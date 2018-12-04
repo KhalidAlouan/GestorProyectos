@@ -37,15 +37,13 @@
 	            </div>
 	</section>
 
-
 	<?php
 
 	$user=$_POST['usuario'];
 	$pass=$_POST['passwd'];
-
-
-	$resultUser=2;
-	$resultPass=2;
+	
+	
+	
 	$dbs= "mysql:host=localhost;dbname=GestorProjectes";
 	$dbh = new PDO( $dbs, "miguel","miguel123");
  
@@ -61,30 +59,21 @@
 
 	$resultUser=$consultaUsuario->rowCount();
 	$resultPass=$consultaPassword->rowCount();
-	
+	if($user==""){
+		$resultUser=5;
+		$resultPass=5;	
+	}
 
-	if($resultUser==1 and $resultPass==1){
-		echo"loginCorrecto()";
-	}
-	elseif($resultUser==1 and $resultPass!=1){
-		echo"errorPassword()";
-	}
-	elseif ($resultUser!=1 and $resultPass==1) {
-		echo"errorUser()";
-	}
-	elseif($resultUser!=1 and $resultPass!=1){
-		echo"errorLogin()";
-	}
-	echo "<p id='p1'>nada</p>";
+	echo "<p id='p1'></p>";
 
- 	echo"<div>";
- 	echo "</div>";
-
-	echo"<div>";
- 	echo "</div>";
 
 	?>
-	<script type="text/javascript" language="javascript"></script>
+	
+	<script type="text/javascript">
+    var resultUser = '<?php echo $resultUser;?>'
+    var resultPass = '<?php echo $resultPass;?>'
+    login();
+	</script>
 	
 </body>
 </html>
