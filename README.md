@@ -1,4 +1,4 @@
-Integrans:
+Integrants:
 
 Marc
 Khalid
