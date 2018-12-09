@@ -75,10 +75,17 @@
 
 	$_SESSION["NombreUsuario"] = $nombreUser ;
 
+	foreach ($nombreUser as $value) {
+		$nombreUser=(string)$value;
+	}
 
-	$consultaProyectos =  $dbh->prepare("SELECT nombre_projecte FROM projectes");
-	$consultaProyectos->execute();
-	$nombreProyectos = $consultaProyectos ->fetchAll();
+
+	$consultaNombreProyecto = $dbh->prepare("SELECT nombre_projecte FROM projectes WHERE  product_owner = :nombre  or scrum_master = :nombre ");
+	$consultaNombreProyecto->bindValue(':nombre', $nombreUser);
+	$consultaNombreProyecto->execute();
+	$nombreProyectos = $consultaNombreProyecto ->fetchAll();
+
+	
 
 	$_SESSION["NombreProyectos"] = $nombreProyectos ;
 

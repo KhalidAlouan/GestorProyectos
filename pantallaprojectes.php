@@ -8,6 +8,9 @@
 <body>
 <?php 
 	session_start();
+	
+	
+
 	$nombre = $_SESSION["NombreUsuario"];
 	foreach ($nombre as $value) {
 		$nombre=$value;

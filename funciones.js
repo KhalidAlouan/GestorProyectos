@@ -48,6 +48,10 @@ function insertAfter(e,i){
 }
 
 
+
+
+
+
 function nombreProyectos(){
 	var body = document.getElementsByTagName("body")[0];
 
