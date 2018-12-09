@@ -57,13 +57,16 @@
 
 	<?php
 
+		session_destroy();
+		session_start();
 		$user=$_POST['usuario'];
 		$pass=$_POST['passwd'];
-		$resultUser=2;
-		$resultPass=2;
+		
+		
+		
 		$dbs= "mysql:host=localhost;dbname=GestorProjectes";
 		$dbh = new PDO( $dbs, "marc","marc123");
-	 
+	 	
 		$consultaUsuario = $dbh->prepare("SELECT * FROM usuarios WHERE usuario=:user");
 		$consultaPassword = $dbh->prepare("SELECT * FROM usuarios WHERE password=SHA2(:pass,512) ");
 	    $consultaUsuario->bindValue(':user', $user);
@@ -74,23 +77,27 @@
 		$resultUser=$consultaUsuario->rowCount();
 		$resultPass=$consultaPassword->rowCount();
 		
-		/*if($resultUser==1 and $resultPass==1){
-			echo"loginCorrecto()";
+		if($user==""){
+			$resultUser=5;
+			$resultPass=5;	
 		}
-		elseif($resultUser==1 and $resultPass!=1){
-			echo"errorPassword()";
-		}
-		elseif ($resultUser!=1 and $resultPass==1) {
-			echo"errorUser()";
-		}
-		elseif($resultUser!=1 and $resultPass!=1){
-			echo"errorLogin()";
-		}
-		*/
-
 		
-
-
-	?>	
+		$consultaNombreUsuario = $dbh->prepare("SELECT nombre FROM usuarios WHERE usuario=:user");
+		$consultaNombreUsuario->bindValue(':user', $user);
+		$consultaNombreUsuario->execute();
+		$nombreUser = $consultaNombreUsuario ->fetch(PDO::FETCH_ASSOC);
+		$_SESSION["NombreUsuario"] = $nombreUser ;
+		$consultaProyectos =  $dbh->prepare("SELECT nombre_projecte FROM projectes");
+		$consultaProyectos->execute();
+		$nombreProyectos = $consultaProyectos ->fetchAll();
+		$_SESSION["NombreProyectos"] = $nombreProyectos ;
+		echo "<p id='p1'></p>";
+		?>
+		
+		<script type="text/javascript">
+		    var resultUser = '<?php echo $resultUser;?>'
+		    var resultPass = '<?php echo $resultPass;?>'
+		    login();
+		</script>	
 </body>
 </html>
