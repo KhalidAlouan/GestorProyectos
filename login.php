@@ -39,14 +39,18 @@
 
 	<?php
 
+	session_destroy();
+	session_start();
+
+
 	$user=$_POST['usuario'];
 	$pass=$_POST['passwd'];
 	
 	
 	
 	$dbs= "mysql:host=localhost;dbname=GestorProjectes";
-	$dbh = new PDO( $dbs, "miguel","miguel123");
- 
+	$dbh = new PDO( $dbs, "root","arteagae21");
+ 	
 	$consultaUsuario = $dbh->prepare("SELECT * FROM usuarios WHERE usuario=:user");
 
 	$consultaPassword = $dbh->prepare("SELECT * FROM usuarios WHERE password=SHA2(:pass,512) ");
@@ -64,8 +68,21 @@
 		$resultPass=5;	
 	}
 
-	echo "<p id='p1'></p>";
+	$consultaNombreUsuario = $dbh->prepare("SELECT nombre FROM usuarios WHERE usuario=:user");
+	$consultaNombreUsuario->bindValue(':user', $user);
+	$consultaNombreUsuario->execute();
+	$nombreUser = $consultaNombreUsuario ->fetch(PDO::FETCH_ASSOC);
 
+	$_SESSION["NombreUsuario"] = $nombreUser ;
+
+
+	$consultaProyectos =  $dbh->prepare("SELECT nombre_projecte FROM projectes");
+	$consultaProyectos->execute();
+	$nombreProyectos = $consultaProyectos ->fetchAll();
+
+	$_SESSION["NombreProyectos"] = $nombreProyectos ;
+
+	echo "<p id='p1'></p>";
 
 	?>
 	
