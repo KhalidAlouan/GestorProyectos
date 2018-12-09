@@ -18,33 +18,35 @@
 		
 	</div>
 	<div id='center' >
-		<section class="section section-login">
-	            <div class="valign-wrapper row login-box">
-	                    <div class="col card hoverable s10 pull-s1 m6 pull-m3 l4 pull-l4">
-	                      <form action="#" method="POST">
-	                        <div class="card-content">
-	                          <span class="card-title">Login</span>
-	                          <div class="row">
-	                          	
-	                            <div class="input-field col s12">
-	                              <label for="text">usuario </label>
-	                              <br>
-	                              <input type="text" class="validate" name="usuario"  />
-	                            </div>
-	                            <div class="input-field col s12">
-	                              <label for="password">contraseña </label>
-	                              <br>
-	                              <input type="password" class="validate" name="passwd"  />
-	                            </div>
-	                          </div>
-	                        </div>
-	                        <div class="card-action right-align">
-	                            <input type="submit" class="btn teal waves-effect waves-light" value="Login">
-	                        </div>
-	                      </form>
-	                    </div>
-	            </div>
-	</section>
+		<div id="contenido">
+			<section class="section section-login">
+		            <div class="valign-wrapper row login-box">
+		                    <div class="col card hoverable s10 pull-s1 m6 pull-m3 l4 pull-l4">
+		                      <form action="#" method="POST">
+		                        <div class="card-content">
+		                          <span class="card-title">Login</span>
+		                          <div class="row">
+		                          	
+		                            <div class="input-field col s12">
+		                              <label for="text">usuario </label>
+		                              <br>
+		                              <input type="text" class="validate" name="usuario"  />
+		                            </div>
+		                            <div class="input-field col s12">
+		                              <label for="password">contraseña </label>
+		                              <br>
+		                              <input type="password" class="validate" name="passwd"  />
+		                            </div>
+		                          </div>
+		                        </div>
+		                        <div class="card-action right-align">
+		                            <input type="submit" class="btn teal waves-effect waves-light" value="Login">
+		                        </div>
+		                      </form>
+		                    </div>
+		            </div>
+			</section>
+		</div>
 	</div>
 
 	<div id='mensajeError'>
@@ -61,7 +63,6 @@
 		session_start();
 		$user=$_POST['usuario'];
 		$pass=$_POST['passwd'];
-		
 		
 		
 		$dbs= "mysql:host=localhost;dbname=GestorProjectes";
@@ -91,6 +92,16 @@
 		$consultaProyectos->execute();
 		$nombreProyectos = $consultaProyectos ->fetchAll();
 		$_SESSION["NombreProyectos"] = $nombreProyectos ;
+
+
+		/*Hago una consulta para sacar el nombre de usuario*/
+		$consultaUsername = $dbh->prepare("SELECT usuario FROM usuarios WHERE usuario=:user");
+		$consultaUsername->bindValue(':user', $user);
+		$consultaUsername->execute();
+		$username = $consultaUsername ->fetch(PDO::FETCH_ASSOC);
+		$_SESSION["username"] = $username ;
+
+
 		echo "<p id='p1'></p>";
 		?>
 		

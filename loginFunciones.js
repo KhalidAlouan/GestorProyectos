@@ -33,6 +33,26 @@ function mensajeError(texto) {
 
 }
 
+function buttonCrearNouProjecte() {
+	//Guardo en una variable el div center
+	var center = document.getElementById("center");
+
+	//Creo el boton
+	var button = document.createElement("button");
+
+	button.type = "button";
+	button.innerText = "Crear nou projecte";
+
+	//Anado el boton como hijo al div center
+	center.appendChild(button);
+
+	button.setAttribute("id","b");
+
+
+
+
+}
+
 var arrayNombresProyectos = [];
 
 function login(){
