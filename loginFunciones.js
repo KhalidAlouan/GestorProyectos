@@ -1,5 +1,5 @@
 function mensajeError(texto) {
-	//Guardo en una variable del div especial para los errores
+	//Guardo en una variable el div especial para los errores
 	var zonaError = document.getElementById("mensajeError");
 
 	
@@ -29,6 +29,7 @@ function mensajeError(texto) {
 	//Le anado al divError la p
 	divError.appendChild(pTextoError);
 
-	divError.setAttribute("class","parpadea");
-	
+	errorImg.setAttribute("class","animated flash");
+
 }
+

@@ -10,6 +10,8 @@
 	<script type="text/javascript" src="loginFunciones.js" ></script>
 
 	<link rel="stylesheet" type="text/css" href="style.css">
+
+	<meta charset="utf-8">
 </head>
 <body>
 	<div id='header'>
@@ -85,6 +87,8 @@
 			echo"errorLogin()";
 		}
 		*/
+
+		
 
 
 	?>	

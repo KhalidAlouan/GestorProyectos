@@ -14,56 +14,40 @@
 }
 
 
-.charSelected{
-background-color: #03a9f4;
-animation: parpadeo 1s;
--webkit-animation: parpadeo 1s;
--moz-animation: parpadeo 1s;
-animation-iteration-count:infinite;
--webkit-animation-iteration-count:infinite;
--moz-animation-iteration-count:infinite;
-}
+/* PARPADEO IMAGEN */
+	.animated {
+		animation: flash 2.5s linear infinite;
+		-webkit-animation-fill-mode: both;
+		animation-fill-mode: both;
+	}
+	@-webkit-keyframes flash {
+		0%, 50%, 100% {
+	 		opacity: 1;
+	 	}
+	25%, 75% {
+		opacity: 0;
+		}
+	}
+	@keyframes flash {
+		0%, 50%, 100% {
+			opacity: 1;
+		}
+		25%, 75% {
+	 		opacity: 0;
+	 	}
+	}
+	.flash {
+		-webkit-animation-name: flash;
+		animation-name: flash;
+	}
+/* FIN PARPADEO IMAGEN */
 
-
-@keyframes parpadeo {
-0% {background-color: white}
-100%{background-color: #03a9f4}
-}
-
-@-webkit-keyframes parpadeo {
-0% {background-color: white}
-100%{background-color: #03a9f4}
-}
-
-
-/* ZONA PARA HACER PARPADEAR ELEMENTOS */
-	.parpadea {
-		animation-name: parpadeo;
-		animation-duration: 1s;
-		animation-timing-function: linear;
-		animation-iteration-count: infinite;
-
-		-webkit-animation-name:parpadeo;
-		-webkit-animation-duration: 2.5s;
-		-webkit-animation-timing-function: linear;
-		-webkit-animation-iteration-count: infinite;
+/* PARPADEO BORDE DIV */
+	@keyframes blink { 
+		50% { border-color: #ff0000; } 
 	}
 
-	@-moz-keyframes parpadeo{  
-	  0% { opacity: 1.0; }
-	  50% { opacity: 0.0; }
-	  100% { opacity: 1.0; }
+	#contenedorError {
+		animation: blink .5s step-end infinite alternate;
 	}
-
-	@-webkit-keyframes parpadeo {  
-	  0% { opacity: 1.0; }
-	  50% { opacity: 0.0; }
-	   100% { opacity: 1.0; }
-	}
-
-	@keyframes parpadeo {  
-	  0% { opacity: 1.0; }
-	   50% { opacity: 0.0; }
-	  100% { opacity: 1.0; }
-	}
-/*FIN ZONA PARA HACER PARPADEAR ELEMENTOS */
+/* FIN PARPADEO BORDE DIV */
