@@ -1,7 +1,6 @@
 function mensajeError(texto) {
 	//Guardo en una variable el div especial para los errores
 	var zonaError = document.getElementById("mensajeError");
-
 	
 	//Creo un div para meter el icono y el texto dentro
 	var divError = document.createElement("div");
@@ -79,30 +78,24 @@ function login(){
 
 
 function errorLogin() {
-	document.getElementById('p1').innerText="Error Login";
+	mensajeError("Contraseña y usuario incorrectos !");
+	//document.getElementById('p1').innerText="Error Login";
 }
 
 function errorUser(){
-	document.getElementById('p1').innerText="Error Usuario";
+	mensajeError("Usuario incorrecto !");
+	//document.getElementById('p1').innerText="Error Usuario";
 }
 
 function errorPassword(){
-	document.getElementById('p1').innerText="Error Password";
+	mensajeError("Contraseña incorrecta !");
+	//document.getElementById('p1').innerText="Error Password";
 
 }
 
 function loginCorrecto(){
 	window.location="pantallaprojectes.php";
 }
-
-/*function insertAfter(e,i){
-	if(e.nextSibling){
-		e.parentNode.insertBefore(i,e.nextSibling);
-	}
-	else{
-		e.parentNode.appendChild(i);
-	}
-}*/
 
 function insertAfter(newNode, referenceNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);

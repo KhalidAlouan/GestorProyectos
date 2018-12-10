@@ -54,7 +54,7 @@
 	</div>
 	
 	<div id='footer'>
-		<button onclick='mensajeError("holaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholahola")' > HOLA </button>
+		
 	</div>
 
 	<?php
@@ -106,7 +106,6 @@
 		$_SESSION["username"] = $username ;
 
 
-		echo "<p id='p1'></p>";
 		?>
 		
 		<script type="text/javascript">
