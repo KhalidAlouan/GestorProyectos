@@ -79,17 +79,14 @@ function login(){
 
 function errorLogin() {
 	mensajeError("Contraseña y usuario incorrectos !");
-	//document.getElementById('p1').innerText="Error Login";
 }
 
 function errorUser(){
 	mensajeError("Usuario incorrecto !");
-	//document.getElementById('p1').innerText="Error Usuario";
 }
 
 function errorPassword(){
 	mensajeError("Contraseña incorrecta !");
-	//document.getElementById('p1').innerText="Error Password";
 
 }
 
