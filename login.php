@@ -59,7 +59,6 @@
 
 	<?php
 
-		session_destroy();
 		session_start();
 		$user=$_POST['usuario'];
 		$pass=$_POST['passwd'];

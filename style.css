@@ -83,14 +83,15 @@ nav{
 }
 
 #imagenlogat{
-	width: 3%;
-	height: 3%;
+	padding-top: 25px;
+	width: 5%;
+	height: 50%;
 	
 }
 
 #imagenusuario{
-	width: 3%;
-	height: 3%;
+	width: 5%;
+	height: 50%;
 	
 	
 }
@@ -120,8 +121,8 @@ nav{
 	left: 45%;
 }
 
-#b {
-	position:absolute;
+#buttonCrearNouProjecte {
+	position:relative;
     bottom:5px;
     left: 15%;
 }

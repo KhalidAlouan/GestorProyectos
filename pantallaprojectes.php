@@ -12,7 +12,7 @@
 	session_start();
 	$nombre = $_SESSION["NombreUsuario"];
 	$username = $_SESSION["username"];
-	
+
 	foreach ($nombre as $value) {
 		$nombre=$value;
 	}
@@ -20,6 +20,8 @@
 	foreach ($username as $value) {
 		$username = $value;
 	}
+
+
 
 	$dbs= "mysql:host=localhost;dbname=GestorProjectes";
 	$dbh = new PDO( $dbs, "marc","marc123");
@@ -42,7 +44,7 @@
 	}
 
 	echo "<div id='header'>";
-		echo"<nav >";
+		echo"<nav>";
 			echo"<img id='imagenusuario' src='https://img.icons8.com/android/1600/user.png'>";
 		  	echo"<b>	usuario : $nombre	</b>";
 		  	echo"<a href='login.php'><img id='imagenlogat' src='https://image.flaticon.com/icons/png/512/55/55023.png' ></a> ";

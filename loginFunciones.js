@@ -37,23 +37,25 @@ function buttonCrearNouProjecte() {
 	//Guardo en una variable el div center
 	var center = document.getElementById("center");
 
+	var idNomberProyectos = document.getElementById("idNombreProyectos");
+
 	//Creo el boton
 	var button = document.createElement("button");
 
 	button.type = "button";
 	button.innerText = "Crear nou projecte";
 
-	//Anado el boton como hijo al div center
-	center.appendChild(button);
+	/*//Anado el boton como hijo al div center
+	center.appendChild(button);*/
 
-	button.setAttribute("id","b");
+	button.setAttribute("id","buttonCrearNouProjecte");
+
+	insertAfter(button,center);
 
 
 
 
 }
-
-var arrayNombresProyectos = [];
 
 function login(){
 
@@ -93,13 +95,17 @@ function loginCorrecto(){
 	window.location="pantallaprojectes.php";
 }
 
-function insertAfter(e,i){
+/*function insertAfter(e,i){
 	if(e.nextSibling){
 		e.parentNode.insertBefore(i,e.nextSibling);
 	}
 	else{
 		e.parentNode.appendChild(i);
 	}
+}*/
+
+function insertAfter(newNode, referenceNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
 
 
