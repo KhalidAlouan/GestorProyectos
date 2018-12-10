@@ -49,7 +49,7 @@
 	
 	
 	$dbs= "mysql:host=localhost;dbname=GestorProjectes";
-	$dbh = new PDO( $dbs, "root","arteagae21");
+	$dbh = new PDO( $dbs, "miguel","miguel123");
  	
 	$consultaUsuario = $dbh->prepare("SELECT * FROM usuarios WHERE usuario=:user");
 
@@ -74,20 +74,7 @@
 	$nombreUser = $consultaNombreUsuario ->fetch(PDO::FETCH_ASSOC);
 
 	$_SESSION["NombreUsuario"] = $nombreUser ;
-
-	foreach ($nombreUser as $value) {
-		$nombreUser=(string)$value;
-	}
-
-
-	$consultaNombreProyecto = $dbh->prepare("SELECT nombre_projecte FROM projectes WHERE  product_owner = :nombre  or scrum_master = :nombre ");
-	$consultaNombreProyecto->bindValue(':nombre', $nombreUser);
-	$consultaNombreProyecto->execute();
-	$nombreProyectos = $consultaNombreProyecto ->fetchAll();
-
 	
-
-	$_SESSION["NombreProyectos"] = $nombreProyectos ;
 
 	echo "<p id='p1'></p>";
 
