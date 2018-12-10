@@ -54,13 +54,17 @@
 	</div>
 	
 	<div id='footer'>
-		<button onclick='mensajeError("holaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholaholahola")' > HOLA </button>
+		
 	</div>
 
 	<?php
 
-		session_destroy();
-		session_start();
+		if (isset($_SESSION["username"])) {
+			session_destroy();
+		} else {
+			session_start();
+		}
+		
 		$user=$_POST['usuario'];
 		$pass=$_POST['passwd'];
 		
@@ -87,11 +91,10 @@
 		$consultaNombreUsuario->bindValue(':user', $user);
 		$consultaNombreUsuario->execute();
 		$nombreUser = $consultaNombreUsuario ->fetch(PDO::FETCH_ASSOC);
+
 		$_SESSION["NombreUsuario"] = $nombreUser ;
-		$consultaProyectos =  $dbh->prepare("SELECT nombre_projecte FROM projectes");
-		$consultaProyectos->execute();
-		$nombreProyectos = $consultaProyectos ->fetchAll();
-		$_SESSION["NombreProyectos"] = $nombreProyectos ;
+
+		
 
 
 		/*Hago una consulta para sacar el nombre de usuario*/
@@ -99,13 +102,10 @@
 		$consultaUsername->bindValue(':user', $user);
 		$consultaUsername->execute();
 		$username = $consultaUsername ->fetch(PDO::FETCH_ASSOC);
+		
 		$_SESSION["username"] = $username ;
 
 
-
-
-
-		echo "<p id='p1'></p>";
 		?>
 		
 		<script type="text/javascript">

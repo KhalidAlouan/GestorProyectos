@@ -1,7 +1,6 @@
 function mensajeError(texto) {
 	//Guardo en una variable el div especial para los errores
 	var zonaError = document.getElementById("mensajeError");
-
 	
 	//Creo un div para meter el icono y el texto dentro
 	var divError = document.createElement("div");
@@ -37,23 +36,29 @@ function buttonCrearNouProjecte() {
 	//Guardo en una variable el div center
 	var center = document.getElementById("center");
 
+	var idNomberProyectos = document.getElementById("idNombreProyectos");
+
 	//Creo el boton
 	var button = document.createElement("button");
 
 	button.type = "button";
 	button.innerText = "Crear nou projecte";
 
-	//Anado el boton como hijo al div center
-	center.appendChild(button);
+	/*//Anado el boton como hijo al div center
+	center.appendChild(button);*/
 
-	button.setAttribute("id","b");
+	button.setAttribute("id","buttonCrearNouProjecte");
+
+	insertAfter(button,center);
 	button.setAttribute("onclick","formulario()");
+
 	
 
 }
+
 //La siguiente funcion crea un formulario
 function formulario(){
-	alert("Hola");
+	
 	var center = document.getElementById("center");
 	//Creo una variable del div idNombreProyectos
 	var divProyectos = document.getElementById("idNombreProyectos");
@@ -104,8 +109,12 @@ function formulario(){
 	//Creao la opcion scrumMaster
 	var scrumMaster=document.createElement("option");
 	scrumMaster.setAttribute("value","scrumMaster");
-	var scrumMasterNode = document.createTextNode("ScrumMaster");
-	scrumMaster.appendChild(scrumMasterNode);
+	// for (var i = 0; i < $arraySM.length; i++) {
+	// 	var scrumMasterNode = document.createTextNode($arraySM[i]);
+
+	// }
+	// var scrumMasterNode = document.createTextNode("$arrarySM");
+	// scrumMaster.appendChild(scrumMasterNode);
 	//Añado la opcion scrumMaster al select scrumMaster
 	selectScrum.appendChild(scrumMaster);
 	selectScrum.required=true;
@@ -124,8 +133,11 @@ function formulario(){
 	//Creo la opcion productOwner
 	var productOwner=document.createElement("option");
 	productOwner.setAttribute("value","productOwner");
-	var productOwnerNode = document.createTextNode("Product Owner");
-	scrumMaster.appendChild(scrumMasterNode);
+	// for (var i = 0; i < $arrayPO.length; i++) {
+	// 	var productOwnerNode = document.createTextNode($arraryPO[i]);
+
+	// }
+	// productOwner.appendChild(productOwnerNode);
 	//Añado la opcion productOwner al select tipo_usuario
 	selectOwner.appendChild(productOwner);
 	selectOwner.required=true;
@@ -141,8 +153,12 @@ function formulario(){
 	var selectGrup = document.createElement("select");
 	//Creo la opcion Grup de desenvolupadors
 	var grupDesenvol=document.createElement("option");
-	grupDesenvol.setAttribute("value","grupDesenvol");
-	grupDesenvol.setAttribute("label","Grup de desenvolupadors");
+	// grupDesenvolNode.setAttribute("value","grupDesenvol");
+	// for (var i = 0; i < $arrayDE.length; i++) {
+	// 	var grupDesenvolNode = document.createTextNode($arrayDE[i]);
+
+	// }
+	// grupDesenvol.appendChild(grupDesenvolNode);
 	//Añado la opcion grupDesenvol al select tipo_usuario
 	selectGrup.appendChild(grupDesenvol);
 	selectGrup.required=true;
@@ -153,16 +169,8 @@ function formulario(){
 
 	divForm.appendChild(form);
 	center.appendChild(divForm);
-
 	
 }
-
-
-function insertAfterForm(newNode, referenceNode) {
-    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-}
-
-var arrayNombresProyectos = [];
 
 function login(){
 
@@ -186,15 +194,15 @@ function login(){
 
 
 function errorLogin() {
-	document.getElementById('p1').innerText="Error Login";
+	mensajeError("Contraseña y usuario incorrectos !");
 }
 
 function errorUser(){
-	document.getElementById('p1').innerText="Error Usuario";
+	mensajeError("Usuario incorrecto !");
 }
 
 function errorPassword(){
-	document.getElementById('p1').innerText="Error Password";
+	mensajeError("Contraseña incorrecta !");
 
 }
 
@@ -202,48 +210,12 @@ function loginCorrecto(){
 	window.location="pantallaprojectes.php";
 }
 
-function insertAfter(e,i){
-	if(e.nextSibling){
-		e.parentNode.insertBefore(i,e.nextSibling);
-	}
-	else{
-		e.parentNode.appendChild(i);
-	}
+function insertAfter(newNode, referenceNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
 
-
-function nombreProyectos(){
-	var body = document.getElementsByTagName("body")[0];
-
-	var tableBody = document.createElement("tbody");
-
-	var tabla = document.createElement("table");
-	var tableBody = document.createElement("tbody");
-
-	var tbtr = document.createElement("tr");
-	var tbtd = document.createElement("td");
-
-	var ullista = document.createElement("ul");
-	var lilista = document.createElement("li");
-	for (var i = 0; i < length.arrayNombresProyectos; i++){
-		var textoLi = document.createTextNode(arrayNombresProyectos[i]);
-		lilista.appendChild(textoLi);
-		
+function saberRolUsuario() {
+	if (rol=="SM") {
+		buttonCrearNouProjecte();
 	}
-	ullista.appendChild(lilista);
-
-
-	tbtd.appendChild(ullista);
-	tbtr.appendChild(tbtd);
-
-	tableBody.appendChild(tbtr);
-
-	tabla.appendChild(tableBody);
-
-	body.appendChild(tabla);
-
-	tabla.setAttribute("border","2");
-
-
 }
-

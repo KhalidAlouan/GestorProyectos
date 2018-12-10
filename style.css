@@ -121,8 +121,8 @@ nav{
 	left: 45%;
 }
 
-/*#b {
-	position:absolute;
+#buttonCrearNouProjecte {
+	position:relative;
     bottom:5px;
     left: 15%;
-}*/
+}
