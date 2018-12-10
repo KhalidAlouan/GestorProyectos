@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script type="text/javascript" src="loginFunciones.js"></script>
 	<meta charset="utf-8">
+
 </head>
 <body>
 <?php
@@ -39,11 +40,6 @@
 		$consultaRolResultado = $value;
 	}
 
-	if ($consultaRolResultado == "SM") {
-		echo "<button onclick='buttonCrearNouProjecte()'> HOLA </button>";
-		
-	}
-
 	$consultaNombreProyecto = $dbh->prepare("SELECT nombre_projecte FROM projectes WHERE  product_owner = :nombre  or scrum_master = :nombre ");
 	$consultaNombreProyecto->bindValue(':nombre', $nombreUser);
 	$consultaNombreProyecto->execute();
@@ -73,14 +69,15 @@
 	echo "</div>";
 	
 	echo "<div id='footer'>";
-		echo "<button onclick='mensajeError()'> HOLA </button>";
+		
 	echo "</div>";
+
 	
 	
 ?>
 <script type="text/javascript">
-	creacionNombreProyectos();
-	var arrayNombreProyectos = '<"php echo $nombreproyectos; ?>'
+	var rol = '<?php echo $consultaRolResultado;?>'
+	saberRolUsuario();
 </script>
 
 </body>
