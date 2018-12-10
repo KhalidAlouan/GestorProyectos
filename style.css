@@ -121,8 +121,16 @@ nav{
 	left: 45%;
 }
 
+<<<<<<< HEAD
 /*#b {
 	position:absolute;
     bottom:5px;
     left: 15%;
 }*/
+=======
+#buttonCrearNouProjecte {
+	position:relative;
+    bottom:5px;
+    left: 15%;
+}
+>>>>>>> 85d793ddaab4e83049e4d83295d1fafb6a8abe47
