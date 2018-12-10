@@ -1,5 +1,0 @@
-Integrants:
-
-Marc
-Khalid
-Miguel
