@@ -93,10 +93,46 @@
 		
 	echo "</div>";
 
+
+	$sm="SM";
+	$nomusuari = $dbh->prepare("SELECT nombre FROM usuarios WHERE  rol = :rol ");
+	$nomusuari->bindValue(':rol', $sm);
+	$nomusuari->execute();
+	$arraySM = $nomusuari ->fetchAll();
+	$array1=[];
+	foreach ($arraySM as $value) {
+		array_push($array1, $value[0]);
+		
+	}
+	$po="PO";
+	$nomusuari = $dbh->prepare("SELECT nombre FROM usuarios WHERE  rol = :rol ");
+	$nomusuari->bindValue(':rol', $po);
+	$nomusuari->execute();
+	$arrayPO = $nomusuari ->fetchAll();
+	$array2=[];
+	foreach ($arrayPO as $value) {
+		array_push($array2, $value[0]);
+		
+	}
+	$de="DE";
+	$nomusuari = $dbh->prepare("SELECT nombre FROM usuarios WHERE  rol = :rol ");
+	$nomusuari->bindValue(':rol', $de);
+	$nomusuari->execute();
+	$arrayDE = $nomusuari ->fetchAll();
+	$array3=[];
+	foreach ($arrayDE as $value) {
+		array_push($array3, $value[0]);
+	}
+
+
+
 	
 	
 ?>
 <script type="text/javascript">
+	var arraySM=<?php echo json_encode($array1);?>;
+	var arrayPO=<?php echo json_encode($array2);?>;
+	var arrayDE=<?php echo json_encode($array3);?>;
 	var rol = '<?php echo $consultaRolResultado;?>'
 	saberRolUsuario();
 </script>

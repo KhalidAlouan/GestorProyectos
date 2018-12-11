@@ -126,3 +126,8 @@ nav{
     bottom:5px;
     left: 15%;
 }
+
+#idForm{
+	position: relative;
+	bottom: -50%;
+}
