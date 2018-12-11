@@ -13,7 +13,7 @@
 	session_start();
 
 	$dbs= "mysql:host=localhost;dbname=GestorProjectes";
-	$dbh = new PDO( $dbs, "marc","marc123");
+	$dbh = new PDO( $dbs, "khalid","khalid123");
 
 
 	$nombreUser = $_SESSION["NombreUsuario"];
