@@ -48,7 +48,7 @@
 	echo "<div id='header'>";
 		echo"<nav>";
 			echo"<img id='imagenusuario' src='https://img.icons8.com/android/1600/user.png'>";
-		  	echo"<b>	usuario : $nombreUser	</b>";
+		  	echo"<b> usuario : $nombreUser	</b>";
 		  	echo"<a href='login.php'><img id='imagenlogat' src='https://image.flaticon.com/icons/png/512/55/55023.png' ></a> ";
 		echo"</nav>"; 
 	echo "</div>";
@@ -59,7 +59,7 @@
 				echo"<b>Projectes</b>";
 			echo "</p>";
 			foreach ($nombreProyectos as $value) {
-				echo "<p id='idnombreProyec' > <a href='#' > $value[0] </a></p>";
+				echo "<p id='idnombreProyec' > <a href='administracionProyecto.php' > $value[0] </a></p>";
 			}
 		echo "</div>";
 	echo "</div>";
