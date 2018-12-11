@@ -49,7 +49,7 @@ function buttonCrearNouProjecte() {
 
 	button.setAttribute("id","buttonCrearNouProjecte");
 
-	insertAfter(button,center);
+	insertAfter(button,idNombreProyectos);
 
 	button.setAttribute("onclick","formulario()");
 
@@ -186,11 +186,14 @@ function formulario(){
 	var selectOwner = document.createElement("select");
 	//Creo la opcion productOwner
 	var productOwner=document.createElement("option");
+
 	productOwner.setAttribute("value","productOwner");
-	// for (var i = 0; i < $arrayPO.length; i++) {
-	// 	var productOwnerNode = document.createTextNode($arraryPO[i]);
-	
-	// }
+	for (var i = 0; i < arrayPO.length; i++) {
+		var productOwner=document.createElement("option");
+	 	var productOwnerNode = document.createTextNode(arrayPO[i]);
+	 	productOwner.appendChild(productOwnerNode);
+	 	selectOwner.appendChild(productOwner);
+	}
 	// productOwner.appendChild(productOwnerNode);
 	//Añado la opcion productOwner al select tipo_usuario
 	selectOwner.appendChild(productOwner);
@@ -208,10 +211,20 @@ function formulario(){
 	//Creo la opcion Grup de desenvolupadors
 	var grupDesenvol=document.createElement("option");
 	// grupDesenvolNode.setAttribute("value","grupDesenvol");
-	// for (var i = 0; i < $arrayDE.length; i++) {
-	// 	var grupDesenvolNode = document.createTextNode($arrayDE[i]);
+	for (var i = 0; i < arrayDE.length; i++) {
+		var grupDesenvol=document.createElement("option");
+	 	var grupDesenvolNode = document.createTextNode(arrayDE[i]);
+	 	grupDesenvol.appendChild(grupDesenvolNode);
+	 	selectGrup.appendChild(grupDesenvol);
+	}
 
-	// }
+	//Craecion boton submit
+	var botonInsertar = document.createElement("input");
+
+	botonInsertar.type="submit";
+
+
+	
 	// grupDesenvol.appendChild(grupDesenvolNode);
 	//Añado la opcion grupDesenvol al select tipo_usuario
 	selectGrup.appendChild(grupDesenvol);
@@ -224,10 +237,17 @@ function formulario(){
 	form.appendChild(selectOwner);
 	form.appendChild(selectGrup_label);
 	form.appendChild(selectGrup);
-	
+
+	form.appendChild(botonInsertar);
+
 	
 
 	divForm.appendChild(form);
-	center.appendChild(divForm);
+
+	var idButtonCrearProyecto = document.getElementById("buttonCrearNouProjecte");
+
+	insertAfter(divForm,idButtonCrearProyecto);
+
+	idButtonCrearProyecto.hidden = true;
 	
 }
