@@ -13,7 +13,7 @@
 	session_start();
 
 	$dbs= "mysql:host=localhost;dbname=GestorProjectes";
-	$dbh = new PDO( $dbs, "miguel","miguel123");
+	$dbh = new PDO( $dbs, "marc","marc123");
 
 
 	$nombreUser = $_SESSION["NombreUsuario"];
@@ -115,7 +115,7 @@
 		
 	}
 	$de="DE";
-	$nomusuari = $dbh->prepare("SELECT nombre FROM usuarios WHERE  rol = :rol ");
+	$nomusuari = $dbh->prepare("SELECT nombre_grupo FROM grupos");
 	$nomusuari->bindValue(':rol', $de);
 	$nomusuari->execute();
 	$arrayDE = $nomusuari ->fetchAll();
