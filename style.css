@@ -1,6 +1,19 @@
+body {
+	background-image: url(wallpaper.jpg);
+  	background-repeat: no-repeat;
+  	background-position: center center;
+  	background-attachment: fixed;
+  	background-size: 100%;
+}
+
 #header {
 	width:100%;
 	height:100px;
+}
+
+#cabezera {
+	border-radius: 10px;
+	background-color: #00008B;
 }
 
 #center {

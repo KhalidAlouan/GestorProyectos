@@ -67,7 +67,7 @@
 	}
 
 	echo "<div id='header'>";
-		echo"<nav>";
+		echo"<nav id='cabezera'>";
 			echo"<img id='imagenusuario' src='https://img.icons8.com/android/1600/user.png'>";
 		  	echo"<b>	usuario : $nombreUser	</b>";
 		  	echo"<a href='login.php'><img id='imagenlogat' src='https://image.flaticon.com/icons/png/512/55/55023.png' ></a> ";
