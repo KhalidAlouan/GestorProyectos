@@ -13,7 +13,7 @@
 	session_start();
 
 	$dbs= "mysql:host=localhost;dbname=GestorProjectes";
-	$dbh = new PDO( $dbs, "marc","marc123");
+	$dbh = new PDO( $dbs, "admin","admin");
 
 
 	$nombreUser = $_SESSION["NombreUsuario"];
@@ -80,9 +80,10 @@
 				echo"<b>Projectes</b>";
 			echo "</p>";
 			foreach ($nombreProyectos as $value) {
-				echo "<p id='idnombreProyec' > <a href='#' > $value[0] </a></p>";
-			}
-		echo "</div>";
+				echo "<p class='nombreProyec' > <a onclick='hola(id)' id='$value[0]' href='administracionProyectos.php' > $value[0] </a></p>";
+			}		
+	echo "</div>";
+
 	echo "</div>";
 
 	echo "<div id='mensajeError'>";
@@ -134,8 +135,10 @@
 	var arrayPO=<?php echo json_encode($array2);?>;
 	var arrayDE=<?php echo json_encode($array3);?>;
 	var rol = '<?php echo $consultaRolResultado;?>'
+	function hola(id) {
+		console.log(id)
+	}
 	saberRolUsuario();
 </script>
-
 </body>
 </html>

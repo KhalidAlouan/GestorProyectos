@@ -1,5 +1,5 @@
 body {
-	background-image: url(wallpaper.jpg);
+	background-image: url(walllpaper.jpg);
   	background-repeat: no-repeat;
   	background-position: center center;
   	background-attachment: fixed;
@@ -128,7 +128,7 @@ nav{
 	bottom: 80px;
 }
 
-#idnombreProyec{
+.nombreProyec{
 	position: relative;
 	margin: 0 auto;
 	left: 45%;
@@ -147,4 +147,8 @@ nav{
 	height: 300px;
 	top: 100px;
 	margin: auto;
+}
+
+.enlaces {
+
 }
