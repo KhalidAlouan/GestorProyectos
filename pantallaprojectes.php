@@ -10,11 +10,11 @@
 <body>
 <?php
 	session_start();
-
+	//conexion a la BaseDeDatos.
 	$dbs= "mysql:host=localhost;dbname=GestorProjectes";
-	$dbh = new PDO( $dbs, "miguel","miguel123");
+	$dbh = new PDO( $dbs, "admin","admin");
 
-
+	//Almacemar Usuario logueado.
 	$nombreUser = $_SESSION["NombreUsuario"];
 	$username = $_SESSION["username"];
 
@@ -26,7 +26,7 @@
 		$username = $value;
 	}
 
-	
+	//Consulta para saber rol de un usuario
 	$consultaRol = $dbh->prepare("SELECT rol FROM usuarios WHERE usuario=:username");
 
 	$consultaRol->bindValue(':username', $username);
@@ -39,7 +39,7 @@
 		$consultaRolResultado = $value;
 	}
 
-
+	//Saber el id de grupo del usuario
 	$consultaIdGrupo = $dbh->prepare("SELECT grupo FROM usuarios WHERE  usuario = :user");
 	$consultaIdGrupo->bindValue(':user', $username);
 	$consultaIdGrupo->execute();
@@ -49,9 +49,9 @@
 		$idgrupo = $value;
 	}
 
-	print_r($idgrupo);
+	
 
-
+	//Condicion para mostrar los proyectos que tiene cada usuario  asignado
 	if($consultaRolResultado != "SM"){
 		$consultaNombreProyecto = $dbh->prepare("SELECT nombre_projecte FROM projectes WHERE  product_owner = :nombre  or id_grupo = :grupoid ");
 		$consultaNombreProyecto->bindValue(':nombre', $nombreUser);
@@ -64,7 +64,7 @@
 		$consultaNombreProyecto->execute();
 		$nombreProyectos = $consultaNombreProyecto ->fetchAll();
 	}
-
+	//Creacion del Nav y Mostra nombre de usuario
 	echo "<div id='header'>";
 		echo"<nav>";
 			echo"<img id='imagenusuario' src='https://img.icons8.com/android/1600/user.png'>";
@@ -78,6 +78,7 @@
 			echo"<p id='idpProjectes'>";
 				echo"<b>Projectes</b>";
 			echo "</p>";
+			//Printar nombre de proyectos
 			foreach ($nombreProyectos as $value) {
 				echo "<p id='idnombreProyec' > <a href='#' > $value[0] </a></p>";
 			}
@@ -92,7 +93,7 @@
 		
 	echo "</div>";
 
-
+	//Consulta para saber los Scrum Maste
 	$sm="SM";
 	$nomusuari = $dbh->prepare("SELECT nombre FROM usuarios WHERE  rol = :rol ");
 	$nomusuari->bindValue(':rol', $sm);
@@ -103,6 +104,7 @@
 		array_push($array1, $value[0]);
 		
 	}
+	//Consulta para saber los Product Owner
 	$po="PO";
 	$nomusuari = $dbh->prepare("SELECT nombre FROM usuarios WHERE  rol = :rol ");
 	$nomusuari->bindValue(':rol', $po);
@@ -113,6 +115,7 @@
 		array_push($array2, $value[0]);
 		
 	}
+	//Consulta de grupos desarrolladores
 	$de="DE";
 	$nomusuari = $dbh->prepare("SELECT nombre_grupo FROM grupos");
 	$nomusuari->bindValue(':rol', $de);
@@ -123,13 +126,23 @@
 		array_push($array3, $value[0]);
 	}
 
-
+	//Almacenar Valores de la creacion de un nuevo proyecto
 	$valorNom=$_POST["inputNombreprojecte"];
 	$valorDesc=$_POST["inputDescrion"];
 	$valorScrum=$_POST["selectSM"];
 	$valorPOD=$_POST["selectPO"];
 	$valorGrupo=$_POST["selectGP"];
 
+	if(empty($valorNom)){
+		echo'<script type="text/javascript">mensajeError("Introduzca el campo Nombre del Projectes .");</script>';
+	}
+	elseif(empty($valorDesc)){
+		echo'<script type="text/javascript">mensajeError("Introduzca el campo Nombre del Projectes .");</script>';
+	}
+
+
+
+	//Consulta para saber el id de grupo para insertar en la tabla de proyectos
 	$consultaIdGrupoInsert = $dbh->prepare("SELECT id_grupo FROM grupos WHERE  nombre_grupo = :nombreGrupo");
 	$consultaIdGrupoInsert->bindValue(':nombreGrupo', $valorGrupo);
 	$consultaIdGrupoInsert->execute();
@@ -139,22 +152,24 @@
 		$idgrupoInsert = $value;
 	}
 
-	if ($valorDesc!=""){
-    	$inserResultado = $dbh->prepare("INSERT INTO projectes(nombre_projecte, descripcion, scrum_master, product_owner,id_grupo) VALUES (:nombreprojecte,:descripcionprojecte,:smprojecte,:poprojecte,:idgrupoprojecte)");
+	//Condicion para insertar el nuevo proyecto
+	if (isset($_POST["insertarDatos"])){
+		if(isset($valorDesc)){
+			$valorDesc=$_POST["inputDescrion"];
+		}
+		else{
+			$valorDesc=NULL;
+		}
+    	$inserResultado = $dbh->prepare("INSERT INTO projectes (nombre_projecte, descripcion, scrum_master, product_owner,id_grupo) VALUES(:nombreprojecte,:descripcionprojecte,:smprojecte,:poprojecte,:idgrupoprojecte)");
     	$inserResultado->bindValue(':nombreprojecte', $valorNom);
     	$inserResultado->bindValue(':descripcionprojecte', $valorDesc);
     	$inserResultado->bindValue(':smprojecte', $valorScrum);
     	$inserResultado->bindValue(':poprojecte', $valorPOD);
-    	$inserResultado->bindValue(':idgrupoprojecte', $valorGrupo);
+    	$inserResultado->bindValue(':idgrupoprojecte', $idgrupoInsert);
     	$inserResultado->execute();
-	}
-	else{
-		$insertProjectes = "INSERT INTO `projectes`(`nombre_projecte`, `scrum_master`,`product_owner`,`id_grupo`) VALUES (:nombreprojecte,:descripcionprojecte,:smprojecte,:poprojecte,:idgrupoprojecte)";
-    	$inserResultado = $dbh->prepare($insertProjectes);
-    	$resultadoInsert = $inserResultado->execute(array(":nombreprojecte"=>$valorNom,":smprojecte"=>$valorScrum,":poprojecte"=>$valorPOD,":idgrupoprojecte"=>$valorGrupo));
+    	header("Location: pantallaprojectes.php");
 	}
 
-	
 ?>
 <script type="text/javascript">
 	var arraySM=<?php echo json_encode($array1);?>;
