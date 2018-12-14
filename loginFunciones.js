@@ -251,4 +251,3 @@ function formulario(){
 	idButtonCrearProyecto.hidden = true;
 	
 }
-

@@ -149,6 +149,20 @@ nav{
 	margin: auto;
 }
 
-.enlaces {
+#marcoInfoProyectos {
+	border-top-style: solid;
+  	border-right-style: solid;
+  	border-bottom-style: solid;
+  	border-left-style: solid;
+  	position: relative;
+  	padding: 5%;
+  	bottom: -100px;
+  	width: 60%;
+  	height: 40%;
+  	left: 15%;
+}
 
+.titulos {
+	display: inline-block;
+	padding: 5px;
 }

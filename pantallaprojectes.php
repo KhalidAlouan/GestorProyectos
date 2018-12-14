@@ -2,7 +2,6 @@
 <html>
 <head>
 	<title>PantallaProjectes</title>
-	<script type="text/javascript"  src="funciones.js" ></script>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script type="text/javascript" src="loginFunciones.js"></script>
 	<meta charset="utf-8">
@@ -80,7 +79,7 @@
 				echo"<b>Projectes</b>";
 			echo "</p>";
 			foreach ($nombreProyectos as $value) {
-				echo "<p class='nombreProyec' > <a onclick='hola(id)' id='$value[0]' href='administracionProyectos.php' > $value[0] </a></p>";
+				echo "<p class='nombreProyec' > <a id='$value[0]' href='administracionProyectos.php?id=$value[0]'> $value[0] </a></p>";
 			}		
 	echo "</div>";
 
@@ -135,9 +134,6 @@
 	var arrayPO=<?php echo json_encode($array2);?>;
 	var arrayDE=<?php echo json_encode($array3);?>;
 	var rol = '<?php echo $consultaRolResultado;?>'
-	function hola(id) {
-		console.log(id)
-	}
 	saberRolUsuario();
 </script>
 </body>
