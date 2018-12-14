@@ -133,12 +133,7 @@
 	$valorPOD=$_POST["selectPO"];
 	$valorGrupo=$_POST["selectGP"];
 
-	if(empty($valorNom)){
-		echo'<script type="text/javascript">mensajeError("Introduzca el campo Nombre del Projectes .");</script>';
-	}
-	elseif(empty($valorDesc)){
-		echo'<script type="text/javascript">mensajeError("Introduzca el campo Nombre del Projectes .");</script>';
-	}
+	
 
 
 
@@ -154,6 +149,7 @@
 
 	//Condicion para insertar el nuevo proyecto
 	if (isset($_POST["insertarDatos"])){
+		echo'<script type="text/javascript">comprobarErroresInsertar();</script>';
 		if(isset($valorDesc)){
 			$valorDesc=$_POST["inputDescrion"];
 		}
@@ -177,6 +173,8 @@
 	var arrayDE=<?php echo json_encode($array3);?>;
 	var rol = '<?php echo $consultaRolResultado;?>'
 	saberRolUsuario();
+	
+
 </script>
 
 </body>

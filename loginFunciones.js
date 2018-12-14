@@ -126,6 +126,7 @@ function formulario(){
 	divForm.setAttribute("id","idForm");
 	//Creo el formulario
 	var form = document.createElement("form");
+	form.setAttribute("id","idFormulario");
 	form.setAttribute("action","pantallaprojectes.php");
 	form.setAttribute("method","POST");
 
@@ -199,7 +200,7 @@ function formulario(){
 	//Creamos un option para el select Owner
 	var productOwner=document.createElement("option");
 	//Ponemos un atributo de tipo value en el option
-	productOwner.setAttribute("value","option0");
+	productOwner.setAttribute("value","opcion0");
 	var productOwnerNode = document.createTextNode("Seleccionar");
 	productOwner.appendChild(productOwnerNode);
 	selectOwner.appendChild(productOwner);
@@ -240,12 +241,20 @@ function formulario(){
 	 	selectGrup.appendChild(grupDesenvol);
 	}
 
+	nomProjecte_input.setAttribute("change",comprobarErroresInsertar);
+	scrumMaster.setAttribute("change",comprobarErroresInsertar);
+	selectOwner.setAttribute("change",comprobarErroresInsertar);
+	selectGrup.setAttribute("change",comprobarErroresInsertar);
+
 	//Craecion boton submit para insertar nuevo proyecto en la base de datos
 	var botonInsertar = document.createElement("input");
-	botonInsertar.type="submit";
 	botonInsertar.setAttribute("name","insertarDatos");
+	botonInsertar.setAttribute("value","Enviar");
+	botonInsertar.setAttribute("type", "button");
 	botonInsertar.setAttribute("onclick","comprobarErroresInsertar()");
+	botonInsertar.type="submit";
 
+	
 
 	selectGrup.appendChild(grupDesenvol);
 	selectGrup.required=true;
@@ -273,10 +282,29 @@ function formulario(){
 }
 
 function comprobarErroresInsertar(){
-	var DescripcionProyecto = document.getElementsByName("inputDescrion")[0].value;
+
 	var NombreProyecto =  document.getElementsByName("inputNombreprojecte")[0].value;
+
+	var SMselect = document.getElementsByName("selectSM")[0].value;
+	var POselect = document.getElementsByName("selectPO")[0].value;
+	var GPselect = document.getElementsByName("selectGP")[0].value;
 	
-	
+	if (NombreProyecto == ""){
+		mensajeError("El camp Nom del Projecte no pot estar buit");
+	}
+	else if(SMselect == "opcion0"){
+		mensajeError("El camp ScrumMaster no pot estar buit");
+	}
+	else if(POselect == "opcion0"){
+		mensajeError("El camp ProductOwner no pot estar buit");
+	}
+	else if(GPselect == "opcion0"){
+		mensajeError("El camp Grup de Desenvolupadors no pot estar buit");
+	}
+	else{
+		document.getElementById('idFormulario').submit();
+	}
+		
 }
 
 
