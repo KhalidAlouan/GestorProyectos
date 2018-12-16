@@ -1,46 +1,117 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
 	<title>LOGIN</title>
-	<script type="text/javascript"  src="funciones.js" ></script>
+	
+	<script type="text/javascript" src="loginFunciones.js" ></script>
+
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+	<meta charset="utf-8">
 </head>
 <body>
+	<div id='header'>
+		
+	</div>
+	<div id='center' >
+		<div id="contenido">
+			<section class="section section-login">
+		            <div class="valign-wrapper row login-box">
+		                    <div class="col card hoverable s10 pull-s1 m6 pull-m3 l4 pull-l4">
+		                      <form action="#" method="POST">
+		                        <div class="card-content">
+		                          <span class="card-title">Login</span>
+		                          <div class="row">
+		                          	
+		                            <div class="input-field col s12">
+		                              <label for="text">Usuario </label>
+		                              <br>
+		                              <input type="text" class="validate" name="usuario"  />
+		                            </div>
+		                            <div class="input-field col s12">
+		                              <label for="password">Contraseña </label>
+		                              <br>
+		                              <input type="password" class="validate" name="passwd"  />
+		                            </div>
+		                          </div>
+		                        </div>
+		                        <div class="card-action right-align">
+		                            <input type="submit" class="btn teal waves-effect waves-light" value="Login">
+		                        </div>
+		                      </form>
+		                    </div>
+		            </div>
+			</section>
+		</div>
+	</div>
+
+	<div id='mensajeError'>
+	
+	</div>
+	
+	<div id='footer'>
+		
+	</div>
+
 	<?php
 
-	echo "<h1>LOGIN  </h1>";
+		if (isset($_SESSION["username"])) {
+			session_destroy();
+		} else {
+			session_start();
+		}
+		
+		$user=$_POST['usuario'];
+		$pass=$_POST['passwd'];
+		
+		
+		$dbs= "mysql:host=localhost;dbname=GestorProjectes";
+		$dbh = new PDO( $dbs, "root","");
+	 	
+		$consultaUsuario = $dbh->prepare("SELECT * FROM usuarios WHERE usuario=:user");
+		$consultaPassword = $dbh->prepare("SELECT * FROM usuarios WHERE password=SHA2(:pass,512) ");
+	    $consultaUsuario->bindValue(':user', $user);
+		$consultaPassword->bindValue(':pass', $pass);
+		$consultaUsuario->execute();
+		$consultaPassword->execute();
+	 	
+		$resultUser=$consultaUsuario->rowCount();
+		$resultPass=$consultaPassword->rowCount();
+		
+		if($user==""){
+			$resultUser=5;
+			$resultPass=5;	
+		}
+		
+		$consultaNombreUsuario = $dbh->prepare("SELECT nombre FROM usuarios WHERE usuario=:user");
+		$consultaNombreUsuario->bindValue(':user', $user);
+		$consultaNombreUsuario->execute();
+		$nombreUser = $consultaNombreUsuario ->fetch(PDO::FETCH_ASSOC);
 
-	echo "<form action='login.php' method='post' >";
-	echo" USUARIO: <input type='text' name='usuario'><br>";
-	echo"CONTRASEÑA: <input type='password' name='passwd'><br>";
-	echo "<input value='ENTRAR' type='submit' name='Submit'>";
-	echo"</form>";
+		$_SESSION["NombreUsuario"] = $nombreUser ;
+
+		
 
 
-	$user=$_POST['usuario'];
-	$pass=$_POST['passwd'];
+		/*Hago una consulta para sacar el nombre de usuario*/
+		$consultaUsername = $dbh->prepare("SELECT usuario FROM usuarios WHERE usuario=:user");
+		$consultaUsername->bindValue(':user', $user);
+		$consultaUsername->execute();
+		$username = $consultaUsername ->fetch(PDO::FETCH_ASSOC);
+		
+		$_SESSION["username"] = $username ;
 
 
-
-	$BaseDeDatos= "mysql:host=localhost;dbname=GestorProjectes";
-	$Login = new PDO( $dbs, "miguel","miguel123");
- 
-	$USER = $Login->prepare("SELECT * FROM usuarios WHERE usuario=:user AND password=SHA2(:pass,512) ");
-
-    $stmt->bindValue(':user', $user);
-	$stmt->bindValue(':pass', $pass);
-	$stmt->execute();
- 	
-
-	$result=$stmt->rowCount();
-	
-	if($result==1){
-		echo "Hola $user";
-	}
-
- 	
-
-
-	?>
-
+		?>
+		
+		<script type="text/javascript">
+		    var resultUser = '<?php echo $resultUser;?>'
+		    var resultPass = '<?php echo $resultPass;?>'
+		    login();
+		</script>	
 </body>
 </html>
