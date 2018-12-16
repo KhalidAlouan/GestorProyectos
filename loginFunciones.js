@@ -309,3 +309,9 @@ function comprobarErroresInsertar(){
 
 
 
+function estadoSprints(id){
+	
+	document.getElementById(id).className="sprintActivo";
+	//document.getElementById("miguel").innerText=id;
+	
+}

@@ -107,6 +107,7 @@ nav{
   	width: 60%;
   	height: 40%;
   	left: 15%;
+  	overflow: auto;
 }
 
 #idpProjectes{
@@ -123,7 +124,7 @@ nav{
 
 #buttonCrearNouProjecte {
 	position:relative;
-	top: 150px;
+	top: 130px;
     bottom:5px;
     left: 15%;
 }
@@ -135,3 +136,80 @@ nav{
 	top: 100px;
 	margin: auto;
 }
+
+
+.SprintNombres{
+	border-top-style: solid;
+  	border-right-style: solid;
+  	border-bottom-style: solid;
+  	border-left-style: solid;
+  	position: relative;
+  	padding: 5%;
+  	bottom: -100px;
+  	width: 60%;
+  	height: 40%;
+  	left: 15%;
+  	overflow: auto;
+}
+
+
+.sprintActivo{
+	background-color: green;
+	color: #444;
+    cursor: pointer;
+    padding: 2%;
+    width: 100%;
+    border: none;
+    text-align: center;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+.sprintAcabado{
+	background-color: #eee;
+	color: #444;
+    cursor: pointer;
+    padding: 2%;
+    width: 100%;
+    border: none;
+    text-align: center;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+.sprintSinIniciar{
+	background-color: black;
+	color: #444;
+    cursor: pointer;
+    padding: 2%;
+    width: 100%;
+    border: none;
+    text-align: center;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+.accordion {
+  color: #444;
+  cursor: pointer;
+  padding: 2%;
+  width: 100%;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+.active, .accordion:hover {
+  background-color: #ccc; 
+}
+
+.panel {
+  padding: 0 2%;
+  display: none;
+  background-color: white;
+  overflow: hidden;
+}
+
