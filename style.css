@@ -166,3 +166,17 @@ nav{
 	display: inline-block;
 	padding: 5px;
 }
+
+.divPB {
+  	position: relative;
+	border-top-style: solid;
+  	border-right-style: solid;
+  	border-bottom-style: solid;
+  	border-left-style: solid;
+  	top: 35%;
+  	padding: 5%;
+  	bottom: 15%;
+  	width: 60%;
+  	height: 40%;
+  	left: 15%;
+}

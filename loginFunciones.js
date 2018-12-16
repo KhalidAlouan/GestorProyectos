@@ -251,3 +251,32 @@ function formulario(){
 	idButtonCrearProyecto.hidden = true;
 	
 }
+
+function inforGeneral(arrayJS) {
+	var div = document.createElement("div");
+	div.setAttribute("id","marcoInfoProyectos");
+
+	var center = document.getElementById("center");
+	center.appendChild(div);
+
+	for(var i=0;i<arrayJS.length;i++) {
+		var p = document.createElement("p");
+		div.appendChild(p);
+		p.innerText = arrayJS[i];
+
+	}
+    
+
+}
+
+function divEspecificacionesPB() {
+	var div = document.createElement("div");
+	div.setAttribute("class","divPB");
+
+	var marcoInfoProyectos = document.getElementById("marcoInfoProyectos");
+
+	insertAfter(div,marcoInfoProyectos);
+
+
+
+}
