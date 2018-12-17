@@ -281,9 +281,45 @@ function divEspecificacionesPB(array_especificaciones) {
 		var p = document.createElement("p");
 		div.appendChild(p);
 		p.innerText = array_especificaciones[i];
-		
 	}
 
+	
 
 
+
+}
+
+function comprobarErroresInsertar(){
+
+	var NombreProyecto =  document.getElementsByName("inputNombreprojecte")[0].value;
+
+	var SMselect = document.getElementsByName("selectSM")[0].value;
+	var POselect = document.getElementsByName("selectPO")[0].value;
+	var GPselect = document.getElementsByName("selectGP")[0].value;
+	
+	if (NombreProyecto == ""){
+		mensajeError("El camp Nom del Projecte no pot estar buit");
+	}
+	else if(SMselect == "opcion0"){
+		mensajeError("El camp ScrumMaster no pot estar buit");
+	}
+	else if(POselect == "opcion0"){
+		mensajeError("El camp ProductOwner no pot estar buit");
+	}
+	else if(GPselect == "opcion0"){
+		mensajeError("El camp Grup de Desenvolupadors no pot estar buit");
+	}
+	else{
+		document.getElementById('idFormulario').submit();
+	}
+		
+}
+
+
+
+function estadoSprints(id){
+	
+	document.getElementById(id).className="sprintActivo";
+	//document.getElementById("miguel").innerText=id;
+	
 }

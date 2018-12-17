@@ -70,17 +70,28 @@
 	}
 
 	//Consulta para sacar la info de las especificaciones
-	$consultaEspecificaciones = $dbh->prepare("SELECT * FROM especificaciones WHERE id_projecte = :projectId and acabado = 0");
+    $consultaInfoEspecificaciones = $dbh->prepare("SELECT * FROM especificaciones WHERE id_projecte = :projectId AND acabado = 0");
 
-	$consultaEspecificaciones->bindValue(':projectId', $consultaIdResultado);
+    $consultaInfoEspecificaciones->bindValue(':projectId', $consultaIdResultado);
+	$consultaInfoEspecificaciones->execute();
+	$consultaInfoEspecificacionesResultado = $consultaInfoEspecificaciones->fetchAll(PDO::FETCH_ASSOC);
 
-	$consultaEspecificaciones->execute();
+	$array_especificaciones =[];
+	
+	foreach($consultaInfoEspecificacionesResultado as $cliente){
+    	echo $cliente['id_projecte'];
+    	echo $cliente['id_especificacion'];
+    	echo $cliente['nombre_especificacion'];
+    	echo $cliente['dificultad'];
+    	echo $cliente['descripcio'];
+    	echo $cliente['tiempo'];
+    	echo $cliente['id_usuario'];
+    	echo $cliente['acabado'];
+    	array_push($array_especificaciones,$cliente);
+    	echo "<br>";
+	}
 
-	$consultaEspecificacionesResultado = $consultaEspecificaciones->fetchAll();
-
-
-	echo $consultaEspecificacionesResultado[0][3];
-
+	
 
 	echo "<div id='header'>";
 
@@ -94,17 +105,6 @@
 			inforGeneral(arrayJS);
 		</script>
 		<?php 
-
-	for ($i=0; $i <=$consultaEspecificacionesSinAcabarResultado-1 ; $i++) {
-		?>
-			<script type="text/javascript">
-			    var i = '<?php echo $i;?>'
-				var array_especificaciones = <?php echo json_encode($array_especificaciones);?>;
-				divEspecificacionesPB(array_especificaciones[i]);
-				
-			</script>
-		<?php 
-	}
 
 	echo "</div>";
 

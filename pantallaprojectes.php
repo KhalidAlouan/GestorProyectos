@@ -124,6 +124,47 @@
 		array_push($array3, $value[0]);
 	}
 
+		//Almacenar Valores de la creacion de un nuevo proyecto
+	$valorNom=$_POST["inputNombreprojecte"];
+	$valorDesc=$_POST["inputDescrion"];
+	$valorScrum=$_POST["selectSM"];
+	$valorPOD=$_POST["selectPO"];
+	$valorGrupo=$_POST["selectGP"];
+
+	
+
+
+
+	//Consulta para saber el id de grupo para insertar en la tabla de proyectos
+	$consultaIdGrupoInsert = $dbh->prepare("SELECT id_grupo FROM grupos WHERE  nombre_grupo = :nombreGrupo");
+	$consultaIdGrupoInsert->bindValue(':nombreGrupo', $valorGrupo);
+	$consultaIdGrupoInsert->execute();
+	$idgrupoInsert = $consultaIdGrupoInsert ->fetch(PDO::FETCH_ASSOC);
+
+	foreach ($idgrupoInsert as $value) {
+		$idgrupoInsert = $value;
+	}
+
+	//Condicion para insertar el nuevo proyecto
+	if (isset($_POST["insertarDatos"])){
+		echo'<script type="text/javascript">comprobarErroresInsertar();</script>';
+		if(isset($valorDesc)){
+			$valorDesc=$_POST["inputDescrion"];
+		}
+		else{
+			$valorDesc=NULL;
+			
+	    $inserResultado = $dbh->prepare("INSERT INTO projectes (nombre_projecte, descripcion, scrum_master, product_owner,id_grupo) VALUES(:nombreprojecte,:descripcionprojecte,:smprojecte,:poprojecte,:idgrupoprojecte)");
+	    $inserResultado->bindValue(':nombreprojecte', $valorNom);
+	    $inserResultado->bindValue(':descripcionprojecte', $valorDesc);
+	    $inserResultado->bindValue(':smprojecte', $valorScrum);
+	    $inserResultado->bindValue(':poprojecte', $valorPOD);
+	    $inserResultado->bindValue(':idgrupoprojecte', $idgrupoInsert);
+	    $inserResultado->execute();
+	    header("Location: pantallaprojectes.php");
+	    }
+	}
+
 
 
 	
