@@ -69,6 +69,19 @@
 
 	}
 
+	//Consulta para sacar la info de las especificaciones
+	$consultaEspecificaciones = $dbh->prepare("SELECT * FROM especificaciones WHERE id_projecte = :projectId and acabado = 0");
+
+	$consultaEspecificaciones->bindValue(':projectId', $consultaIdResultado);
+
+	$consultaEspecificaciones->execute();
+
+	$consultaEspecificacionesResultado = $consultaEspecificaciones->fetchAll();
+
+
+	echo $consultaEspecificacionesResultado[0][3];
+
+
 	echo "<div id='header'>";
 
 	echo "</div>";
@@ -82,10 +95,13 @@
 		</script>
 		<?php 
 
-	for ($i=1; $i <=$consultaEspecificacionesSinAcabarResultado ; $i++) { 
+	for ($i=0; $i <=$consultaEspecificacionesSinAcabarResultado-1 ; $i++) {
 		?>
 			<script type="text/javascript">
-				divEspecificacionesPB(array_especificaciones);
+			    var i = '<?php echo $i;?>'
+				var array_especificaciones = <?php echo json_encode($array_especificaciones);?>;
+				divEspecificacionesPB(array_especificaciones[i]);
+				
 			</script>
 		<?php 
 	}

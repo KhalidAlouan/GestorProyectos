@@ -269,13 +269,20 @@ function inforGeneral(arrayJS) {
 
 }
 
-function divEspecificacionesPB() {
+function divEspecificacionesPB(array_especificaciones) {
 	var div = document.createElement("div");
 	div.setAttribute("class","divPB");
 
 	var marcoInfoProyectos = document.getElementById("marcoInfoProyectos");
-
+	
 	insertAfter(div,marcoInfoProyectos);
+
+	for (var i = 0; i <= array_especificaciones.length; i++) {
+		var p = document.createElement("p");
+		div.appendChild(p);
+		p.innerText = array_especificaciones[i];
+		
+	}
 
 
 
