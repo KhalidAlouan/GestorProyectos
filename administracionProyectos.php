@@ -82,6 +82,8 @@
        	array_push($array_especificaciones,$cliente);
 	}
 
+	
+
 
 
 	echo "<div id='header'>";
@@ -107,8 +109,6 @@
 		var arrayJS = <?php echo json_encode($array_datos);?>;
 		inforGeneral(arrayJS);
 		var array_especificaciones = <?php echo json_encode($array_especificaciones) ?>;
-
-
 		divEspecificacionesPB(array_especificaciones);
 	</script>
 </body>
