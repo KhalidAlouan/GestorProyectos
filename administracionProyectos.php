@@ -79,32 +79,16 @@
 	$array_especificaciones =[];
 	
 	foreach($consultaInfoEspecificacionesResultado as $cliente){
-    	echo $cliente['id_projecte'];
-    	echo $cliente['id_especificacion'];
-    	echo $cliente['nombre_especificacion'];
-    	echo $cliente['dificultad'];
-    	echo $cliente['descripcio'];
-    	echo $cliente['tiempo'];
-    	echo $cliente['id_usuario'];
-    	echo $cliente['acabado'];
-    	array_push($array_especificaciones,$cliente);
-    	echo "<br>";
+       	array_push($array_especificaciones,$cliente);
 	}
 
-	
+
 
 	echo "<div id='header'>";
 
 	echo "</div>";
 
 	echo "<div id='center'>";
-
-		?>
-		<script type="text/javascript">
-			var arrayJS = <?php echo json_encode($array_datos);?>;
-			inforGeneral(arrayJS);
-		</script>
-		<?php 
 
 	echo "</div>";
 
@@ -120,8 +104,12 @@
 
 	?>
 	<script type="text/javascript">
-		//var array_especificaciones= <?php echo json_encode($consultaEspecificacionesResultado);?>;
-		//divEspecificacionesPB(array_especificaciones);
+		var arrayJS = <?php echo json_encode($array_datos);?>;
+		inforGeneral(arrayJS);
+		var array_especificaciones = <?php echo json_encode($array_especificaciones) ?>;
+
+
+		divEspecificacionesPB(array_especificaciones);
 	</script>
 </body>
 </html>

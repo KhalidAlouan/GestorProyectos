@@ -277,15 +277,26 @@ function divEspecificacionesPB(array_especificaciones) {
 	
 	insertAfter(div,marcoInfoProyectos);
 
-	for (var i = 0; i <= array_especificaciones.length; i++) {
+
+
+
+	var n = array_especificaciones.length;
+	for(var i = 0;i<n;i++){
 		var p = document.createElement("p");
 		div.appendChild(p);
-		p.innerText = array_especificaciones[i];
+		p.innerText = array_especificaciones[i]; 
+		p.innerHTML = JSON.stringify(array_especificaciones, null, 4);
+
+
+    	console.log(array_especificaciones[i]);
 	}
 
-	
-
-
+	/*for (var i in array_especificaciones) { 
+			var p = document.createElement("p");
+			div.appendChild(p);
+			p.innerText = array_especificaciones[i]; 
+			}
+	*/
 
 }
 
