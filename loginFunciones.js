@@ -333,10 +333,19 @@ function comprobarErroresInsertar(){
 }
 
 
-
-function estadoSprints(id){
+//Funcion del estado acabado de un sprint
+function estadoAcabado(id){
+	document.getElementById(id).className='sprintAcabado';
 	
-	document.getElementById(id).className="sprintActivo";
-	//document.getElementById("miguel").innerText=id;
+}
+
+//Funcion del estado Activo de un sprint
+function estadoActivo(id){
+	document.getElementById(id).className='sprintActivo';
+	
+}
+//Funcion del estado Sin iniciar un Sprint
+function estadoSinIniciar(id){
+	document.getElementById(id).className='sprintSinIniciar';
 	
 }

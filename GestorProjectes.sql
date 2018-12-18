@@ -21,7 +21,7 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
-USE GestorProjectes;
+
 --
 -- Estructura de tabla para la tabla `especificaciones`
 --

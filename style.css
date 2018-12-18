@@ -188,7 +188,7 @@ nav{
   	border-left-style: solid;
   	position: relative;
   	padding: 5%;
-  	bottom: -100px;
+  	bottom: 50px;
   	width: 60%;
   	height: 40%;
   	left: 15%;
@@ -198,39 +198,40 @@ nav{
 
 .sprintActivo{
 	background-color: green;
-	color: #444;
-    cursor: pointer;
-    padding: 2%;
-    width: 100%;
-    border: none;
-    text-align: center;
-    outline: none;
-    font-size: 15px;
-    transition: 0.4s;
+	width: 10%;
+	height: 10%;
+	text-align: center;
+	font-size: 15px;
+	color: white;
+	display: block;
+	margin-left: auto;
+	margin-right: auto; 
+
+
 }
 .sprintAcabado{
-	background-color: #eee;
-	color: #444;
-    cursor: pointer;
-    padding: 2%;
-    width: 100%;
-    border: none;
-    text-align: center;
-    outline: none;
-    font-size: 15px;
-    transition: 0.4s;
+	background-color:  #63605e ;
+	width: 10%;
+	height: 10%;
+	text-align: center;
+	font-size: 15px;
+	color: white;
+	display: block;
+	margin-left: auto;
+	margin-right: auto; 
+	
 }
 .sprintSinIniciar{
 	background-color: black;
-	color: #444;
-    cursor: pointer;
-    padding: 2%;
-    width: 100%;
-    border: none;
-    text-align: center;
-    outline: none;
-    font-size: 15px;
-    transition: 0.4s;
+	width: 10%;
+	height: 10%;
+	text-align: center;
+	font-size: 15px;
+	color: white;
+	display: block;
+	margin-left: auto;
+	margin-right: auto; 
+	
 }
 
 .accordion {
@@ -243,7 +244,10 @@ nav{
   outline: none;
   font-size: 15px;
   transition: 0.4s;
+  align-items: center;
+  margin: auto;
 }
+
 
 .active, .accordion:hover {
   background-color: #ccc; 
@@ -256,3 +260,6 @@ nav{
   overflow: hidden;
 }
 
+.class0{
+	
+}
