@@ -1,5 +1,5 @@
 body {
-	background-image: url(walllpaper.jpg);
+	background-image: url(wallpaper.jpg);
   	background-repeat: no-repeat;
   	background-position: center center;
   	background-attachment: fixed;
@@ -120,6 +120,7 @@ nav{
   	width: 60%;
   	height: 40%;
   	left: 15%;
+  	background-color: white;
 }
 
 #idpProjectes{
@@ -147,6 +148,7 @@ nav{
 	height: 300px;
 	top: 100px;
 	margin: auto;
+	background-color: white;
 }
 
 #marcoInfoProyectos {
@@ -160,6 +162,7 @@ nav{
   	width: 60%;
   	height: 40%;
   	left: 15%;
+  	background-color: white;
 }
 
 .titulos {
@@ -179,6 +182,7 @@ nav{
   	width: 60%;
   	height: 40%;
   	left: 15%;
+  	background-color: white;
 }
 
 .SprintNombres{
@@ -193,6 +197,7 @@ nav{
   	height: 40%;
   	left: 15%;
   	overflow: auto;
+  	background-color: white;
 }
 
 
