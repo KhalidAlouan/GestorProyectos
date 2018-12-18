@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2.1
--- http://www.phpmyadmin.net
+-- version 4.6.6deb5
+-- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 16-12-2018 a las 19:50:41
--- Versión del servidor: 5.7.24-0ubuntu0.16.04.1
--- Versión de PHP: 7.0.32-0ubuntu0.16.04.1
+-- Servidor: localhost:3306
+-- Tiempo de generación: 18-12-2018 a las 13:10:24
+-- Versión del servidor: 5.7.24-0ubuntu0.18.04.1
+-- Versión de PHP: 7.2.10-0ubuntu0.18.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -33,15 +33,22 @@ CREATE TABLE `especificaciones` (
   `dificultad` varchar(255) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
   `tiempo` time NOT NULL,
-  `id_usuario` int(11) NOT NULL
+  `id_usuario` int(11) NOT NULL,
+  `acabado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `especificaciones`
 --
 
-INSERT INTO `especificaciones` (`id_especificacion`, `id_projecte`, `nombre_especificacion`, `dificultad`, `descripcion`, `tiempo`, `id_usuario`) VALUES
-(1, 1, 'espe1', 'facil', 'Crear boton', '01:00:00', 1);
+INSERT INTO `especificaciones` (`id_especificacion`, `id_projecte`, `nombre_especificacion`, `dificultad`, `descripcion`, `tiempo`, `id_usuario`, `acabado`) VALUES
+(1, 1, 'Esp1', 'Media', 'prueba', '02:00:00', 1, 0),
+(2, 1, 'Espe2', 'Facil', 'Adios', '03:00:00', 1, 0),
+(3, 1, 'Espe3', 'Facil', 'Adios', '03:00:00', 1, 1),
+(4, 2, 'Espe1', 'Facil', 'Crear botón', '01:00:00', 1, 0),
+(5, 2, 'Espe2', 'Dificil', 'Prueba', '05:08:00', 2, 0),
+(6, 1, 'Espe3', 'Difícil', 'Hola', '03:00:00', 1, 0),
+(7, 2, 'Espr3', 'Media', 'Hola', '02:08:10', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -107,9 +114,12 @@ CREATE TABLE `sprint` (
 --
 
 INSERT INTO `sprint` (`id_sprint`, `nombre_sprint`, `id_especificacion`, `id_projecte`, `fecha_inicio`, `fecha_final`) VALUES
-(1, 'sprint1', 1, 1, '2018-12-01', '2018-12-10'),
-(2, 'sprint2', 1, 1, '2018-12-10', '2018-12-20'),
-(3, 'sprint3', 1, 1, '2018-12-20', '2018-12-28');
+(1, 'Sprint1', 1, 1, '2018-12-09', '2018-12-16'),
+(4, 'Sprint2', 2, 1, '2018-12-17', '2018-12-24'),
+(5, 'Sprint3', 3, 1, '2018-12-31', '2019-01-07'),
+(6, 'Sprint1', 1, 2, '2018-12-03', '2018-12-10'),
+(7, 'Sprint2', 4, 2, '2018-12-10', '2018-12-24'),
+(8, 'Sprint3', 3, 2, '2018-12-24', '2018-12-31');
 
 -- --------------------------------------------------------
 
@@ -190,7 +200,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `especificaciones`
 --
 ALTER TABLE `especificaciones`
-  MODIFY `id_especificacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_especificacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `grupos`
 --
@@ -205,7 +215,7 @@ ALTER TABLE `projectes`
 -- AUTO_INCREMENT de la tabla `sprint`
 --
 ALTER TABLE `sprint`
-  MODIFY `id_sprint` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_sprint` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
