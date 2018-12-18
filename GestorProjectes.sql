@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 18-12-2018 a las 13:10:24
+-- Tiempo de generación: 18-12-2018 a las 13:56:44
 -- Versión del servidor: 5.7.24-0ubuntu0.18.04.1
 -- Versión de PHP: 7.2.10-0ubuntu0.18.04.1
 
@@ -145,7 +145,7 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id`, `nombre`, `apellidos`, `correo`, `usuario`, `password`, `rol`, `grupo`) VALUES
 (1, 'marc', 'alvarez', 'marcalvarezru8@gmail.com', 'marcalvarez', '36752aed6f2a4650f2f88a2822e3b8ef97b5404ff62813d11be0314dca76c5da37d0b0bf6de272472b274013e1bc98970a9564065435f3baa190f3284b266a64', 'SM', NULL),
 (2, 'miguel', 'arteaga', 'marteagavalle@gmail.com', 'miguelarteaga', '69d02a6c3c9ea7ff711e454020a16a81f7ee438cd3334e0f9be3eb0338df2dff58a231963c681e736143eeb6c1d3280d5f053d9892ff33ff09d95cf8294c556f', 'PO', NULL),
-(3, 'khalid', 'alouan', 'kalit.alouan668@gmail.com', 'khalidalouan', 'e7a978e62e94186506e8a0ed9b6bedbc4c938c50a4ef73998afdedc5c7154345647a71037fde883fcac9ade1a4e15d9a495a56641a382f39393889f26a2d0470', 'DE', NULL),
+(3, 'khalid', 'alouan', 'kalit.alouan668@gmail.com', 'khalidalouan', 'e7a978e62e94186506e8a0ed9b6bedbc4c938c50a4ef73998afdedc5c7154345647a71037fde883fcac9ade1a4e15d9a495a56641a382f39393889f26a2d0470', 'DE', 1),
 (4, 'lucas', 'alvarez', 'lucasalv@gmail.com', 'lucasalvarez', 'a02e6f9f4b63c9f00232d1d478d5fb1ec7431a444f91fad58f3c7678a0113eac0dd10d8830be48c34a27f654319e026e47542dc1d5a603177aa641b882dac1f9', 'DE', NULL),
 (5, 'carlos', 'ruiz', 'carlosruiz@gmail.com', 'carlosruiz', '1ca6cc129624a0f7abd0a55f443a9f31d040dc502c4f1abe5b78e7659f4fd82e1532ea3ba5c17bc4624b2ef5d2ce7cb17b53ff53b8b53bf8ab085d2387f4704a', 'SM', NULL),
 (6, 'marcos', 'arteaga', 'marcosarteaga@gmail.com', 'marcosarteaga', 'a0a8418422f08bf0a9ebf039028fa228129c7b6a7db6bc22bffe2068638869bf73cf1ac337fa0748a4c0cc6aeb6d10322b3ee39d067497968258635349cfbf0c', 'PO', NULL);
@@ -210,7 +210,7 @@ ALTER TABLE `grupos`
 -- AUTO_INCREMENT de la tabla `projectes`
 --
 ALTER TABLE `projectes`
-  MODIFY `id_projecte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_projecte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `sprint`
 --

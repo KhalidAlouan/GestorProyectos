@@ -8,10 +8,44 @@
 </head>
 <body>
 	<?php
+	session_start();
 
+
+	$nombreUser = $_SESSION["NombreUsuario"];
+	$username = $_SESSION["username"];
+
+	foreach ($nombreUser as $value) {
+		$nombreUser=$value;
+	}
+
+	foreach ($username as $value) {
+		$username = $value;
+	}
 	//Abro la conexion a la base de datos
 	$dbs= "mysql:host=localhost;dbname=GestorProjectes";
 	$dbh = new PDO( $dbs, "admin","admin");
+
+
+	echo "<div id='header'>";
+		echo"<nav id='cabezera'>";
+			echo"<img id='imagenusuario' src='https://img.icons8.com/android/1600/user.png'>";
+		  	echo"<b>	usuario : $nombreUser	</b>";
+		  	echo"<a href='login.php'><img id='imagenlogat' src='https://image.flaticon.com/icons/png/512/55/55023.png' ></a> ";
+		echo"</nav>"; 
+	echo "</div>";
+
+	//Consulta para saber el rol de un usuario.
+	$consultaRol = $dbh->prepare("SELECT rol FROM usuarios WHERE usuario=:username");
+
+	$consultaRol->bindValue(':username', $username);
+
+	$consultaRol->execute();
+
+	$consultaRolResultado = $consultaRol ->fetch(PDO::FETCH_ASSOC);
+
+	foreach ($consultaRolResultado as $value) {
+		$consultaRolResultado = $value;
+	}
 
 	//Obtengo la url actual de la web para despues obtener el id
 	$host= $_SERVER["HTTP_HOST"];
@@ -37,7 +71,9 @@
 			$consultaDatosProyectoResultado = $value;
 			array_push($array_datos, $consultaDatosProyectoResultado);
 	}
-	
+
+
+
 	//Consulta para sacar el id del projecto
 	$consultaId = $dbh->prepare("SELECT id_projecte FROM projectes WHERE nombre_projecte=:projectName");
 
@@ -52,7 +88,17 @@
 
 	}
 
+	echo "<div id='header'>";
 
+	echo "</div>";
+
+	echo "<div id='center'>";
+	if ($consultaRolResultado != "SM") {
+		
+	
+
+	
+	
 	
 
 	//Consulta para sacar el numero de especificaciones sin acabar y generar cada marco
@@ -114,11 +160,7 @@
 		array_push($array3, $value[0]);
 	}
 
-	echo "<div id='header'>";
-
-	echo "</div>";
-
-	echo "<div id='center'>";
+	
 
 		//Consulta para saber el nombre de los Sprint
 	$consultaSprint = $dbh->prepare("SELECT nombre_sprint FROM sprint WHERE id_projecte=:projectId");
@@ -215,10 +257,8 @@
 				}
 				
 			}
-
-
-
 		echo "</div>";
+	}	
 
 	echo "</div>";
 

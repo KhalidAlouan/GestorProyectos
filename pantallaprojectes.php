@@ -153,16 +153,15 @@
 		}
 		else{
 			$valorDesc=NULL;
-			
-	    $inserResultado = $dbh->prepare("INSERT INTO projectes (nombre_projecte, descripcion, scrum_master, product_owner,id_grupo) VALUES(:nombreprojecte,:descripcionprojecte,:smprojecte,:poprojecte,:idgrupoprojecte)");
-	    $inserResultado->bindValue(':nombreprojecte', $valorNom);
-	    $inserResultado->bindValue(':descripcionprojecte', $valorDesc);
-	    $inserResultado->bindValue(':smprojecte', $valorScrum);
-	    $inserResultado->bindValue(':poprojecte', $valorPOD);
-	    $inserResultado->bindValue(':idgrupoprojecte', $idgrupoInsert);
-	    $inserResultado->execute();
-	    header("Location: pantallaprojectes.php");
-	    }
+		}
+    	$inserResultado = $dbh->prepare("INSERT INTO projectes (nombre_projecte, descripcion, scrum_master, product_owner,id_grupo) VALUES(:nombreprojecte,:descripcionprojecte,:smprojecte,:poprojecte,:idgrupoprojecte)");
+    	$inserResultado->bindValue(':nombreprojecte', $valorNom);
+    	$inserResultado->bindValue(':descripcionprojecte', $valorDesc);
+    	$inserResultado->bindValue(':smprojecte', $valorScrum);
+    	$inserResultado->bindValue(':poprojecte', $valorPOD);
+    	$inserResultado->bindValue(':idgrupoprojecte', $idgrupoInsert);
+    	$inserResultado->execute();
+    	header("Location: pantallaprojectes.php");
 	}
 
 
