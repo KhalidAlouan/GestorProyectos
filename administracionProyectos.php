@@ -93,12 +93,7 @@
 	echo "</div>";
 
 	echo "<div id='center'>";
-	if ($consultaRolResultado != "SM") {
 		
-	
-
-	
-	
 	
 
 	//Consulta para sacar el numero de especificaciones sin acabar y generar cada marco
@@ -258,7 +253,7 @@
 				
 			}
 		echo "</div>";
-	}	
+		
 
 	echo "</div>";
 
