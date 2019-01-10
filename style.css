@@ -126,7 +126,7 @@ nav{
 #idpProjectes{
 	position: relative;
 	float:right;
-	bottom: 80px;
+	bottom: 40px;
 }
 
 .nombreProyec{
@@ -266,5 +266,12 @@ nav{
 }
 
 .class0{
+	
+}
+#CrearSprint{
+	float: right;
+}
+
+#sprintFormulario{
 	
 }

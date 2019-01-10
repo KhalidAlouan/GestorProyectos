@@ -213,6 +213,10 @@
 				  	echo"</p>";
 				echo"</div>";
 			}
+			echo "<br>";
+			echo "<br>";
+			echo"<button id='CrearSprint' onclick='formularioSprint()'>Crear Nou Sprint</button>";
+			echo "<div id='sprintFormulario'></di>";
 
 			//Consulta de Fecha Actual
 			$FechaActual = $dbh->prepare("SELECT CURDATE() ");

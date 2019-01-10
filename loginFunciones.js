@@ -373,3 +373,94 @@ function estadoSinIniciar(id){
 	document.getElementById(id).className='sprintSinIniciar';
 	
 }
+
+function formularioSprint(){
+
+	
+	//Creo el formulario
+	var formSprint = document.createElement("form");
+	formSprint.setAttribute("id","idFormularioSprint");
+	formSprint.setAttribute("action","administracionProyectos.php");
+	formSprint.setAttribute("method","POST");
+
+
+	//Creo el label del numero del Sprint
+	var numSprint_label = document.createElement("label");
+	//Le meto texto al numSprint_label
+	numSprint_label.innerText="Número de  Sprint: ";
+	//Creo el label para mostrar el numero de la especificacion
+	var numSprint_label2 = document.createElement("label");
+	numSprint_label2.innerText="id";
+
+	//Creamos un label para la fecha de inicio del sprint
+	var dataIniciSprint_label = document.createElement("label");
+	//Añadimos texto dentro del label
+	dataIniciSprint_label.innerText="Data de Inici: ";
+	//Creamos un input para poder poner la fecha de inicio del sprint
+	var dataIniciSprint_input = document.createElement("input");	
+	//ponemos que el input sera de tipo texto
+	dataIniciSprint_input.setAttribute("type","text");
+	//ponemos un name para el input
+	dataIniciSprint_input.setAttribute("name","inputDataInici");
+
+
+	//Creamos un label para la fecha final del sprint
+	var dataFiSprint_label = document.createElement("label");
+	//Añadimos texto dentro del label
+	dataFiSprint_label.innerText="Data de Final: ";
+	//Creamos un input para poder poner la fecha final del sprint
+	var dataFiSprint_input = document.createElement("input");	
+	//ponemos que el input sera de tipo texto
+	dataFiSprint_input.setAttribute("type","text");
+	//ponemos un name para el input
+	dataFiSprint_input.setAttribute("name","inputDataFi");
+
+
+	//Creamos un label para las horas del sprint
+	var horasSprint_label = document.createElement("label");
+	//Añadimos texto dentro del label
+	horasSprint_label.innerText="Horas del Sprint: ";
+	//Creamos un input para poder poner las horas del sprint
+	var horasSprint_input = document.createElement("input");	
+	//ponemos que el input sera de tipo texto
+	horasSprint_input.setAttribute("type","text");
+	//ponemos un name para el input
+	horasSprint_input.setAttribute("name","inputHoras");
+
+	//Creamos una variable con el id de un div para ponerlo dentro
+	var divsprint=document.getElementById('sprintFormulario');
+
+	var buttonSprint=document.createElement("button");
+	buttonSprint.setAttribute("name","")
+
+	var saltoDelinea1=document.createElement("br");
+	var saltoDelinea2=document.createElement("br");
+	var saltoDelinea3=document.createElement("br");
+	var saltoDelinea4=document.createElement("br");
+
+	
+	//Añadimos todas la variables dentro del form
+	formSprint.appendChild(numSprint_label);
+	formSprint.appendChild(numSprint_label2);
+	formSprint.appendChild(saltoDelinea1);
+
+
+	formSprint.appendChild(dataIniciSprint_label);
+	formSprint.appendChild(dataIniciSprint_input);
+	formSprint.appendChild(saltoDelinea2);
+
+	formSprint.appendChild(dataFiSprint_label);
+	formSprint.appendChild(dataFiSprint_input);
+	formSprint.appendChild(saltoDelinea3);
+
+	formSprint.appendChild(horasSprint_label);
+	formSprint.appendChild(horasSprint_input);
+	formSprint.appendChild(saltoDelinea4);
+	
+	//añadimos el form dentro del div
+	divsprint.appendChild(formSprint);
+
+
+
+
+}
