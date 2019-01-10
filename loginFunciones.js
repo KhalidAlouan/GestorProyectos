@@ -1,3 +1,5 @@
+arrayNombre=['ID PROJECTE: ','NOMBRE PROJECTE: ','DESCRIPCIÓN: ','SCRUM MASTER: ','PRODUCT OWNER: ','ID GRUPO: '];
+
 function mensajeError(texto) {
 	//Guardo en una variable el div especial para los errores
 	var zonaError = document.getElementById("mensajeError");
@@ -55,24 +57,21 @@ function buttonCrearNouProjecte() {
 
 
 }
-//Funcion de condiciones de usuario y password del Login
+
 function login(){
-	//Si el usuario y la password son correctos llamamos a la funcion loginCorrecto()
+
 	if(resultUser==1 && resultPass==1){
 		loginCorrecto();
 		
 	}
-	//Si el Password es erroneo llamamos a la funcion errorPassword()
 	else if (resultUser==1 && resultPass!=1){
 		errorPassword();
 	
 	}
-	//Si el Usuario es erroneo llamamos a la funcion errorUser()
 	else if (resultUser!=1 && resultPass==1) {
 		errorUser();
 
 	}
-	//Si el Usuario y el Password son erroneos llamamos a la funcion errorLogin()
 	else if(resultUser==0 && resultPass==0){
 		errorLogin();
 
@@ -81,23 +80,19 @@ function login(){
 
 
 function errorLogin() {
-	//Llamamos a la funcion de mensajeError pasando el tipo de error
 	mensajeError("Contraseña y usuario incorrectos !");
 }
 
 function errorUser(){
-	//Llamamos a la funcion de mensajeError pasando el tipo de error
 	mensajeError("Usuario incorrecto !");
 }
 
 function errorPassword(){
-	//Llamamos a la funcion de mensajeError pasando el tipo de error
 	mensajeError("Contraseña incorrecta !");
 
 }
 
 function loginCorrecto(){
-	//Abrimos la pantallaprojectes.php si el usuario y el password son correctos
 	window.location="pantallaprojectes.php";
 }
 
@@ -281,6 +276,60 @@ function formulario(){
 	
 }
 
+function inforGeneral(arrayJS) {
+	var div = document.createElement("div");
+	div.setAttribute("id","marcoInfoProyectos");
+
+	var center = document.getElementById("center");
+	center.appendChild(div);
+
+	for(var i=0;i<arrayJS.length;i++) {
+		var p = document.createElement("p");
+		div.appendChild(p);
+		p.innerText = arrayNombre[i]+" "+arrayJS[i]
+
+	}
+    
+
+}
+
+function divEspecificacionesPB(array_especificaciones) {
+	var div = document.createElement("div");
+	div.setAttribute("class","divPB");
+
+	var marcoInfoProyectos = document.getElementById("marcoInfoProyectos");
+	
+	insertAfter(div,marcoInfoProyectos);
+
+	var input = document.createElement("input");
+	input.setAttribute("type","text");
+
+	var button = document.createElement("button");
+	button.type="submit";
+	button.innerText="+";
+	button.setAttribute("onclick","formulario()");
+
+	var nuevoArray = array_especificaciones.map(function(o) {
+	    return Object.keys(o).reduce(function(array, key) {
+    		return array.concat([key, o[key]]);
+    	}, []);
+	});
+
+	var n = nuevoArray.length;
+	for(var i = 0;i<n;i++){
+		var p = document.createElement("p");
+		div.appendChild(p);
+		p.innerText = nuevoArray[i]; 
+	}
+
+	insertAfter(input,p);
+	insertAfter(button,input);
+
+
+
+
+}
+
 function comprobarErroresInsertar(){
 
 	var NombreProyecto =  document.getElementsByName("inputNombreprojecte")[0].value;
@@ -308,10 +357,19 @@ function comprobarErroresInsertar(){
 }
 
 
-
-function estadoSprints(id){
+//Funcion del estado acabado de un sprint
+function estadoAcabado(id){
+	document.getElementById(id).className='sprintAcabado';
 	
-	document.getElementById(id).className="sprintActivo";
-	//document.getElementById("miguel").innerText=id;
+}
+
+//Funcion del estado Activo de un sprint
+function estadoActivo(id){
+	document.getElementById(id).className='sprintActivo';
+	
+}
+//Funcion del estado Sin iniciar un Sprint
+function estadoSinIniciar(id){
+	document.getElementById(id).className='sprintSinIniciar';
 	
 }

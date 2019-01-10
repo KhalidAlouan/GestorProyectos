@@ -28,12 +28,12 @@
 		                          <div class="row">
 		                          	
 		                            <div class="input-field col s12">
-		                              <label for="text">usuario </label>
+		                              <label for="text">Usuario </label>
 		                              <br>
 		                              <input type="text" class="validate" name="usuario"  />
 		                            </div>
 		                            <div class="input-field col s12">
-		                              <label for="password">contraseña </label>
+		                              <label for="password">Contraseña </label>
 		                              <br>
 		                              <input type="password" class="validate" name="passwd"  />
 		                            </div>

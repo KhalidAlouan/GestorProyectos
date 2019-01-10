@@ -10,11 +10,11 @@
 <body>
 <?php
 	session_start();
-	//conexion a la BaseDeDatos.
+
 	$dbs= "mysql:host=localhost;dbname=GestorProjectes";
 	$dbh = new PDO( $dbs, "admin","admin");
 
-	//Almacemar Usuario logueado.
+
 	$nombreUser = $_SESSION["NombreUsuario"];
 	$username = $_SESSION["username"];
 
@@ -26,7 +26,7 @@
 		$username = $value;
 	}
 
-	//Consulta para saber rol de un usuario
+	
 	$consultaRol = $dbh->prepare("SELECT rol FROM usuarios WHERE usuario=:username");
 
 	$consultaRol->bindValue(':username', $username);
@@ -39,7 +39,7 @@
 		$consultaRolResultado = $value;
 	}
 
-	//Saber el id de grupo del usuario
+
 	$consultaIdGrupo = $dbh->prepare("SELECT grupo FROM usuarios WHERE  usuario = :user");
 	$consultaIdGrupo->bindValue(':user', $username);
 	$consultaIdGrupo->execute();
@@ -49,9 +49,9 @@
 		$idgrupo = $value;
 	}
 
-	
+	print_r($idgrupo);
 
-	//Condicion para mostrar los proyectos que tiene cada usuario  asignado
+
 	if($consultaRolResultado != "SM"){
 		$consultaNombreProyecto = $dbh->prepare("SELECT nombre_projecte FROM projectes WHERE  product_owner = :nombre  or id_grupo = :grupoid ");
 		$consultaNombreProyecto->bindValue(':nombre', $nombreUser);
@@ -64,9 +64,9 @@
 		$consultaNombreProyecto->execute();
 		$nombreProyectos = $consultaNombreProyecto ->fetchAll();
 	}
-	//Creacion del Nav y Mostra nombre de usuario
+
 	echo "<div id='header'>";
-		echo"<nav>";
+		echo"<nav id='cabezera'>";
 			echo"<img id='imagenusuario' src='https://img.icons8.com/android/1600/user.png'>";
 		  	echo"<b>	usuario : $nombreUser	</b>";
 		  	echo"<a href='login.php'><img id='imagenlogat' src='https://image.flaticon.com/icons/png/512/55/55023.png' ></a> ";
@@ -78,11 +78,11 @@
 			echo"<p id='idpProjectes'>";
 				echo"<b>Projectes</b>";
 			echo "</p>";
-			//Printar nombre de proyectos
 			foreach ($nombreProyectos as $value) {
-				echo "<p id='idnombreProyec' > <a href='#' > $value[0] </a></p>";
-			}
-		echo "</div>";
+				echo "<p class='nombreProyec' > <a id='$value[0]' href='administracionProyectos.php?id=$value[0]'> $value[0] </a></p>";
+			}		
+	echo "</div>";
+
 	echo "</div>";
 
 	echo "<div id='mensajeError'>";
@@ -93,7 +93,7 @@
 		
 	echo "</div>";
 
-	//Consulta para saber los Scrum Maste
+
 	$sm="SM";
 	$nomusuari = $dbh->prepare("SELECT nombre FROM usuarios WHERE  rol = :rol ");
 	$nomusuari->bindValue(':rol', $sm);
@@ -104,7 +104,6 @@
 		array_push($array1, $value[0]);
 		
 	}
-	//Consulta para saber los Product Owner
 	$po="PO";
 	$nomusuari = $dbh->prepare("SELECT nombre FROM usuarios WHERE  rol = :rol ");
 	$nomusuari->bindValue(':rol', $po);
@@ -115,7 +114,6 @@
 		array_push($array2, $value[0]);
 		
 	}
-	//Consulta de grupos desarrolladores
 	$de="DE";
 	$nomusuari = $dbh->prepare("SELECT nombre_grupo FROM grupos");
 	$nomusuari->bindValue(':rol', $de);
@@ -126,7 +124,7 @@
 		array_push($array3, $value[0]);
 	}
 
-	//Almacenar Valores de la creacion de un nuevo proyecto
+		//Almacenar Valores de la creacion de un nuevo proyecto
 	$valorNom=$_POST["inputNombreprojecte"];
 	$valorDesc=$_POST["inputDescrion"];
 	$valorScrum=$_POST["selectSM"];
@@ -166,6 +164,10 @@
     	header("Location: pantallaprojectes.php");
 	}
 
+
+
+	
+	
 ?>
 <script type="text/javascript">
 	var arraySM=<?php echo json_encode($array1);?>;
@@ -173,9 +175,6 @@
 	var arrayDE=<?php echo json_encode($array3);?>;
 	var rol = '<?php echo $consultaRolResultado;?>'
 	saberRolUsuario();
-	
-
 </script>
-
 </body>
 </html>
