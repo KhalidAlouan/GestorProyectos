@@ -70,7 +70,7 @@
 		
 		
 		$dbs= "mysql:host=localhost;dbname=GestorProjectes";
-		$dbh = new PDO( $dbs, "root","");
+		$dbh = new PDO( $dbs, "admin","admin");
 	 	
 		$consultaUsuario = $dbh->prepare("SELECT * FROM usuarios WHERE usuario=:user");
 		$consultaPassword = $dbh->prepare("SELECT * FROM usuarios WHERE password=SHA2(:pass,512) ");

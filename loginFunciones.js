@@ -1,3 +1,5 @@
+arrayNombre=['ID PROJECTE: ','NOMBRE PROJECTE: ','DESCRIPCIÓN: ','SCRUM MASTER: ','PRODUCT OWNER: ','ID GRUPO: '];
+
 function mensajeError(texto) {
 	//Guardo en una variable el div especial para los errores
 	var zonaError = document.getElementById("mensajeError");
@@ -119,6 +121,9 @@ function formulario(){
 	divForm.setAttribute("id","idForm");
 	//Creo el formulario
 	var form = document.createElement("form");
+	form.setAttribute("id","idFormulario");
+	form.setAttribute("action","pantallaprojectes.php");
+	form.setAttribute("method","POST");
 
 	
 
@@ -128,8 +133,10 @@ function formulario(){
 	nomProjecte_label.innerText="Nom del Projecte:";
 	//Creo el input del nomProjecte
 	var nomProjecte_input = document.createElement("input");
+	//Ponemos el tipo del input
 	nomProjecte_input.setAttribute("type","text");
-	nomProjecte_input.required=true;
+	//Ponemos un name al input de nombre de proyecto
+	nomProjecte_input.setAttribute("name","inputNombreprojecte");
 
 	//Añado el label y el input al formulario
 	form.appendChild(nomProjecte_label);
@@ -143,7 +150,10 @@ function formulario(){
 	descripcion_label.innerText="Descripció:";
 	//Creo el input de la descripcion
 	var descripcion_input = document.createElement("input");
+	//Ponemos el tipo del input
 	descripcion_input.setAttribute("type","text");
+	//Ponemos un name al input de Descripcion 
+	descripcion_input.setAttribute("name","inputDescrion");
 
 	//Añado el label y el input al formulario
 	form.appendChild(descripcion_label);
@@ -158,44 +168,48 @@ function formulario(){
 
 	//Creo el select de scrumMaster
 	var selectScrum = document.createElement("select");
-	//Creao la opcion scrumMaster
-	
-	
+	selectScrum.setAttribute("name","selectSM");
+	//Creamos un option para el select Scrum
+	var scrumMaster=document.createElement("option");
+	//Ponemos un atributo de tipo value en el option
+	scrumMaster.setAttribute("value","opcion0");
+	var scrumMasterNode = document.createTextNode("Seleccionar");
+	scrumMaster.appendChild(scrumMasterNode);
+	selectScrum.appendChild(scrumMaster);
+
+	//Hacemos un for del arraySM donde estan todos los Scrum Master 
 	for (var i = 0; i < arraySM.length; i++) {
 		var scrumMaster=document.createElement("option");
 	 	var scrumMasterNode = document.createTextNode(arraySM[i]);
 	 	scrumMaster.appendChild(scrumMasterNode);
 	 	selectScrum.appendChild(scrumMaster);
 	}
-	// var scrumMasterNode = document.createTextNode("$arrarySM");
-	// scrumMaster.appendChild(scrumMasterNode);
-	//Añado la opcion scrumMaster al select scrumMaster
-	
-	
-
 	
 	//Creo el label selectOwner
 	var selectOwner_label = document.createElement("label");
 	//Le meto texto al selectScrum_label
 	selectOwner_label.innerText="Product Owner:";
-	//Añado el label selectOwner_label al formulario
-	
-
-	
 	//Creo el select de selectOwner
 	var selectOwner = document.createElement("select");
-	//Creo la opcion productOwner
+	selectOwner.setAttribute("name","selectPO");
+	//Creamos un option para el select Owner
 	var productOwner=document.createElement("option");
+	//Ponemos un atributo de tipo value en el option
+	productOwner.setAttribute("value","opcion0");
+	var productOwnerNode = document.createTextNode("Seleccionar");
+	productOwner.appendChild(productOwnerNode);
+	selectOwner.appendChild(productOwner);
 
-	productOwner.setAttribute("value","productOwner");
+	//Hacemos un for del arraySM donde estan todos los  Product Owner
 	for (var i = 0; i < arrayPO.length; i++) {
 		var productOwner=document.createElement("option");
+		//productOwner.setAttribute("value","po"+i);
 	 	var productOwnerNode = document.createTextNode(arrayPO[i]);
 	 	productOwner.appendChild(productOwnerNode);
 	 	selectOwner.appendChild(productOwner);
 	}
-	// productOwner.appendChild(productOwnerNode);
-	//Añado la opcion productOwner al select tipo_usuario
+	
+	//Añado la opcion productOwner 
 	selectOwner.appendChild(productOwner);
 	selectOwner.required=true;
 
@@ -203,14 +217,18 @@ function formulario(){
 	var selectGrup_label = document.createElement("label");
 	//Le meto texto al selectGrup_label
 	selectGrup_label.innerText="Grup de Desenvolupadors:";
-	//Añado el label selectGrup_label al formulario
 	
-
-	//Creo el select de grupDesenvol
+	//Creamos el elemento Select de grupos
 	var selectGrup = document.createElement("select");
-	//Creo la opcion Grup de desenvolupadors
+	selectGrup.setAttribute("name","selectGP");
+	//Creamos un option para el select Grupo
 	var grupDesenvol=document.createElement("option");
-	// grupDesenvolNode.setAttribute("value","grupDesenvol");
+	//Ponemos un atributo de tipo value en el option
+	grupDesenvol.setAttribute("value","opcion0");
+	var grupDesenvolNode = document.createTextNode("Seleccionar");
+	grupDesenvol.appendChild(grupDesenvolNode);
+	selectGrup.appendChild(grupDesenvol);
+	//Hacemos un for del arraySM donde estan todos los  nombre de los Grupos
 	for (var i = 0; i < arrayDE.length; i++) {
 		var grupDesenvol=document.createElement("option");
 	 	var grupDesenvolNode = document.createTextNode(arrayDE[i]);
@@ -218,15 +236,21 @@ function formulario(){
 	 	selectGrup.appendChild(grupDesenvol);
 	}
 
-	//Craecion boton submit
-	var botonInsertar = document.createElement("input");
+	nomProjecte_input.setAttribute("change",comprobarErroresInsertar);
+	scrumMaster.setAttribute("change",comprobarErroresInsertar);
+	selectOwner.setAttribute("change",comprobarErroresInsertar);
+	selectGrup.setAttribute("change",comprobarErroresInsertar);
 
+	//Craecion boton submit para insertar nuevo proyecto en la base de datos
+	var botonInsertar = document.createElement("input");
+	botonInsertar.setAttribute("name","insertarDatos");
+	botonInsertar.setAttribute("value","Enviar");
+	botonInsertar.setAttribute("type", "button");
+	botonInsertar.setAttribute("onclick","comprobarErroresInsertar()");
 	botonInsertar.type="submit";
 
-
 	
-	// grupDesenvol.appendChild(grupDesenvolNode);
-	//Añado la opcion grupDesenvol al select tipo_usuario
+
 	selectGrup.appendChild(grupDesenvol);
 	selectGrup.required=true;
 
@@ -250,4 +274,169 @@ function formulario(){
 
 	idButtonCrearProyecto.hidden = true;
 	
+}
+
+function inforGeneral(arrayJS) {
+	var div = document.createElement("div");
+	div.setAttribute("id","marcoInfoProyectos");
+
+	var center = document.getElementById("center");
+	center.appendChild(div);
+
+	for(var i=0;i<arrayJS.length;i++) {
+		var p = document.createElement("p");
+		div.appendChild(p);
+		p.innerText = arrayNombre[i]+" "+arrayJS[i]
+
+	}
+    
+
+}
+
+function divEspecificacionesPB(array_especificaciones) {
+	var div = document.createElement("div");
+	div.setAttribute("class","divPB");
+
+	var marcoInfoProyectos = document.getElementById("marcoInfoProyectos");
+	
+	insertAfter(div,marcoInfoProyectos);
+
+	var input = document.createElement("input");
+	input.setAttribute("type","text");
+
+	var button = document.createElement("button");
+	button.type="submit";
+	button.innerText="+";
+	button.setAttribute("onclick","formulario()");
+
+	var nuevoArray = array_especificaciones.map(function(o) {
+	    return Object.keys(o).reduce(function(array, key) {
+    		return array.concat([key, o[key]]);
+    	}, []);
+	});
+
+	
+	for(var i = 0;i<nuevoArray.length;i++){
+		var p = document.createElement("p");
+		p.innerText = nuevoArray[i];
+		p.appendChild(FlechaArriba());
+		p.appendChild(FlechaAbajo());
+		p.appendChild(borrarEspec());
+		div.appendChild(p);
+	}
+
+	insertAfter(input,p);
+	insertAfter(button,input);
+
+}
+
+function FlechaArriba(){
+	var flecha_arriba = document.createElement('img');
+	flecha_arriba.src="assets/arriba.jpg";
+	flecha_arriba.setAttribute('class', 'arriba');
+	flecha_arriba.setAttribute('onclick', 'moverElementoArriba(this)');
+	return flecha_arriba;
+}
+
+function FlechaAbajo(){
+	var flecha_abajo = document.createElement('img');
+	flecha_abajo.src="assets/abajo.jpg";
+	flecha_abajo.setAttribute('class', 'abajo');
+	flecha_abajo.setAttribute('onclick', 'moverElementoAbajo(this)');
+	return flecha_abajo;
+}
+
+function borrarEspec(){
+	var borrar = document.createElement('img');
+	borrar.src='assets/borrar.jpg';
+	borrar.setAttribute('class', 'borrar');
+	borrar.setAttribute('onclick', 'borrarElemento(this)');
+	return borrar;
+}
+
+
+
+
+
+
+function comprobarErroresInsertar(){
+
+	var NombreProyecto =  document.getElementsByName("inputNombreprojecte")[0].value;
+
+	var SMselect = document.getElementsByName("selectSM")[0].value;
+	var POselect = document.getElementsByName("selectPO")[0].value;
+	var GPselect = document.getElementsByName("selectGP")[0].value;
+	
+	if (NombreProyecto == ""){
+		mensajeError("El camp Nom del Projecte no pot estar buit");
+	}
+	else if(SMselect == "opcion0"){
+		mensajeError("El camp ScrumMaster no pot estar buit");
+	}
+	else if(POselect == "opcion0"){
+		mensajeError("El camp ProductOwner no pot estar buit");
+	}
+	else if(GPselect == "opcion0"){
+		mensajeError("El camp Grup de Desenvolupadors no pot estar buit");
+	}
+	else{
+		document.getElementById('idFormulario').submit();
+	}
+		
+}
+
+
+//Funcion del estado acabado de un sprint
+function estadoAcabado(id){
+	document.getElementById(id).className='sprintAcabado';
+	
+}
+
+//Funcion del estado Activo de un sprint
+function estadoActivo(id){
+	document.getElementById(id).className='sprintActivo';
+	
+}
+//Funcion del estado Sin iniciar un Sprint
+function estadoSinIniciar(id){
+	document.getElementById(id).className='sprintSinIniciar';
+	
+}
+
+//Funcion que mueve el elemento una posicion hacia abajo
+
+function moverElementoAbajo(element){
+	//Recuperamos el padre del elemento
+	var elementoPosterior = element.parentNode.nextSibling.nextSibling;
+	//Clonamos el elemento
+	var elementoClonado = element.parentNode.cloneNode(true);
+	//Accedemos al elemento <ul> 
+	var elementoRaiz = element.parentNode.parentNode;
+
+	var elementoPadre = element.parentNode;
+	
+	elementoPadre.parentNode.removeChild(elementoPadre);	
+	elementoRaiz.insertBefore(elementoClonado, elementoPosterior);
+
+
+}
+
+//Funcion que mueve el elemento una posicion hacia arriba
+function moverElementoArriba(element){
+	var elementoAnterior = element.parentNode.previousSibling;
+
+	var elementoClonado = element.parentNode.cloneNode(true);
+	var elementoRaiz = element.parentNode.parentNode;
+
+	
+	var elementoPadre = element.parentNode;
+	elementoPadre.parentNode.removeChild(elementoPadre);
+	elementoRaiz.insertBefore(elementoClonado, elementoAnterior);
+
+}
+
+//Funcion que elimina el elemento
+function borrarElemento(element){
+	var elementoPadre = element.parentNode;
+	elementoPadre.parentNode.removeChild(elementoPadre);
 }

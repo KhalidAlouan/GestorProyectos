@@ -1,5 +1,10 @@
-Integrans:
+Integrants:
 
-Marc
-Khalid
-Miguel
+Marc Alvarez
+Jose Andres Soto
+Miguel Arteaga 
+
+
+Crear usuario mysql con permisos totales.
+Usuario: admin
+contraseña: admin

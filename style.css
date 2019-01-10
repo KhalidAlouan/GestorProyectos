@@ -1,5 +1,5 @@
 body {
-	background-image: url(walllpaper.jpg);
+	background-image: url(wallpaper.jpg);
   	background-repeat: no-repeat;
   	background-position: center center;
   	background-attachment: fixed;
@@ -120,6 +120,7 @@ nav{
   	width: 60%;
   	height: 40%;
   	left: 15%;
+  	background-color: white;
 }
 
 #idpProjectes{
@@ -147,6 +148,7 @@ nav{
 	height: 300px;
 	top: 100px;
 	margin: auto;
+	background-color: white;
 }
 
 #marcoInfoProyectos {
@@ -160,9 +162,127 @@ nav{
   	width: 60%;
   	height: 40%;
   	left: 15%;
+  	background-color: white;
 }
 
 .titulos {
 	display: inline-block;
 	padding: 5px;
+}
+
+.divPB {
+  	position: relative;
+	border-top-style: solid;
+  	border-right-style: solid;
+  	border-bottom-style: solid;
+  	border-left-style: solid;
+  	top: 35%;
+  	padding: 5%;
+  	bottom: 15%;
+  	width: 60%;
+  	height: 40%;
+  	left: 15%;
+  	background-color: white;
+}
+
+.SprintNombres{
+	border-top-style: solid;
+  	border-right-style: solid;
+  	border-bottom-style: solid;
+  	border-left-style: solid;
+  	position: relative;
+  	padding: 5%;
+  	bottom: 50px;
+  	width: 60%;
+  	height: 40%;
+  	left: 15%;
+  	overflow: auto;
+  	background-color: white;
+}
+
+
+.sprintActivo{
+	background-color: green;
+	width: 10%;
+	height: 10%;
+	text-align: center;
+	font-size: 15px;
+	color: white;
+	display: block;
+	margin-left: auto;
+	margin-right: auto; 
+
+
+}
+.sprintAcabado{
+	background-color:  #63605e ;
+	width: 10%;
+	height: 10%;
+	text-align: center;
+	font-size: 15px;
+	color: white;
+	display: block;
+	margin-left: auto;
+	margin-right: auto; 
+	
+}
+.sprintSinIniciar{
+	background-color: black;
+	width: 10%;
+	height: 10%;
+	text-align: center;
+	font-size: 15px;
+	color: white;
+	display: block;
+	margin-left: auto;
+	margin-right: auto; 
+	
+}
+
+.accordion {
+  color: #444;
+  cursor: pointer;
+  padding: 2%;
+  width: 100%;
+  border: none;
+  text-align: center;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+  align-items: center;
+  margin: auto;
+}
+
+
+.active, .accordion:hover {
+  background-color: #ccc; 
+}
+
+.panel {
+  padding: 0 2%;
+  display: none;
+  background-color: white;
+  overflow: hidden;
+}
+
+.class0{
+	
+}
+
+.abajo{
+	height: 25px;
+	width: 25px;
+	display: inline-block;
+}
+
+.arriba{
+	height: 25px;
+	width: 25px;
+	display: inline-block;
+}
+
+.borrar{
+	height: 25px;
+	width: 25px;
+	display: inline-block;
 }
