@@ -303,11 +303,13 @@ function divEspecificacionesPB(array_especificaciones) {
 
 	var input = document.createElement("input");
 	input.setAttribute("type","text");
+	input.setAttribute("id","especificacion");
+
 
 	var button = document.createElement("button");
 	button.type="submit";
 	button.innerText="+";
-	button.setAttribute("onclick","formulario()");
+	button.setAttribute("onclick","anadirEspecifiacion()");
 
 	var nuevoArray = array_especificaciones.map(function(o) {
 	    return Object.keys(o).reduce(function(array, key) {
@@ -319,13 +321,12 @@ function divEspecificacionesPB(array_especificaciones) {
 	for(var i = 0;i<n;i++){
 		var p = document.createElement("p");
 		div.appendChild(p);
-		p.innerText = nuevoArray[i]; 
+		p.innerText = nuevoArray[i];
+
 	}
 
 	insertAfter(input,p);
 	insertAfter(button,input);
-
-
 
 
 }
@@ -373,3 +374,50 @@ function estadoSinIniciar(id){
 	document.getElementById(id).className='sprintSinIniciar';
 	
 }
+
+
+function anadirEspecifiacion() {
+	var divPB = document.getElementsByClassName("divPB")[0];
+
+	var nuevaESP = document.getElementById("especificacion").value;
+
+	var p = document.createElement("p");
+
+	p.innerText=nuevaESP;
+
+	var center = document.getElementById("center");
+
+
+	var primerHijo = divPB.firstElementChild;
+
+	divPB.insertBefore(p,primerHijo);
+}
+
+function eliminarSprint(sprint,boton) {
+	var sprint = document.getElementById(boton);
+
+	console.log(sprint);
+
+	borrarElemento(boton);
+
+
+}
+
+
+//Funcion que elimina el elemento
+function borrarElemento(element){
+	var elementoPadre = element.parentNode;
+	elementoPadre.parentNode.removeChild(elementoPadre);
+}
+
+/*Eliminar elemento
+Element.prototype.remove = function() {
+    this.parentElement.removeChild(this);
+}
+NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+    for(var i = this.length - 1; i >= 0; i--) {
+        if(this[i] && this[i].parentElement) {
+            this[i].parentElement.removeChild(this[i]);
+        }
+    }
+}*/

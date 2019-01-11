@@ -93,13 +93,7 @@
 	echo "</div>";
 
 	echo "<div id='center'>";
-	if ($consultaRolResultado != "SM") {
-		
-	
 
-	
-	
-	
 
 	//Consulta para sacar el numero de especificaciones sin acabar y generar cada marco
 	$consultaEspecificacionesSinAcabar = $dbh->prepare("SELECT count( * ) FROM especificaciones WHERE id_projecte = :projectId");
@@ -178,10 +172,12 @@
 
 			
 
-			//Printar Sprints
-			foreach ($nombreSprint as $value) {
 
-				echo"<button class='accordion' ><p id='$value[0]' class='class0'>$value[0]</p></button>";
+			//Printar Sprints
+			$idBoton = 0;
+			foreach ($nombreSprint as $value) {
+				echo"<button id='$idBoton' class='accordion' ><p id='$value[0]' class='class0'>$value[0]</p></button>";
+				$idBoton++;
 				echo"<div class='panel' >";
 					$ValorSprint="$value[0]";
 					$consultaDatosSprint = $dbh->prepare("SELECT * FROM sprint WHERE  nombre_sprint=:SprintNombre and id_projecte=:projectId ");
@@ -190,8 +186,8 @@
 					$consultaDatosSprint->execute();
 					$DatosSprint = $consultaDatosSprint ->fetchAll();
 
+					$idSprint = $DatosSprint[0][0];
 
-								
 			  		echo"<p>";
 			  			//Datos de un sprint
 				  		foreach ($DatosSprint as $value) {
@@ -217,6 +213,7 @@
 						echo "FECHA FINAL: $fechafinalsp";
 				  	echo"</p>";
 				echo"</div>";
+			echo "<button onclick='eliminarSprint($idSprint,$idBoton)' class='botonliminarSprint'> Eliminar </button>";
 			}
 
 			//Consulta de Fecha Actual
@@ -258,7 +255,6 @@
 				
 			}
 		echo "</div>";
-	}	
 
 	echo "</div>";
 
