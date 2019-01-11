@@ -259,7 +259,20 @@
 		echo "</div>";
 		
 
+	//Consulta para sacar el id del sprint
+    $consultaIdSprint = $dbh->prepare("SELECT id_sprint FROM sprint ");
+	$consultaIdSprint->execute();
+	$consultaIdSprint = $consultaIdSprint->fetchAll(PDO::FETCH_ASSOC);
+
+	$array_IdSprint = [];
+	foreach ($consultaIdSprint as $value) {
+		array_push($array_IdSprint, $value);
+	}
+
+
 	echo "</div>";
+
+
 
 
 	echo "<div id='mensajeError'>";

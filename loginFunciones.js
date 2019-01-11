@@ -246,6 +246,7 @@ function formulario(){
 	botonInsertar.setAttribute("name","insertarDatos");
 	botonInsertar.setAttribute("value","Enviar");
 	botonInsertar.setAttribute("type", "button");
+	botonInsertar.setAttribute("id","botoninsert");
 	botonInsertar.setAttribute("onclick","comprobarErroresInsertar()");
 	botonInsertar.type="submit";
 
@@ -352,6 +353,8 @@ function comprobarErroresInsertar(){
 	}
 	else{
 		document.getElementById('idFormulario').submit();
+
+		var botonInsertar2 = document.getElementById('botoninsert').type="submit";
 	}
 		
 }
@@ -430,13 +433,20 @@ function formularioSprint(){
 	//Creamos una variable con el id de un div para ponerlo dentro
 	var divsprint=document.getElementById('sprintFormulario');
 
-	var buttonSprint=document.createElement("button");
-	buttonSprint.setAttribute("name","")
+	//Creamos el boton para insertar
+	var buttonSprint=document.createElement("input");
+	buttonSprint.setAttribute("type","button");
+	buttonSprint.setAttribute("value","Crear")
+	buttonSprint.setAttribute("id","buttonInsertarSprint");
+	buttonSprint.setAttribute("onclick","ComprobarInsertarSprint()")
+	
+
 
 	var saltoDelinea1=document.createElement("br");
 	var saltoDelinea2=document.createElement("br");
 	var saltoDelinea3=document.createElement("br");
 	var saltoDelinea4=document.createElement("br");
+
 
 	
 	//Añadimos todas la variables dentro del form
@@ -456,11 +466,41 @@ function formularioSprint(){
 	formSprint.appendChild(horasSprint_label);
 	formSprint.appendChild(horasSprint_input);
 	formSprint.appendChild(saltoDelinea4);
+
+	formSprint.appendChild(buttonSprint);
 	
 	//añadimos el form dentro del div
 	divsprint.appendChild(formSprint);
 
 
+	//Ocultamos el boton de crear Sprint
+	var botonCrearSprint= document.getElementById("CrearSprint").hidden=true;
 
+}
+
+
+
+
+
+function ComprobarInsertarSprint(){
+	var FechaInicio=document.getElementsByName("inputDataInici")[0].value;
+	var FechaFinal=document.getElementsByName("inputDataFi")[0].value;
+	var horas=document.getElementsByName("inputHoras")[0].value;
+
+
+	if (FechaInicio == ""){
+		mensajeError("El camp FechaInicio no pot estar buit");
+	}
+	else if(FechaFinal == ""){
+		mensajeError("El camp FechaFinal no pot estar buit");
+	}
+	else if(horas == ""){
+		mensajeError("El camp horas no pot estar buit");
+	}
+	else{
+		document.getElementById('idFormulario').submit();
+
+		var botonInsertar2 = document.getElementById('botoninsert').type="submit";
+	}
 
 }
