@@ -156,14 +156,19 @@
 
 	
 
-		//Consulta para saber el nombre de los Sprint
+	//Consulta para saber el nombre de los Sprint
 	$consultaSprint = $dbh->prepare("SELECT nombre_sprint FROM sprint WHERE id_projecte=:projectId");
 	$consultaSprint->bindValue(':projectId', $consultaIdResultado);
 	$consultaSprint->execute();
 	$nombreSprint = $consultaSprint ->fetchAll();
 
-
-
+	//Consulta de Fecha Actual
+	$FechaActual = $dbh->prepare("SELECT CURDATE() ");
+	$FechaActual->execute();
+	$FechaActual = $FechaActual ->fetchAll();
+	foreach ($FechaActual as $value1) {
+			$FechaActual2=$value1[0];
+	}
 
 	echo "<div class='SprintNombres'>";
 			echo"<p id='idpProjectes'>";
@@ -174,10 +179,9 @@
 
 
 			//Printar Sprints
-			$idBoton = 0;
+			$idBoton = 1;
 			foreach ($nombreSprint as $value) {
 				echo"<button id='$idBoton' class='accordion' ><p id='$value[0]' class='class0'>$value[0]</p></button>";
-				$idBoton++;
 				echo"<div class='panel' >";
 					$ValorSprint="$value[0]";
 					$consultaDatosSprint = $dbh->prepare("SELECT * FROM sprint WHERE  nombre_sprint=:SprintNombre and id_projecte=:projectId ");
@@ -213,17 +217,16 @@
 						echo "FECHA FINAL: $fechafinalsp";
 				  	echo"</p>";
 				echo"</div>";
-			echo "<button onclick='eliminarSprint($idSprint,$idBoton)' class='botonliminarSprint'> Eliminar </button>";
+			echo "<button onclick='eliminarSprint($idSprint,$idBoton,$FechaActual2,$fechainiciosp)' class='botonliminarSprint'> Eliminar </button>";
+			$idBoton++;
 			}
 
-			//Consulta de Fecha Actual
-			$FechaActual = $dbh->prepare("SELECT CURDATE() ");
-			$FechaActual->execute();
-			$FechaActual = $FechaActual ->fetchAll();
-			foreach ($FechaActual as $value1) {
-				$FechaActual2=$value1[0];
 
-			}
+
+
+
+			
+
 
 			//COLORES
 			foreach ($nombreSprint as $value) {
