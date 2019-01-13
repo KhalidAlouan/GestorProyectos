@@ -354,7 +354,7 @@ function comprobarErroresInsertar(){
 	else{
 		document.getElementById('idFormulario').submit();
 
-		var botonInsertar2 = document.getElementById('botoninsert').type="submit";
+		
 	}
 		
 }
@@ -377,6 +377,8 @@ function estadoSinIniciar(id){
 	
 }
 
+//**Nuevo Sprint 3
+
 function formularioSprint(){
 
 	
@@ -387,13 +389,21 @@ function formularioSprint(){
 	formSprint.setAttribute("method","POST");
 
 
+	//Array con los Id de los Sprint
+	arrayIdSprint.sort();
+	var longitudArrayIdSprint=arrayIdSprint.length;
+	var idSprint=arrayIdSprint[longitudArrayIdSprint-1];
+
+	
+
 	//Creo el label del numero del Sprint
 	var numSprint_label = document.createElement("label");
 	//Le meto texto al numSprint_label
 	numSprint_label.innerText="Número de  Sprint: ";
 	//Creo el label para mostrar el numero de la especificacion
 	var numSprint_label2 = document.createElement("label");
-	numSprint_label2.innerText="id";
+	numSprint_label2.innerText=parseInt(idSprint)+1;
+	numSprint_label2.setAttribute("name","IdSprintInt");
 
 	//Creamos un label para la fecha de inicio del sprint
 	var dataIniciSprint_label = document.createElement("label");
@@ -402,7 +412,7 @@ function formularioSprint(){
 	//Creamos un input para poder poner la fecha de inicio del sprint
 	var dataIniciSprint_input = document.createElement("input");	
 	//ponemos que el input sera de tipo texto
-	dataIniciSprint_input.setAttribute("type","text");
+	dataIniciSprint_input.setAttribute("type","date");
 	//ponemos un name para el input
 	dataIniciSprint_input.setAttribute("name","inputDataInici");
 
@@ -414,7 +424,7 @@ function formularioSprint(){
 	//Creamos un input para poder poner la fecha final del sprint
 	var dataFiSprint_input = document.createElement("input");	
 	//ponemos que el input sera de tipo texto
-	dataFiSprint_input.setAttribute("type","text");
+	dataFiSprint_input.setAttribute("type","date");
 	//ponemos un name para el input
 	dataFiSprint_input.setAttribute("name","inputDataFi");
 
@@ -438,7 +448,10 @@ function formularioSprint(){
 	buttonSprint.setAttribute("type","button");
 	buttonSprint.setAttribute("value","Crear")
 	buttonSprint.setAttribute("id","buttonInsertarSprint");
-	buttonSprint.setAttribute("onclick","ComprobarInsertarSprint()")
+	buttonSprint.setAttribute("name","InsertarSprint");
+	buttonSprint.setAttribute("onclick","comprobarInsertarSprint()");
+	buttonSprint.type="submit";
+
 	
 
 
@@ -446,6 +459,13 @@ function formularioSprint(){
 	var saltoDelinea2=document.createElement("br");
 	var saltoDelinea3=document.createElement("br");
 	var saltoDelinea4=document.createElement("br");
+
+
+	dataIniciSprint_input.setAttribute("change",comprobarInsertarSprint);
+	dataFiSprint_input.setAttribute("change",comprobarInsertarSprint);
+	horasSprint_input.setAttribute("change",comprobarInsertarSprint);
+	
+
 
 
 	
@@ -482,11 +502,21 @@ function formularioSprint(){
 
 
 
-function ComprobarInsertarSprint(){
+function comprobarInsertarSprint(){
 	var FechaInicio=document.getElementsByName("inputDataInici")[0].value;
 	var FechaFinal=document.getElementsByName("inputDataFi")[0].value;
 	var horas=document.getElementsByName("inputHoras")[0].value;
 
+
+
+	//Obtenemos la fecha actual
+	var fecha = new Date();
+	var dd=fecha.getDate();
+	var mm=""+fecha.getMonth()+1;
+	var yyyy=fecha.getFullYear();
+	var hoy =yyyy+"-"+mm+"-"+dd;
+	
+	
 
 	if (FechaInicio == ""){
 		mensajeError("El camp FechaInicio no pot estar buit");
@@ -497,10 +527,19 @@ function ComprobarInsertarSprint(){
 	else if(horas == ""){
 		mensajeError("El camp horas no pot estar buit");
 	}
+	else if(FechaInicio<=hoy){
+		mensajeError("La Data de inici te que ser posterior a la Data actual");
+	}
+	else if(FechaFinal<=FechaInicio){
+		mensajeError("La Data Final te que ser posterior a la Data de inici");
+	}
+	else if(horas<1){
+		mensajeError("Les hores del sprint te que ser 1 o superior");
+	}
 	else{
-		document.getElementById('idFormulario').submit();
+		document.getElementById('idFormularioSprint').submit();
 
-		var botonInsertar2 = document.getElementById('botoninsert').type="submit";
+		
 	}
 
 }

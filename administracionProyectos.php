@@ -7,8 +7,12 @@
 	<meta charset="utf-8">
 </head>
 <body>
-	<?php
+<?php
 	session_start();
+
+	//Abro la conexion a la base de datos
+	$dbs= "mysql:host=localhost;dbname=GestorProjectes";
+	$dbh = new PDO( $dbs, "admin","admin");
 
 
 	$nombreUser = $_SESSION["NombreUsuario"];
@@ -21,9 +25,7 @@
 	foreach ($username as $value) {
 		$username = $value;
 	}
-	//Abro la conexion a la base de datos
-	$dbs= "mysql:host=localhost;dbname=GestorProjectes";
-	$dbh = new PDO( $dbs, "admin","admin");
+	
 
 
 	echo "<div id='header'>";
@@ -51,11 +53,18 @@
 	$host= $_SERVER["HTTP_HOST"];
 	$url= $_SERVER["REQUEST_URI"];
 
+
+
+
 	//separo la url por el = para obtener la posicion 1 que es el nombre
 	$a = explode("=", $url);
 
+	
+
 	//Consulta para sacar los campos del proyecto seleccionado
 	$nombreProyecto = $a[1];
+
+
 
 	$consultaDatosProyecto = $dbh->prepare("SELECT * FROM projectes WHERE nombre_projecte=:projectName");
 
@@ -258,23 +267,64 @@
 			}
 		echo "</div>";
 		
+	//** Nuevo Sprint 3
+
+
 
 	//Consulta para sacar el id del sprint
     $consultaIdSprint = $dbh->prepare("SELECT id_sprint FROM sprint ");
 	$consultaIdSprint->execute();
-	$consultaIdSprint = $consultaIdSprint->fetchAll(PDO::FETCH_ASSOC);
+	$consultaIdSprint = $consultaIdSprint->fetchAll();
 
 	$array_IdSprint = [];
 	foreach ($consultaIdSprint as $value) {
-		array_push($array_IdSprint, $value);
+		array_push($array_IdSprint, $value[0]);
 	}
+
+	//Consulta para contar el numero de sprint que hay en el proyecto 
+	$cuentaNombresSprint = $dbh->prepare("SELECT count(nombre_sprint) FROM sprint where id_projecte=:id_projecte");
+	$cuentaNombresSprint->bindValue(':id_projecte', $consultaIdResultado);
+	$cuentaNombresSprint->execute();
+	$cuentaNombresSprint = $cuentaNombresSprint->fetchAll();
+
+	$NumeroDeNombres=$cuentaNombresSprint[0][0]+1;
+
+	$NombreNuevoSprint="Sprint".$NumeroDeNombres;
+
+	
+
+	//Almacenar valor de los inputs del formulario Sprint
+	$valorIdSprint=$_POST["IdSprintInt"];
+	$valorFechaInicio=$_POST["inputDataInici"];
+	$valorFechaFinal=$_POST["inputDataFi"];
+	$valorHoras=$_POST["inputHoras"];
+
+	
+
+
+
+
+	if (isset($_POST["InsertarSprint"])){
+		echo'<script type="text/javascript">comprobarInsertarSprint();</script>';
+    	$inserResultado = $dbh->prepare("INSERT INTO sprint (id_sprint, nombre_sprint, id_projecte, fecha_inicio,fecha_final,horas_totales) VALUES(:id_sprint,:nombre_sprint,:id_projecte,:fecha_inicio,:fecha_final,:horas_totales)");
+    	$inserResultado->bindValue(':id_sprint', $valorIdSprint);
+    	$inserResultado->bindValue(':nombre_sprint', $NombreNuevoSprint);
+    	$inserResultado->bindValue(':id_projecte', $consultaIdResultado);
+    	$inserResultado->bindValue(':fecha_inicio', $valorFechaInicio);
+    	$inserResultado->bindValue(':fecha_final', $valorFechaFinal);
+    	$inserResultado->bindValue(':horas_totales', $valorHoras);
+    	$inserResultado->execute();
+    	header("Location: administracionProyectos.php");
+	}
+
+
+
+
 
 
 	echo "</div>";
 
-
-
-
+	
 	echo "<div id='mensajeError'>";
 	
 	echo "</div>";
@@ -282,9 +332,9 @@
 	echo "<div id='footer'>";
 		
 	echo "</div>";
+	
 
-
-	?>
+?>
 	<script type="text/javascript">
 		var acc = document.getElementsByClassName("accordion");
 		var i;
@@ -300,12 +350,15 @@
 		    }
 		  });
 		}
-		///////////////
 
 		var arrayJS = <?php echo json_encode($array_datos);?>;
 		inforGeneral(arrayJS);
 		var array_especificaciones = <?php echo json_encode($array_especificaciones);?>;
 		divEspecificacionesPB(array_especificaciones);
+
+		//**Nuevo Sprint 3
+		var arrayIdSprint = <?php echo json_encode($array_IdSprint);?>;
+
 	</script>
 </body>
 </html>
