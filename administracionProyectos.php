@@ -320,11 +320,13 @@
  	
 
 	//$connect = mysqli_connect($server,"admin", "admin", "GestorProjectes");
- 	$insertSprint = "INSERT INTO sprint (nombre_sprint, id_projecte, fecha_inicio,fecha_final,horas_totales,estado) VALUES ('Sprint5','1','2019-01-15','2019-01-25','4','1');";
+ 	
+ 	
+
 
 	
 
-	if (isset($_POST["InsertarSprint"])){
+	if ($_SERVER["InsertarSprint"] == "POST"){
 		
 		if($valorFechaInicio>$FechaActual2){
 			$valorEstado=1;
@@ -335,16 +337,12 @@
 		}
 
 		echo'<script type="text/javascript">comprobarInsertarSprint();</script>';
-    	$inserResultado = $dbh->prepare("INSERT INTO sprint (nombre_sprint, id_projecte, fecha_inicio,fecha_final,horas_totales) VALUES(:id_sprint,:nombre_sprint,:id_projecte,:fecha_inicio,:fecha_final,:horas_totales,:estado)");
     	
-    	$inserResultado->bindValue(':nombre_sprint', $NombreNuevoSprint);
-    	$inserResultado->bindValue(':id_projecte', $consultaIdResultado);
-    	$inserResultado->bindValue(':fecha_inicio', $valorFechaInicio);
-    	$inserResultado->bindValue(':fecha_final', $valorFechaFinal);
-    	$inserResultado->bindValue(':horas_totales', $valorHoras);
-    	$inserResultado->bindValue(':estado', $valorEstado);
-    	$inserResultado->execute();
-    	header("Location: administracionProyectos.php?id=".$_SESSION["NombreProyecto"]);
+    	$insertSprint = ("INSERT INTO sprint (nombre_sprint, id_projecte, fecha_inicio,fecha_final,horas_totales,estado) VALUES ('Sprint5','1','2019-01-15','2019-01-25','4','1');");
+    	if(mysqli_query($connect,$insertSprint)){
+			header("Location: administracionProyectos.php?id=".$_SESSION["NombreProyecto"]);
+		}
+
 
 		/*
 		$insertSprint = "INSERT INTO sprint (nombre_sprint, id_projecte, fecha_inicio,fecha_final,horas_totales,estado) VALUES ('Sprint5','1','2019-01-15','2019-01-25','4','1');";
@@ -356,7 +354,14 @@
 		}else{
 			print_r("Error al insertar el sprint");
 		}
-
+		$inserResultado = $dbh->prepare("INSERT INTO sprint (nombre_sprint, id_projecte, fecha_inicio,fecha_final,horas_totales) VALUES(:id_sprint,:nombre_sprint,:id_projecte,:fecha_inicio,:fecha_final,:horas_totales,:estado)");
+		$inserResultado->bindValue(':nombre_sprint', $NombreNuevoSprint);
+    	$inserResultado->bindValue(':id_projecte', $consultaIdResultado);
+    	$inserResultado->bindValue(':fecha_inicio', $valorFechaInicio);
+    	$inserResultado->bindValue(':fecha_final', $valorFechaFinal);
+    	$inserResultado->bindValue(':horas_totales', $valorHoras);
+    	$inserResultado->bindValue(':estado', $valorEstado);
+    	$inserResultado->execute();
 
     	PDO::query()
     	*/
