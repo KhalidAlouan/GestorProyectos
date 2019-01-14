@@ -440,3 +440,18 @@ function borrarElemento(element){
 	var elementoPadre = element.parentNode;
 	elementoPadre.parentNode.removeChild(elementoPadre);
 }
+
+function candadoAbierto(){
+	var parentElement = document.getElementById('divID1');
+	imagen = document.createElement('img');
+	imagen.src='assets/abierto.png';
+	imagen.setAttribute('class', 'candadoAbierto');
+
+}
+
+function candadoCerrado(){
+	var parentElement = document.getElementById('divID1');
+	imagen = document.createElement('img');
+	imagen.src='assets/cerrado.png';
+	imagen.setAttribute('class', 'candadoCerrado');
+}

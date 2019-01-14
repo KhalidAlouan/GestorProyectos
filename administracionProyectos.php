@@ -165,12 +165,14 @@
 
 
 
-	echo "<div class='SprintNombres'>";
+	echo "<div class='SprintNombres' id='divID1'>";
 			echo"<p id='idpProjectes'>";
 				echo"<b>Sprints</b>";
 			echo "</p>";	
 
 			
+
+
 
 			//Printar Sprints
 			foreach ($nombreSprint as $value) {
@@ -221,6 +223,36 @@
 				$FechaActual2=$value1[0];
 
 			}
+
+
+			//CONSULTA ESTADO SPRINT
+			foreach($estadoSprint as $value){
+
+				$ValorEstado = "$value[0]";
+				$consultaEstado = $dbh->prepare("SELECT estado FROM sprint WHERE nombre_sprint=:SprintNombre and id_projecte=:projectId");
+				$consultaEstado->bindValue(':SprintNombre', $ValorEstado);
+				$consultaEstado->bindValue(':projectId', $consultaIdResultado);
+				$consultaEstado ->execute();
+				$Datos = $consultaEstado ->fetchAll();
+				
+				foreach($Datos as $value2){
+
+					$estado=$value2;
+					if ($estado == 0){
+						echo"<script type='text/javascript'> candadoAbierto()</script>";
+					}	
+					elseif($estado == 1){
+						echo"<script type='text/javascript'> candadoCerrado()</script>";
+
+
+					}
+				}
+				
+
+			}
+
+
+
 
 			//COLORES
 			foreach ($nombreSprint as $value) {
