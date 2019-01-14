@@ -154,6 +154,16 @@
 		array_push($array3, $value[0]);
 	}
 
+	//Funcion para eliminar sprint
+	function eliminarSprintBBDD($idsp) {
+		echo "hola";
+		$dbs= "mysql:host=localhost;dbname=GestorProjectes";
+		$dbh = new PDO( $dbs, "admin","admin");
+		
+		$borrar = $dbh->prepare("DELETE FROM sprint WHERE id_sprint = :sprintID");
+        $borrar->bindValue(':sprintID', $idsp);
+        $borrar->execute(); 
+	}
 	
 
 	//Consulta para saber el nombre de los Sprint
@@ -180,6 +190,7 @@
 
 			//Printar Sprints
 			$idBoton = 1;
+			$idBotonEliminar = 1;
 			foreach ($nombreSprint as $value) {
 				echo"<button id='$idBoton' class='accordion' ><p id='$value[0]' class='class0'>$value[0]</p></button>";
 				echo"<div class='panel' >";
@@ -217,12 +228,16 @@
 						echo "FECHA FINAL: $fechafinalsp";
 				  	echo"</p>";
 				echo"</div>";
-			echo "<button onclick='eliminarSprint($idSprint,$idBoton,$FechaActual2,$fechainiciosp)' class='botonliminarSprint'> Eliminar </button>";
-			$idBoton++;
+			if ($FechaActual2 < $fechainiciosp) {
+				echo "<button name='eliminar' id=$idBoton onclick='eliminarSprint($idBoton,$idBotonEliminar)' class='botonliminarSprint'> Eliminar </button>";
+
+			} elseif ($FechaActual2 >= $fechainiciosp) {
+				echo "<button id=$idBoton disabled class='botonliminarSprint'> Eliminar </button>";
 			}
 
-
-
+			$idBoton++;
+			$idBotonEliminar++;
+		}
 
 
 			
@@ -293,6 +308,7 @@
 		inforGeneral(arrayJS);
 		var array_especificaciones = <?php echo json_encode($array_especificaciones);?>;
 		divEspecificacionesPB(array_especificaciones);
+		var lang="<?php echo lang("test lang"); ?>";
 	</script>
 </body>
 </html>

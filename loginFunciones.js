@@ -393,10 +393,20 @@ function anadirEspecifiacion() {
 	divPB.insertBefore(p,primerHijo);
 }
 
-function eliminarSprint(idSprint,idBoton,fechaActual,fechaInicio) {
+function eliminarSprint(idBoton,idBotonEliminar) {
 	var botonAcordeon = document.getElementById(idBoton);
 
 	botonAcordeon.parentNode.removeChild(botonAcordeon);
+
+	var fecha = new Date();
+	var dd=fecha.getDate();
+	var mm=""+fecha.getMonth()+1;
+	var yyyy=fecha.getFullYear();
+	var hoy =yyyy+"-"+mm+"-"+dd;
+
+	document.getElementById(idBotonEliminar).hidden = true;
+	botonEliminar.hidden = true;
+
 
 
 }
