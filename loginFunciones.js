@@ -543,3 +543,19 @@ function comprobarInsertarSprint(){
 	}
 
 }
+
+function crearCandados(){
+	//var divDeSprint = document.getElementById("divSprint");
+	var nana=document.getElementById("divSprint");
+
+
+	var imagenCandado = document.createElement("img");
+	imagenCandado.setAttribute("src","assets/candado-cerrado.png");
+	imagenCandado.setAttribute("width","25");
+	imagenCandado.setAttribute("height","25");
+
+	nana.appendChild(imagenCandado);
+
+}
+
+

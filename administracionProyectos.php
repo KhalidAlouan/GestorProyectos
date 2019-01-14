@@ -175,7 +175,7 @@
 
 
 
-	echo "<div class='SprintNombres'>";
+	echo "<div class='SprintNombres' id='divSprint' >";
 			echo"<p id='idpProjectes'>";
 				echo"<b>Sprints</b>";
 			echo "</p>";	
@@ -184,7 +184,7 @@
 
 			//Printar Sprints
 			foreach ($nombreSprint as $value) {
-
+				echo"<script type='text/javascript'> crearCandados()</script>";
 				echo"<button class='accordion' ><p id='$value[0]' class='class0'>$value[0]</p></button>";
 				echo"<div class='panel' >";
 					$ValorSprint="$value[0]";
@@ -299,7 +299,7 @@
 	$valorFechaFinal=$_POST["inputDataFi"];
 	$valorHoras=$_POST["inputHoras"];
 
-	
+
 
 
 
@@ -358,6 +358,7 @@
 
 		//**Nuevo Sprint 3
 		var arrayIdSprint = <?php echo json_encode($array_IdSprint);?>;
+		
 
 	</script>
 </body>
