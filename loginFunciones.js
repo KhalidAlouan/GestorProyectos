@@ -450,7 +450,7 @@ function formularioSprint(){
 	buttonSprint.setAttribute("id","buttonInsertarSprint");
 	buttonSprint.setAttribute("name","InsertarSprint");
 	buttonSprint.setAttribute("onclick","comprobarInsertarSprint()");
-	buttonSprint.type="submit";
+	//buttonSprint.type="submit";
 
 	
 
@@ -546,7 +546,7 @@ function comprobarInsertarSprint(){
 
 function crearCandados(){
 	//var divDeSprint = document.getElementById("divSprint");
-	var nana=document.getElementById("divSprint");
+	var padre=document.getElementById("divSprint");
 
 
 	var imagenCandado = document.createElement("img");
@@ -554,7 +554,7 @@ function crearCandados(){
 	imagenCandado.setAttribute("width","25");
 	imagenCandado.setAttribute("height","25");
 
-	nana.appendChild(imagenCandado);
+	padre.appendChild(imagenCandado);
 
 }
 
