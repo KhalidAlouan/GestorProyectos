@@ -65,6 +65,8 @@
 
 	$nombreProyecto = $a[1];
 
+	//Guardamos el nombre del proyecto en una session
+
 	if (isset($_SESSION["NombreProyecto"])){
 		$nombreProyecto=$_SESSION["NombreProyecto"];
 	}
@@ -72,8 +74,7 @@
 		$_SESSION["NombreProyecto"]=$nombreProyecto;
 	}
 	
-
-
+	
 	$consultaDatosProyecto = $dbh->prepare("SELECT * FROM projectes WHERE nombre_projecte=:projectName");
 
 	$consultaDatosProyecto->bindValue(':projectName', $nombreProyecto);
@@ -104,7 +105,7 @@
 		$consultaIdResultado = $value;
 
 	}
-
+	
 	echo "<div id='header'>";
 
 	echo "</div>";
@@ -174,7 +175,7 @@
 
 	
 
-		//Consulta para saber el nombre de los Sprint
+	//Consulta para saber el nombre de los Sprint
 	$consultaSprint = $dbh->prepare("SELECT nombre_sprint FROM sprint WHERE id_projecte=:projectId");
 	$consultaSprint->bindValue(':projectId', $consultaIdResultado);
 	$consultaSprint->execute();
@@ -326,23 +327,21 @@
 
 	
 
-	if ($_SERVER["InsertarSprint"] == "POST"){
+	if ($_SERVER["REQUEST_METHOD"] == "POST"){
 		
 		if($valorFechaInicio>$FechaActual2){
 			$valorEstado=1;
-			print_r("HOLA");
 		}
 		else{
 			$valorEstado=0;
 		}
-
-		echo'<script type="text/javascript">comprobarInsertarSprint();</script>';
-    	
-    	$insertSprint = ("INSERT INTO sprint (nombre_sprint, id_projecte, fecha_inicio,fecha_final,horas_totales,estado) VALUES ('Sprint5','1','2019-01-15','2019-01-25','4','1');");
+    	$insertSprint = ("INSERT INTO sprint (nombre_sprint, id_projecte, fecha_inicio,fecha_final,horas_totales,estado) VALUES ('$NombreNuevoSprint','$consultaIdResultado','$valorFechaInicio','$valorFechaFinal','$valorHoras','$valorEstado');");
     	if(mysqli_query($connect,$insertSprint)){
 			header("Location: administracionProyectos.php?id=".$_SESSION["NombreProyecto"]);
+			unset($_SESSION["NombreProyecto"]);
+			
 		}
-
+	}
 
 		/*
 		$insertSprint = "INSERT INTO sprint (nombre_sprint, id_projecte, fecha_inicio,fecha_final,horas_totales,estado) VALUES ('Sprint5','1','2019-01-15','2019-01-25','4','1');";
@@ -365,7 +364,7 @@
 
     	PDO::query()
     	*/
-	}
+	
 
 
 

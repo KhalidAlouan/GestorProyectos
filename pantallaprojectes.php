@@ -164,7 +164,7 @@
     	header("Location: pantallaprojectes.php");
 	}
 
-
+	unset($_SESSION["NombreProyecto"]);
 
 	
 	
