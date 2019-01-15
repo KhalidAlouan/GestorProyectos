@@ -408,7 +408,6 @@ function eliminarSprint(idBoton,idBotonEliminar) {
 	botonEliminar.hidden = true;
 
 
-
 }
 
 

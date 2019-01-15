@@ -35,6 +35,7 @@ CREATE TABLE `especificaciones` (
   `tiempo` time NOT NULL,
   `id_usuario` int(11) NOT NULL,
   `acabado` tinyint(1) NOT NULL
+  'id_sprint'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
