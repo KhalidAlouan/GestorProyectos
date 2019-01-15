@@ -156,7 +156,6 @@
 
 	//Funcion para eliminar sprint
 	function eliminarSprintBBDD($idsp) {
-		echo "hola";
 		$dbs= "mysql:host=localhost;dbname=GestorProjectes";
 		$dbh = new PDO( $dbs, "admin","admin");
 		
@@ -229,7 +228,7 @@
 				  	echo"</p>";
 				echo"</div>";
 			if ($FechaActual2 < $fechainiciosp) {
-				echo "<button name='eliminar' id=$idBoton onclick='eliminarSprint($idBoton,$idBotonEliminar)' class='botonliminarSprint'> Eliminar </button>";
+				echo "<button type='submit' name='eliminar' id=$idBoton onclick='eliminarSprint($idBoton,$idBotonEliminar) /class='botonliminarSprint'> Eliminar </button>";
 
 			} elseif ($FechaActual2 >= $fechainiciosp) {
 				echo "<button id=$idBoton disabled class='botonliminarSprint'> Eliminar </button>";
@@ -243,35 +242,35 @@
 			
 
 
-			//COLORES
-			foreach ($nombreSprint as $value) {
-				$ValorFechas="$value[0]";
-				$consultaFechas = $dbh->prepare("SELECT nombre_sprint,fecha_inicio,fecha_final FROM sprint WHERE  nombre_sprint=:SprintNombre and id_projecte=:projectId");
-				$consultaFechas->bindValue(':SprintNombre', $ValorFechas);
-				$consultaFechas->bindValue(':projectId', $consultaIdResultado);
-				$consultaFechas->execute();
-				$Datos = $consultaFechas ->fetchAll();
-				foreach ($Datos as $value2) {
-					$nombreSprint2=$value2[0];
-					$fechainicio=$value2[1];
-					$fechafinal=$value2[2];
-					//Condicion si un sprint ya ha acabado
-					if ($fechainicio<$FechaActual2 && $fechafinal < $FechaActual2){
-						echo "<script type='text/javascript'> var NombreIDsprint = '$nombreSprint2' </script>";
-						echo"<script type='text/javascript'> estadoAcabado(NombreIDsprint)</script>";
-					//Condicion si un sprint esta activo	
-					}elseif ($fechainicio < $FechaActual2 && $fechafinal > $FechaActual2) {
-						echo "<script type='text/javascript'> var NombreIDsprint = '$nombreSprint2' </script>";
-						echo"<script type='text/javascript'> estadoActivo(NombreIDsprint)</script>";
-					//Condicion si un sprint esta sin empezar
-					}elseif ($fechainicio>$FechaActual2 && $fechafinal > $FechaActual2) {
-						echo "<script type='text/javascript'> var NombreIDsprint = '$nombreSprint2' </script>";
-						echo"<script type='text/javascript'> estadoSinIniciar(NombreIDsprint)</script>";
-					}
-					
+		//COLORES
+		foreach ($nombreSprint as $value) {
+			$ValorFechas="$value[0]";
+			$consultaFechas = $dbh->prepare("SELECT nombre_sprint,fecha_inicio,fecha_final FROM sprint WHERE  nombre_sprint=:SprintNombre and id_projecte=:projectId");
+			$consultaFechas->bindValue(':SprintNombre', $ValorFechas);
+			$consultaFechas->bindValue(':projectId', $consultaIdResultado);
+			$consultaFechas->execute();
+			$Datos = $consultaFechas ->fetchAll();
+			foreach ($Datos as $value2) {
+				$nombreSprint2=$value2[0];
+				$fechainicio=$value2[1];
+				$fechafinal=$value2[2];
+				//Condicion si un sprint ya ha acabado
+				if ($fechainicio<$FechaActual2 && $fechafinal < $FechaActual2){
+					echo "<script type='text/javascript'> var NombreIDsprint = '$nombreSprint2' </script>";
+					echo"<script type='text/javascript'> estadoAcabado(NombreIDsprint)</script>";
+				//Condicion si un sprint esta activo	
+				}elseif ($fechainicio < $FechaActual2 && $fechafinal > $FechaActual2) {
+					echo "<script type='text/javascript'> var NombreIDsprint = '$nombreSprint2' </script>";
+					echo"<script type='text/javascript'> estadoActivo(NombreIDsprint)</script>";
+				//Condicion si un sprint esta sin empezar
+				}elseif ($fechainicio>$FechaActual2 && $fechafinal > $FechaActual2) {
+					echo "<script type='text/javascript'> var NombreIDsprint = '$nombreSprint2' </script>";
+					echo"<script type='text/javascript'> estadoSinIniciar(NombreIDsprint)</script>";
 				}
-				
+					
 			}
+				
+		}
 		echo "</div>";
 
 	echo "</div>";
@@ -302,13 +301,10 @@
 		    }
 		  });
 		}
-		///////////////
-
 		var arrayJS = <?php echo json_encode($array_datos);?>;
 		inforGeneral(arrayJS);
 		var array_especificaciones = <?php echo json_encode($array_especificaciones);?>;
 		divEspecificacionesPB(array_especificaciones);
-		var lang="<?php echo lang("test lang"); ?>";
 	</script>
 </body>
 </html>
