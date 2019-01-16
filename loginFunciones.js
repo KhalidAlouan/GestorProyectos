@@ -478,3 +478,246 @@ function modificarSprint() {
 	alert(longitud);
 
 }
+
+//**Nuevo Sprint 3
+
+function formularioSprint(){
+
+	
+	//Creo el formulario
+	var formSprint = document.createElement("form");
+	formSprint.setAttribute("id","idFormularioSprint");
+	formSprint.setAttribute("action","administracionProyectos.php");
+	formSprint.setAttribute("method","POST");
+
+
+	//Array con los Id de los Sprint
+	arrayIdSprint.sort();
+	var longitudArrayIdSprint=arrayIdSprint.length;
+	var idSprint=arrayIdSprint[longitudArrayIdSprint-1];
+
+	
+
+	//Creo el label del numero del Sprint
+	var numSprint_label = document.createElement("label");
+	//Le meto texto al numSprint_label
+	numSprint_label.innerText="Número de  Sprint: ";
+	//Creo el label para mostrar el numero de la especificacion
+	var numSprint_label2 = document.createElement("label");
+	numSprint_label2.innerText=parseInt(idSprint)+1;
+	numSprint_label2.setAttribute("name","IdSprintInt");
+
+	//Creamos un label para la fecha de inicio del sprint
+	var dataIniciSprint_label = document.createElement("label");
+	//Añadimos texto dentro del label
+	dataIniciSprint_label.innerText="Data de Inici: ";
+	//Creamos un input para poder poner la fecha de inicio del sprint
+	var dataIniciSprint_input = document.createElement("input");	
+	//ponemos que el input sera de tipo texto
+	dataIniciSprint_input.setAttribute("type","date");
+	//ponemos un name para el input
+	dataIniciSprint_input.setAttribute("name","inputDataInici");
+
+
+	//Creamos un label para la fecha final del sprint
+	var dataFiSprint_label = document.createElement("label");
+	//Añadimos texto dentro del label
+	dataFiSprint_label.innerText="Data de Final: ";
+	//Creamos un input para poder poner la fecha final del sprint
+	var dataFiSprint_input = document.createElement("input");	
+	//ponemos que el input sera de tipo texto
+	dataFiSprint_input.setAttribute("type","date");
+	//ponemos un name para el input
+	dataFiSprint_input.setAttribute("name","inputDataFi");
+
+
+	//Creamos un label para las horas del sprint
+	var horasSprint_label = document.createElement("label");
+	//Añadimos texto dentro del label
+	horasSprint_label.innerText="Horas del Sprint: ";
+	//Creamos un input para poder poner las horas del sprint
+	var horasSprint_input = document.createElement("input");	
+	//ponemos que el input sera de tipo texto
+	horasSprint_input.setAttribute("type","text");
+	//ponemos un name para el input
+	horasSprint_input.setAttribute("name","inputHoras");
+
+	//Creamos una variable con el id de un div para ponerlo dentro
+	var divsprint=document.getElementById('sprintFormulario');
+
+	//Creamos el boton para insertar
+	var buttonSprint=document.createElement("input");
+	buttonSprint.setAttribute("type","button");
+	buttonSprint.setAttribute("value","Crear")
+	buttonSprint.setAttribute("id","buttonInsertarSprint");
+	buttonSprint.setAttribute("name","InsertarSprint");
+	buttonSprint.setAttribute("onclick","comprobarInsertarSprint()");
+	//buttonSprint.type="submit";
+
+	
+
+
+	var saltoDelinea1=document.createElement("br");
+	var saltoDelinea2=document.createElement("br");
+	var saltoDelinea3=document.createElement("br");
+	var saltoDelinea4=document.createElement("br");
+
+
+	dataIniciSprint_input.setAttribute("change",comprobarInsertarSprint);
+	dataFiSprint_input.setAttribute("change",comprobarInsertarSprint);
+	horasSprint_input.setAttribute("change",comprobarInsertarSprint);
+	
+
+
+
+	
+	//Añadimos todas la variables dentro del form
+	formSprint.appendChild(numSprint_label);
+	formSprint.appendChild(numSprint_label2);
+	formSprint.appendChild(saltoDelinea1);
+
+
+	formSprint.appendChild(dataIniciSprint_label);
+	formSprint.appendChild(dataIniciSprint_input);
+	formSprint.appendChild(saltoDelinea2);
+
+	formSprint.appendChild(dataFiSprint_label);
+	formSprint.appendChild(dataFiSprint_input);
+	formSprint.appendChild(saltoDelinea3);
+
+	formSprint.appendChild(horasSprint_label);
+	formSprint.appendChild(horasSprint_input);
+	formSprint.appendChild(saltoDelinea4);
+
+	formSprint.appendChild(buttonSprint);
+	
+	//añadimos el form dentro del div
+	divsprint.appendChild(formSprint);
+
+
+	//Ocultamos el boton de crear Sprint
+	var botonCrearSprint= document.getElementById("CrearSprint").hidden=true;
+
+}
+
+
+
+
+
+function comprobarInsertarSprint(){
+	var FechaInicio=document.getElementsByName("inputDataInici")[0].value;
+	var FechaFinal=document.getElementsByName("inputDataFi")[0].value;
+	var horas=document.getElementsByName("inputHoras")[0].value;
+
+
+
+	//Obtenemos la fecha actual
+	var fecha = new Date();
+	var dd=fecha.getDate();
+	var mm=""+fecha.getMonth()+1;
+	var yyyy=fecha.getFullYear();
+	var hoy =yyyy+"-"+mm+"-"+dd;
+	
+	
+
+	if (FechaInicio == ""){
+		mensajeError("El camp FechaInicio no pot estar buit");
+	}
+	else if(FechaFinal == ""){
+		mensajeError("El camp FechaFinal no pot estar buit");
+	}
+	else if(horas == ""){
+		mensajeError("El camp horas no pot estar buit");
+	}
+	else if(FechaInicio<=hoy){
+		mensajeError("La Data de inici te que ser posterior a la Data actual");
+	}
+	else if(FechaFinal<=FechaInicio){
+		mensajeError("La Data Final te que ser posterior a la Data de inici");
+	}
+	else if(horas<1){
+		mensajeError("Les hores del sprint te que ser 1 o superior");
+	}
+	else{
+		document.getElementById('idFormularioSprint').submit();
+
+		
+	}
+
+}
+
+function crearCandados(){
+	//var divDeSprint = document.getElementById("divSprint");
+	var padre=document.getElementById("divSprint");
+
+	var imagenCandado = document.createElement("img");
+	imagenCandado.setAttribute("src","assets/candado-cerrado.png");
+	imagenCandado.setAttribute("width","25");
+	imagenCandado.setAttribute("height","25");
+	imagenCandado.setAttribute("class","CandadoAbierto");
+
+	padre.appendChild(imagenCandado);
+
+}
+
+
+function hoverCandadoAbierto(candado){
+	var hermanoImg=candado.previousSibling;
+	var hijoImg=hermanoImg.firstChild;
+
+	if (hijoImg.className=="sprintSinIniciar"){
+		candadoAbiertoFunc(candado);
+	}
+}
+
+function candadoCerradoFunc(element){
+	element.setAttribute("src","assets/candado-cerrado.png");
+
+}
+
+function candadoAbiertoFunc(element){
+	element.setAttribute("src","assets/candado-abierto.png");
+}
+
+function modificarSprint(candado){
+	var hermanoImg=candado.nextSibling;
+	var hijoImg=hermanoImg.firstChild;
+
+	if (hijoImg.className=="sprintSinIniciar"){
+		candadoAbiertoFunc(candado);
+	}
+	console.log(candado);
+
+}
+
+//Funcion que mueve el elemento una posicion hacia abajo
+
+function moverElementoAbajo(element){
+	//Recuperamos el padre del elemento
+	var elementoPosterior = element.parentNode.nextSibling.nextSibling;
+	//Clonamos el elemento
+	var elementoClonado = element.parentNode.cloneNode(true);
+	//Accedemos al elemento <ul> 
+	var elementoRaiz = element.parentNode.parentNode;
+
+	var elementoPadre = element.parentNode;
+	
+	elementoPadre.parentNode.removeChild(elementoPadre);	
+	elementoRaiz.insertBefore(elementoClonado, elementoPosterior);
+
+
+}
+
+//Funcion que mueve el elemento una posicion hacia arriba
+function moverElementoArriba(element){
+	var elementoAnterior = element.parentNode.previousSibling;
+
+	var elementoClonado = element.parentNode.cloneNode(true);
+	var elementoRaiz = element.parentNode.parentNode;
+
+	
+	var elementoPadre = element.parentNode;
+	elementoPadre.parentNode.removeChild(elementoPadre);
+	elementoRaiz.insertBefore(elementoClonado, elementoAnterior);
+
+}

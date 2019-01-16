@@ -10,6 +10,9 @@
 	<?php
 	session_start();
 
+	//Abro la conexion a la base de datos
+	$dbs= "mysql:host=localhost;dbname=GestorProjectes";
+	$dbh = new PDO( $dbs, "admin","admin");
 
 	$nombreUser = $_SESSION["NombreUsuario"];
 	$username = $_SESSION["username"];
@@ -21,10 +24,7 @@
 	foreach ($username as $value) {
 		$username = $value;
 	}
-	//Abro la conexion a la base de datos
-	$dbs= "mysql:host=localhost;dbname=GestorProjectes";
-	$dbh = new PDO( $dbs, "admin","admin");
-
+	
 
 	echo "<div id='header'>";
 		echo"<nav id='cabezera'>";
@@ -56,6 +56,14 @@
 
 	//Consulta para sacar los campos del proyecto seleccionado
 	$nombreProyecto = $a[1];
+
+	//Guardamos el nombre del proyecto en una session
+	if (isset($_SESSION["NombreProyecto"])){
+		$nombreProyecto=$_SESSION["NombreProyecto"];
+	}
+	else{
+		$_SESSION["NombreProyecto"]=$nombreProyecto;
+	}
 
 	$consultaDatosProyecto = $dbh->prepare("SELECT * FROM projectes WHERE nombre_projecte=:projectName");
 
@@ -154,15 +162,12 @@
 		array_push($array3, $value[0]);
 	}
 
-	//COnsulta para saber el rol del usuario logeado
-	$consultaRol = $dbh->prepare("SELECT rol FROM usuarios WHERE usuario=:username");
-	$consultaRol->bindValue(':username', $username);
-	$consultaRol->execute();
-	$consultaRolResultado = $consultaRol ->fetch(PDO::FETCH_ASSOC);
+	//Consulta para saber el nombre de los Sprint
+	$consultaSprint = $dbh->prepare("SELECT nombre_sprint FROM sprint WHERE id_projecte=:projectId");
+	$consultaSprint->bindValue(':projectId', $consultaIdResultado);
+	$consultaSprint->execute();
+	$nombreSprint = $consultaSprint ->fetchAll();
 
-	foreach ($consultaRolResultado as $value) {
-		$consultaRolResultado = $value;
-	}
 
 	//Funcion para eliminar sprint
 	function eliminarSprintBBDD($idsp) {
@@ -199,6 +204,7 @@
 			$idBotonEliminar = 1;
 			foreach ($nombreSprint as $value) {
 				echo"<button id='$idBoton' class='accordion'><p id='$value[0]' class='class0'>$value[0]</p></button>";
+				echo "<img src='assets/candado-cerrado.png' class='candadoCerrado' onclick='modificarSprint(this)' onmouseover='hoverCandadoAbierto(this,id)'  onmouseout='candadoCerradoFunc(this)'  >";
 				echo"<div class='panel' ondragenter='return enter(event)' ondragover='return over(event)' ondragleave='return leave(event)' ondrop='return eliminar(event)'>";
 					$ValorSprint="$value[0]";
 					$consultaDatosSprint = $dbh->prepare("SELECT * FROM sprint WHERE  nombre_sprint=:SprintNombre and id_projecte=:projectId ");
@@ -221,27 +227,17 @@
 
 						}
 						//Print de los datos de un sprint
-						;
+						
 						echo "ID SPRINT: $idsp";
-						
 						echo "<br>";
-						
 						echo"NOMBRE SPRINT: $nombresp";
-						
 						echo "<br>";
-						
 						echo "ID ESPECIFICACION: $idessp";
-						
 						echo "<br>";
-						
 						echo "ID PROJECTE: $idprsp";
-						
 						echo "<br>";
-						
 						echo "FECHA INICIO: $fechainiciosp";
-						
 						echo "<br>";
-						
 						echo "FECHA FINAL: $fechafinalsp";
 						
 				  	echo"</p>";
@@ -256,6 +252,12 @@
 			$idBoton++;
 			$idBotonEliminar++;
 		}
+		echo "<br>";
+		echo "<br>";
+		echo"<button id='CrearSprint' onclick='formularioSprint()'>Crear Nou Sprint</button>";
+		echo "<div id='sprintFormulario'></di>";
+
+
 
 
 		//COLORES
@@ -288,6 +290,55 @@
 				
 		}
 		echo "</div>";
+		//Consulta para sacar el id del sprint
+    $consultaIdSprint = $dbh->prepare("SELECT id_sprint FROM sprint ");
+	$consultaIdSprint->execute();
+	$consultaIdSprint = $consultaIdSprint->fetchAll();
+	$array_IdSprint = [];
+	foreach ($consultaIdSprint as $value) {
+		array_push($array_IdSprint, $value[0]);
+	}
+	//Consulta para contar el numero de sprint que hay en el proyecto 
+	$cuentaNombresSprint = $dbh->prepare("SELECT count(nombre_sprint) FROM sprint where id_projecte=:id_projecte");
+	$cuentaNombresSprint->bindValue(':id_projecte', $consultaIdResultado);
+	$cuentaNombresSprint->execute();
+	$cuentaNombresSprint = $cuentaNombresSprint->fetchAll();
+	$NumeroDeNombres=$cuentaNombresSprint[0][0]+1;
+	$NombreNuevoSprint="Sprint".$NumeroDeNombres;
+	
+	//Almacenar valor de los inputs del formulario Sprint
+	$valorIdSprint=$_POST["IdSprintInt"];
+	$valorFechaInicio=$_POST["inputDataInici"];
+	$valorFechaFinal=$_POST["inputDataFi"];
+	$valorHoras=$_POST["inputHoras"];
+	print_r($valorIdSprint);
+	
+	
+	$server = "localhost";
+ 	$user = "admin";
+ 	$pass = "admin";
+ 	$bbdd = "GestorProjectes";
+ 	$connect = mysqli_connect($server,$user, $pass, $bbdd);
+ 	
+	//$connect = mysqli_connect($server,"admin", "admin", "GestorProjectes");
+ 	
+ 	
+	
+	if ($_SERVER["REQUEST_METHOD"] == "POST"){
+		
+		if($valorFechaInicio>$FechaActual2){
+			$valorEstado=1;
+		}
+		else{
+			$valorEstado=0;
+		}
+    	$insertSprint = ("INSERT INTO sprint (nombre_sprint, id_projecte, fecha_inicio,fecha_final,horas_totales,estado) VALUES ('$NombreNuevoSprint','$consultaIdResultado','$valorFechaInicio','$valorFechaFinal','$valorHoras','$valorEstado');");
+    	if(mysqli_query($connect,$insertSprint)){
+			header("Location: administracionProyectos.php?id=".$_SESSION["NombreProyecto"]);
+			unset($_SESSION["NombreProyecto"]);
+			
+		}
+	}
 
 	echo "</div>";
 
@@ -321,6 +372,9 @@
 		inforGeneral(arrayJS);
 		var array_especificaciones = <?php echo json_encode($array_especificaciones);?>;
 		divEspecificacionesPB(array_especificaciones);
+		//**Nuevo Sprint 3
+		var arrayIdSprint = <?php echo json_encode($array_IdSprint);?>;
+		
 	</script>
 </body>
 </html>

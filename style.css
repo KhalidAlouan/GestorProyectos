@@ -283,3 +283,28 @@ nav{
 	left: 80%;
 	top: -30%;
 }
+
+#CrearSprint{
+	float: right;
+}
+
+#sprintFormulario{
+	
+}
+#buttonInsertarSprint{
+	float: right; 	
+}
+
+.candadoCerrado{
+	width: 5%;
+	height: 15%;
+	float: left;
+	position: relative;
+}
+.CandadoAbierto{
+	background-image: url(assets/candado-abierto.png);
+	width: 10%;
+	height: 10%;
+
+	
+}
