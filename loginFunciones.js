@@ -553,9 +553,38 @@ function crearCandados(){
 	imagenCandado.setAttribute("src","assets/candado-cerrado.png");
 	imagenCandado.setAttribute("width","25");
 	imagenCandado.setAttribute("height","25");
+	imagenCandado.setAttribute("class","CandadoAbierto");
 
 	padre.appendChild(imagenCandado);
 
 }
 
 
+function hoverCandadoAbierto(candado){
+	var hermanoImg=candado.nextSibling;
+	var hijoImg=hermanoImg.firstChild;
+
+	if (hijoImg.className=="sprintSinIniciar"){
+		candadoAbiertoFunc(candado);
+	}
+}
+
+function candadoCerradoFunc(element){
+	element.setAttribute("src","assets/candado-cerrado.png");
+
+}
+
+function candadoAbiertoFunc(element){
+	element.setAttribute("src","assets/candado-abierto.png");
+}
+
+function modificarSprint(candado){
+	var hermanoImg=candado.nextSibling;
+	var hijoImg=hermanoImg.firstChild;
+
+	if (hijoImg.className=="sprintSinIniciar"){
+		candadoAbiertoFunc(candado);
+	}
+	console.log(candado);
+
+}

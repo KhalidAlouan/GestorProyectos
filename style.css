@@ -227,7 +227,7 @@ nav{
 	
 }
 .sprintSinIniciar{
-	background-color: black;
+	background: black;
 	width: 10%;
 	height: 10%;
 	text-align: center;
@@ -277,4 +277,16 @@ nav{
 }
 #buttonInsertarSprint{
 	float: right; 	
+}
+
+.candadoCerrado{
+	width: 3%;
+	height: 8%;
+}
+.CandadoAbierto{
+	background-image: url(assets/candado-abierto.png);
+	width: 10%;
+	height: 10%;
+
+	
 }

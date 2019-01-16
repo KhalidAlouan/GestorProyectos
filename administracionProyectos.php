@@ -193,8 +193,10 @@
 
 			//Printar Sprints
 			foreach ($nombreSprint as $value) {
-				echo"<script type='text/javascript'> crearCandados()</script>";
+				//echo"<script type='text/javascript'> crearCandados()</script>";
+				echo "<img src='assets/candado-cerrado.png' class='candadoCerrado' onclick='modificarSprint(this)' onmouseover='hoverCandadoAbierto(this,id)'  onmouseout='candadoCerradoFunc(this)'  >";
 				echo"<button class='accordion' ><p id='$value[0]' class='class0'>$value[0]</p></button>";
+
 				echo"<div class='panel' >";
 					$ValorSprint="$value[0]";
 					$consultaDatosSprint = $dbh->prepare("SELECT * FROM sprint WHERE  nombre_sprint=:SprintNombre and id_projecte=:projectId ");
@@ -343,32 +345,7 @@
 		}
 	}
 
-		/*
-		$insertSprint = "INSERT INTO sprint (nombre_sprint, id_projecte, fecha_inicio,fecha_final,horas_totales,estado) VALUES ('Sprint5','1','2019-01-15','2019-01-25','4','1');";
-		header("Location: administracionProyectos.php?id=".$_SESSION["NombreProyecto"]);
-		*/
-		/*
-		if(mysqli_query($connect->query($insertSprint) === TRUE)){
-			header("Location: administracionProyectos.php?id=".$_SESSION["NombreProyecto"]);
-		}else{
-			print_r("Error al insertar el sprint");
-		}
-		$inserResultado = $dbh->prepare("INSERT INTO sprint (nombre_sprint, id_projecte, fecha_inicio,fecha_final,horas_totales) VALUES(:id_sprint,:nombre_sprint,:id_projecte,:fecha_inicio,:fecha_final,:horas_totales,:estado)");
-		$inserResultado->bindValue(':nombre_sprint', $NombreNuevoSprint);
-    	$inserResultado->bindValue(':id_projecte', $consultaIdResultado);
-    	$inserResultado->bindValue(':fecha_inicio', $valorFechaInicio);
-    	$inserResultado->bindValue(':fecha_final', $valorFechaFinal);
-    	$inserResultado->bindValue(':horas_totales', $valorHoras);
-    	$inserResultado->bindValue(':estado', $valorEstado);
-    	$inserResultado->execute();
-
-    	PDO::query()
-    	*/
-	
-
-
-
-
+		
 
 
 	echo "</div>";
