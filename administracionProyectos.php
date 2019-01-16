@@ -194,8 +194,9 @@
 			//Printar Sprints
 			foreach ($nombreSprint as $value) {
 				//echo"<script type='text/javascript'> crearCandados()</script>";
-				echo "<img src='assets/candado-cerrado.png' class='candadoCerrado' onclick='modificarSprint(this)' onmouseover='hoverCandadoAbierto(this,id)'  onmouseout='candadoCerradoFunc(this)'  >";
+				
 				echo"<button class='accordion' ><p id='$value[0]' class='class0'>$value[0]</p></button>";
+				echo "<img src='assets/candado-cerrado.png' class='candadoCerrado' onclick='modificarSprint(this)' onmouseover='hoverCandadoAbierto(this,id)'  onmouseout='candadoCerradoFunc(this)'  >";
 
 				echo"<div class='panel' >";
 					$ValorSprint="$value[0]";
@@ -318,17 +319,10 @@
  	$user = "admin";
  	$pass = "admin";
  	$bbdd = "GestorProjectes";
- 	$connect = mysqli_connect($server,$user, $pass, $bbdd);
-
+ 	$connect = mysqli_connect($server,$user, $pass, $bbdd);	
  	
-
-	//$connect = mysqli_connect($server,"admin", "admin", "GestorProjectes");
- 	
- 	
-
-
 	
-
+ 	//Insert del nuevo Sprint
 	if ($_SERVER["REQUEST_METHOD"] == "POST"){
 		
 		if($valorFechaInicio>$FechaActual2){

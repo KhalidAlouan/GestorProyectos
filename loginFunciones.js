@@ -561,12 +561,13 @@ function crearCandados(){
 
 
 function hoverCandadoAbierto(candado){
-	var hermanoImg=candado.nextSibling;
+	var hermanoImg=candado.previousSibling;
 	var hijoImg=hermanoImg.firstChild;
 
 	if (hijoImg.className=="sprintSinIniciar"){
 		candadoAbiertoFunc(candado);
 	}
+	console.log(hijoImg.className);
 }
 
 function candadoCerradoFunc(element){
