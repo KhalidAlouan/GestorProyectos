@@ -154,6 +154,16 @@
 		array_push($array3, $value[0]);
 	}
 
+	//COnsulta para saber el rol del usuario logeado
+	$consultaRol = $dbh->prepare("SELECT rol FROM usuarios WHERE usuario=:username");
+	$consultaRol->bindValue(':username', $username);
+	$consultaRol->execute();
+	$consultaRolResultado = $consultaRol ->fetch(PDO::FETCH_ASSOC);
+
+	foreach ($consultaRolResultado as $value) {
+		$consultaRolResultado = $value;
+	}
+
 	//Funcion para eliminar sprint
 	function eliminarSprintBBDD($idsp) {
 		$dbs= "mysql:host=localhost;dbname=GestorProjectes";
@@ -184,15 +194,12 @@
 				echo"<b>Sprints</b>";
 			echo "</p>";	
 
-			
-
-
 			//Printar Sprints
 			$idBoton = 1;
 			$idBotonEliminar = 1;
 			foreach ($nombreSprint as $value) {
-				echo"<button id='$idBoton' class='accordion' ><p id='$value[0]' class='class0'>$value[0]</p></button>";
-				echo"<div class='panel' >";
+				echo"<button id='$idBoton' class='accordion'><p id='$value[0]' class='class0'>$value[0]</p></button>";
+				echo"<div class='panel' ondragenter='return enter(event)' ondragover='return over(event)' ondragleave='return leave(event)' ondrop='return eliminar(event)'>";
 					$ValorSprint="$value[0]";
 					$consultaDatosSprint = $dbh->prepare("SELECT * FROM sprint WHERE  nombre_sprint=:SprintNombre and id_projecte=:projectId ");
 					$consultaDatosSprint->bindValue(':SprintNombre', $ValorSprint);
@@ -214,21 +221,33 @@
 
 						}
 						//Print de los datos de un sprint
+						;
 						echo "ID SPRINT: $idsp";
+						
 						echo "<br>";
+						
 						echo"NOMBRE SPRINT: $nombresp";
+						
 						echo "<br>";
+						
 						echo "ID ESPECIFICACION: $idessp";
+						
 						echo "<br>";
+						
 						echo "ID PROJECTE: $idprsp";
+						
 						echo "<br>";
+						
 						echo "FECHA INICIO: $fechainiciosp";
+						
 						echo "<br>";
+						
 						echo "FECHA FINAL: $fechafinalsp";
+						
 				  	echo"</p>";
 				echo"</div>";
 			if ($FechaActual2 < $fechainiciosp) {
-				echo "<button type='submit' name='eliminar' id=$idBoton onclick='eliminarSprint($idBoton,$idBotonEliminar) /class='botonliminarSprint'> Eliminar </button>";
+				echo "<button type='submit' name='eliminar' id=$idBoton onclick='eliminarSprint($idBoton,$idBotonEliminar)' class='botonliminarSprint'> Eliminar </button>";
 
 			} elseif ($FechaActual2 >= $fechainiciosp) {
 				echo "<button id=$idBoton disabled class='botonliminarSprint'> Eliminar </button>";
@@ -237,9 +256,6 @@
 			$idBoton++;
 			$idBotonEliminar++;
 		}
-
-
-			
 
 
 		//COLORES

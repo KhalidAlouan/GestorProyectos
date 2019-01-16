@@ -1,4 +1,4 @@
-<!DOCTYPE html>
++<!DOCTYPE html>
 <html>
 <head>
 	<link href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css" rel="stylesheet" id="bootstrap-css">
@@ -94,16 +94,13 @@
 
 		$_SESSION["NombreUsuario"] = $nombreUser ;
 
-		
-
-
 		/*Hago una consulta para sacar el nombre de usuario*/
 		$consultaUsername = $dbh->prepare("SELECT usuario FROM usuarios WHERE usuario=:user");
 		$consultaUsername->bindValue(':user', $user);
 		$consultaUsername->execute();
 		$username = $consultaUsername ->fetch(PDO::FETCH_ASSOC);
 		
-		$_SESSION["username"] = $username ;
+		$_SESSION["username"] = $username;
 
 
 		?>

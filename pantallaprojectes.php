@@ -18,6 +18,7 @@
 	$nombreUser = $_SESSION["NombreUsuario"];
 	$username = $_SESSION["username"];
 
+
 	foreach ($nombreUser as $value) {
 		$nombreUser=$value;
 	}
@@ -165,8 +166,6 @@
 	}
 
 
-
-	
 	
 ?>
 <script type="text/javascript">

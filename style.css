@@ -273,3 +273,13 @@ nav{
 .botonEliminarSprint {
 
 }
+
+.dragable {
+	cursor: move;
+}
+
+.titulos {
+	position: relative;
+	left: 80%;
+	top: -30%;
+}

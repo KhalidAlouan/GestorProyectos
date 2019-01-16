@@ -283,6 +283,12 @@ function inforGeneral(arrayJS) {
 	var center = document.getElementById("center");
 	center.appendChild(div);
 
+	var titulo = document.createElement("p");
+	titulo.style.fontWeight = "bold";
+	div.appendChild(titulo);
+	titulo.textContent = 'Información Sprint';
+	titulo.setAttribute("class","titulos");
+
 	for(var i=0;i<arrayJS.length;i++) {
 		var p = document.createElement("p");
 		div.appendChild(p);
@@ -317,13 +323,26 @@ function divEspecificacionesPB(array_especificaciones) {
     	}, []);
 	});
 
+	var titulo = document.createElement("p");
+	div.appendChild(titulo);
+	titulo.style.fontWeight = "bold";
+	titulo.textContent = 'Product Backlog';
+	titulo.setAttribute("class","titulos");
+
 	var n = nuevoArray.length;
+	var idP = 1;
 	for(var i = 0;i<n;i++){
 		var p = document.createElement("p");
-		div.appendChild(p);
+		div.appendChild(p)
 		p.innerText = nuevoArray[i][1];
-
+		p.setAttribute("draggable","true");
+		p.setAttribute("class","dragable");
+		p.setAttribute("id",idP);
+		p.setAttribute("ondragstart","start(event)");
+		p.setAttribute("ondragend","end(event)");
+		idP++;
 	}
+
 
 	insertAfter(input,p);
 	insertAfter(button,input);
@@ -375,7 +394,6 @@ function estadoSinIniciar(id){
 	
 }
 
-
 function anadirEspecifiacion() {
 	var divPB = document.getElementsByClassName("divPB")[0];
 
@@ -386,7 +404,6 @@ function anadirEspecifiacion() {
 	p.innerText=nuevaESP;
 
 	var center = document.getElementById("center");
-
 
 	var primerHijo = divPB.firstElementChild;
 
@@ -404,15 +421,60 @@ function eliminarSprint(idBoton,idBotonEliminar) {
 	var yyyy=fecha.getFullYear();
 	var hoy =yyyy+"-"+mm+"-"+dd;
 
-	document.getElementById(idBotonEliminar).hidden = true;
+	var botonEliminar = document.getElementById(idBotonEliminar).hidden = true;
 	botonEliminar.hidden = true;
 
-
 }
-
 
 //Funcion que elimina el elemento
 function borrarElemento(element){
 	var elementoPadre = element.parentNode;
 	elementoPadre.parentNode.removeChild(elementoPadre);
+}
+
+function start(e) {
+    e.dataTransfer.effecAllowed = 'move'; // Define el efecto como mover
+    e.dataTransfer.setData("Data", e.target.id); // Coje el elemento que se va a mover
+    e.dataTransfer.setDragImage(e.target, 0, 0); // Define la imagen que se vera al ser arrastrado el elemento y por donde se coje el elemento que se va a mover (el raton aparece en la esquina sup_izq con 0,0)
+    e.target.style.opacity = '0.4'; // Establece la opacidad del elemento que se va arrastrar
+}
+
+function end(e) {
+    e.target.style.opacity = ''; // Restaura la opacidad del elemento   
+    e.dataTransfer.clearData("Data");
+}
+
+function enter(e) {
+    e.target.style.border = '3px dotted #555'; 
+}
+
+function leave(e) {
+    e.target.style.border = ''; 
+}
+
+
+function over(e) {
+    var elemArrastrable = e.dataTransfer.getData("Data"); // Elemento arrastrado
+    var id = e.target.id; // Elemento sobre el que se arrastra
+    alert(id);
+ 
+    // return false para que se pueda soltar
+    if (id.className == "accordion") {
+    	alert("aa");
+        return false;
+    }
+}
+
+function eliminar(e) {
+    var elementoArrastrado = document.getElementById(e.dataTransfer.getData("Data")); // Elemento arrastrado
+    elementoArrastrado.parentNode.removeChild(elementoArrastrado); // Elimina el elemento
+    e.target.style.border = '';   // Quita el borde
+}
+
+function modificarSprint() {
+	var pInfoSprint = document.getElementsByClassName("paragrafoInfoSprint");
+	controlador = 0;
+	var longitud = pInfoSprint.length;
+	alert(longitud);
+
 }
