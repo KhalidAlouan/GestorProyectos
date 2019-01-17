@@ -1,10 +1,15 @@
 Retrospectiva:
 
 1- ¿ Qué hemos hecho mal este sprint ?
+	En algunas ocasiones hemos perdido mucho tiempo intentado arreglar fallos e intentamos hacer cosas que aun no eramos capaces.
+	También nos hemos dado cuenta de que no todo el mundo hacia el mismo trabajo porque no todos tenemos los mismos conocimientos a la hora de programar.
+	
 
 2- ¿ Qué consideramos que tenemos que hacer para que el equipo funcione mejor ?
+	Repartir las tareas equitativamente para que todos los integrantes del grupo trabajen por igual.
+	
 
 Opiniones participantes:
 	Jose:
 	Miguel:
-	Marc:
+	Marc: Creo que hemos fallado a la hora de asignar horas a las especificaciones, también me he dado cuenta de que para algunas especificaciones no las hemos podido hacer porque no como ciamos AJAX.
