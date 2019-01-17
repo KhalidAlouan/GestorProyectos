@@ -468,11 +468,9 @@ function leave(e) {
 function over(e) {
     var elemArrastrable = e.dataTransfer.getData("Data"); // Elemento arrastrado
     var id = e.target.id; // Elemento sobre el que se arrastra
-    alert(id);
- 
+
     // return false para que se pueda soltar
     if (id.className == "accordion") {
-    	alert("aa");
         return false;
     }
 }
