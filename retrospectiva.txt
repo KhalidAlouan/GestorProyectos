@@ -11,5 +11,7 @@ Retrospectiva:
 
 Opiniones participantes:
 	Jose:
-	Miguel:
-	Marc: Creo que hemos fallado a la hora de asignar horas a las especificaciones, también me he dado cuenta de que para algunas especificaciones no las hemos podido hacer porque no como ciamos AJAX.
+	
+	Miguel: Hemos perdido mucho tiempo intentando arreglar fallos que nos surgian a la hora de hacer especificaciones, falta de trabajo por parte de algun integrante del grupo. 
+
+	Marc: Creo que hemos fallado a la hora de asignar horas a las especificaciones, también me he dado cuenta de que para algunas especificaciones no las hemos podido hacer porque no conociamos AJAX.
