@@ -338,8 +338,12 @@ function divEspecificacionesPB(array_especificaciones) {
 		p.setAttribute("draggable","true");
 		p.setAttribute("class","dragable");
 		p.setAttribute("id",idP);
+		if (true) {}
 		p.setAttribute("ondragstart","start(event)");
 		p.setAttribute("ondragend","end(event)");
+		p.appendChild(FlechaArriba());
+		p.appendChild(FlechaAbajo());
+		p.appendChild(borrarEspec());
 		idP++;
 	}
 
@@ -483,7 +487,7 @@ function modificarSprint() {
 
 }
 
-//**Nuevo Sprint 3
+//Formulario para crear un sprint nuevo
 
 function formularioSprint(){
 
@@ -607,7 +611,7 @@ function formularioSprint(){
 
 
 
-
+//Condiciones para insertar un sprint nuevo
 function comprobarInsertarSprint(){
 	var FechaInicio=document.getElementsByName("inputDataInici")[0].value;
 	var FechaFinal=document.getElementsByName("inputDataFi")[0].value;
@@ -650,21 +654,7 @@ function comprobarInsertarSprint(){
 
 }
 
-function crearCandados(){
-	//var divDeSprint = document.getElementById("divSprint");
-	var padre=document.getElementById("divSprint");
-
-	var imagenCandado = document.createElement("img");
-	imagenCandado.setAttribute("src","assets/candado-cerrado.png");
-	imagenCandado.setAttribute("width","25");
-	imagenCandado.setAttribute("height","25");
-	imagenCandado.setAttribute("class","CandadoAbierto");
-
-	padre.appendChild(imagenCandado);
-
-}
-
-
+//Funcion de hover  candado abierto para sprint que no que no esta iniciado
 function hoverCandadoAbierto(candado){
 	var hermanoImg=candado.previousSibling;
 	
@@ -674,31 +664,33 @@ function hoverCandadoAbierto(candado){
 	}
 }
 
+//Funcion Cambiamos la imagen por candado cerrado
 function candadoCerradoFunc(element){
 	element.setAttribute("src","assets/candado-cerrado.png");
 
 }
 
+//Funcion Cambiamos la imagen por candado abierto
 function candadoAbiertoFunc(element){
 	element.setAttribute("src","assets/candado-abierto.png");
 }
 
-function modificarSprint(){
-	var divInfSprint=document.getElementById("DivInformacionSprints").parentNode.previousSibling.firstChild;
-	var inputHor=document.getElementById("DivInformacionSprints").childNodes[5];
-	var inputFechaInicio=document.getElementById("DivInformacionSprints").childNodes[10];
-	var inputFechaFinal=document.getElementById("DivInformacionSprints").childNodes[13];
-
-	inputHor.disabled=true;
-	inputFechaInicio.disabled=true;
-	inputFechaFinal.disabled=true;
+//Funcion para poder modificar Sprint
+function modificarSprint(DivElement){
+	var elementoDiv=DivElement.firstChild.className;
+	var divInfo=DivElement.nextSibling.firstChild;
+	var DivSprintInfo=divInfo.firstChild;
+	var inputHor=divInfo.childNodes[5];
+	var inputFechaInicio=divInfo.childNodes[10];
+	var inputFechaFinal=divInfo.childNodes[13];
 	
 
-	
-	
+	if (elementoDiv=="sprintSinIniciar"){
+		inputHor.disabled=false;
+		inputFechaInicio.disabled=false;
+		inputFechaFinal.disabled=false;
 
-	
-
+	}
 
 }
 
@@ -707,29 +699,56 @@ function modificarSprint(){
 function moverElementoAbajo(element){
 	//Recuperamos el padre del elemento
 	var elementoPosterior = element.parentNode.nextSibling.nextSibling;
-	//Clonamos el elemento
-	var elementoClonado = element.parentNode.cloneNode(true);
-	//Accedemos al elemento <ul> 
-	var elementoRaiz = element.parentNode.parentNode;
+	if (elementoPosterior.className == "dragable" ) {
+		//Clonamos el elemento
+		var elementoClonado = element.parentNode.cloneNode(true);
+		//Accedemos al elemento <ul> 
+		var elementoRaiz = element.parentNode.parentNode;
 
-	var elementoPadre = element.parentNode;
-	
-	elementoPadre.parentNode.removeChild(elementoPadre);	
-	elementoRaiz.insertBefore(elementoClonado, elementoPosterior);
-
-
+		var elementoPadre = element.parentNode;
+		
+		elementoPadre.parentNode.removeChild(elementoPadre);	
+		elementoRaiz.insertBefore(elementoClonado, elementoPosterior);
+		}
 }
 
 //Funcion que mueve el elemento una posicion hacia arriba
 function moverElementoArriba(element){
 	var elementoAnterior = element.parentNode.previousSibling;
+	if (elementoAnterior.className == "dragable") {
+		var elementoClonado = element.parentNode.cloneNode(true);
+		var elementoRaiz = element.parentNode.parentNode;
+		
+		var elementoPadre = element.parentNode;
+		elementoPadre.parentNode.removeChild(elementoPadre);
+		elementoRaiz.insertBefore(elementoClonado, elementoAnterior);
 
-	var elementoClonado = element.parentNode.cloneNode(true);
-	var elementoRaiz = element.parentNode.parentNode;
-
+	}
 	
-	var elementoPadre = element.parentNode;
-	elementoPadre.parentNode.removeChild(elementoPadre);
-	elementoRaiz.insertBefore(elementoClonado, elementoAnterior);
 
+}
+
+
+function FlechaArriba(){
+	var flecha_arriba = document.createElement('img');
+	flecha_arriba.src="assets/arriba.jpg";
+	flecha_arriba.setAttribute('class', 'arriba');
+	flecha_arriba.setAttribute('onclick', 'moverElementoArriba(this)');
+	return flecha_arriba;
+}
+
+function FlechaAbajo(){
+	var flecha_abajo = document.createElement('img');
+	flecha_abajo.src="assets/abajo.jpg";
+	flecha_abajo.setAttribute('class', 'abajo');
+	flecha_abajo.setAttribute('onclick', 'moverElementoAbajo(this)');
+	return flecha_abajo;
+}
+
+function borrarEspec(){
+	var borrar = document.createElement('img');
+	borrar.src='assets/borrar.jpg';
+	borrar.setAttribute('class', 'borrar');
+	borrar.setAttribute('onclick', 'borrarElemento(this)');
+	return borrar;
 }

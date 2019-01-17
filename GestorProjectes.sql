@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
--- https://www.phpmyadmin.net/
+-- version 4.5.4.1deb2ubuntu2.1
+-- http://www.phpmyadmin.net
 --
--- Servidor: localhost:3306
--- Tiempo de generación: 18-12-2018 a las 13:56:44
--- Versión del servidor: 5.7.24-0ubuntu0.18.04.1
--- Versión de PHP: 7.2.10-0ubuntu0.18.04.1
+-- Servidor: localhost
+-- Temps de generació: 17-01-2019 a les 11:09:29
+-- Versió del servidor: 5.7.24-0ubuntu0.16.04.1
+-- Versió de PHP: 7.0.32-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `GestorProjectes`
+-- Base de dades: `GestorProjectes`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `especificaciones`
+-- Estructura de la taula `especificaciones`
 --
 
 CREATE TABLE `especificaciones` (
@@ -35,11 +35,10 @@ CREATE TABLE `especificaciones` (
   `tiempo` time NOT NULL,
   `id_usuario` int(11) NOT NULL,
   `acabado` tinyint(1) NOT NULL
-  'id_sprint'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `especificaciones`
+-- Bolcant dades de la taula `especificaciones`
 --
 
 INSERT INTO `especificaciones` (`id_especificacion`, `id_projecte`, `nombre_especificacion`, `dificultad`, `descripcion`, `tiempo`, `id_usuario`, `acabado`) VALUES
@@ -54,7 +53,7 @@ INSERT INTO `especificaciones` (`id_especificacion`, `id_projecte`, `nombre_espe
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `grupos`
+-- Estructura de la taula `grupos`
 --
 
 CREATE TABLE `grupos` (
@@ -63,7 +62,7 @@ CREATE TABLE `grupos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `grupos`
+-- Bolcant dades de la taula `grupos`
 --
 
 INSERT INTO `grupos` (`id_grupo`, `nombre_grupo`) VALUES
@@ -73,7 +72,7 @@ INSERT INTO `grupos` (`id_grupo`, `nombre_grupo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `projectes`
+-- Estructura de la taula `projectes`
 --
 
 CREATE TABLE `projectes` (
@@ -86,7 +85,7 @@ CREATE TABLE `projectes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `projectes`
+-- Bolcant dades de la taula `projectes`
 --
 
 INSERT INTO `projectes` (`id_projecte`, `nombre_projecte`, `descripcion`, `scrum_master`, `product_owner`, `id_grupo`) VALUES
@@ -98,34 +97,36 @@ INSERT INTO `projectes` (`id_projecte`, `nombre_projecte`, `descripcion`, `scrum
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `sprint`
+-- Estructura de la taula `sprint`
 --
 
 CREATE TABLE `sprint` (
   `id_sprint` int(11) NOT NULL,
   `nombre_sprint` varchar(255) NOT NULL,
-  `id_especificacion` int(11) NOT NULL,
+  `id_especificacion` int(11) DEFAULT NULL,
   `id_projecte` int(11) NOT NULL,
   `fecha_inicio` date DEFAULT NULL,
-  `fecha_final` date DEFAULT NULL
+  `fecha_final` date DEFAULT NULL,
+  `horas_totales` int(11) NOT NULL,
+  `estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `sprint`
+-- Bolcant dades de la taula `sprint`
 --
 
-INSERT INTO `sprint` (`id_sprint`, `nombre_sprint`, `id_especificacion`, `id_projecte`, `fecha_inicio`, `fecha_final`) VALUES
-(1, 'Sprint1', 1, 1, '2018-12-09', '2018-12-16'),
-(4, 'Sprint2', 2, 1, '2018-12-17', '2018-12-24'),
-(5, 'Sprint3', 3, 1, '2018-12-31', '2019-01-07'),
-(6, 'Sprint1', 1, 2, '2018-12-03', '2018-12-10'),
-(7, 'Sprint2', 4, 2, '2018-12-10', '2018-12-24'),
-(8, 'Sprint3', 3, 2, '2018-12-24', '2018-12-31');
+INSERT INTO `sprint` (`id_sprint`, `nombre_sprint`, `id_especificacion`, `id_projecte`, `fecha_inicio`, `fecha_final`, `horas_totales`, `estado`) VALUES
+(1, 'Sprint1', NULL, 1, '2019-01-01', '2019-01-07', 12, 0),
+(2, 'Sprint2', NULL, 1, '2019-01-02', '2019-01-07', 12, 0),
+(3, 'Sprint1', NULL, 2, '2019-01-01', '2019-01-07', 50, 0),
+(4, 'Sprint2', NULL, 2, '2019-01-02', '2019-01-10', 20, 0),
+(5, 'Sprint3', NULL, 1, '2019-01-20', '2019-01-25', 10, 1),
+(6, 'Sprint3', NULL, 2, '2019-01-22', '2019-01-26', 10, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuarios`
+-- Estructura de la taula `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -140,7 +141,7 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Volcado de datos para la tabla `usuarios`
+-- Bolcant dades de la taula `usuarios`
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `apellidos`, `correo`, `usuario`, `password`, `rol`, `grupo`) VALUES
@@ -152,11 +153,11 @@ INSERT INTO `usuarios` (`id`, `nombre`, `apellidos`, `correo`, `usuario`, `passw
 (6, 'marcos', 'arteaga', 'marcosarteaga@gmail.com', 'marcosarteaga', 'a0a8418422f08bf0a9ebf039028fa228129c7b6a7db6bc22bffe2068638869bf73cf1ac337fa0748a4c0cc6aeb6d10322b3ee39d067497968258635349cfbf0c', 'PO', NULL);
 
 --
--- Índices para tablas volcadas
+-- Indexos per taules bolcades
 --
 
 --
--- Indices de la tabla `especificaciones`
+-- Index de la taula `especificaciones`
 --
 ALTER TABLE `especificaciones`
   ADD PRIMARY KEY (`id_especificacion`),
@@ -164,20 +165,20 @@ ALTER TABLE `especificaciones`
   ADD KEY `fk_id_usuario_esp` (`id_usuario`);
 
 --
--- Indices de la tabla `grupos`
+-- Index de la taula `grupos`
 --
 ALTER TABLE `grupos`
   ADD PRIMARY KEY (`id_grupo`);
 
 --
--- Indices de la tabla `projectes`
+-- Index de la taula `projectes`
 --
 ALTER TABLE `projectes`
   ADD PRIMARY KEY (`id_projecte`),
   ADD KEY `fk_projectes` (`id_grupo`);
 
 --
--- Indices de la tabla `sprint`
+-- Index de la taula `sprint`
 --
 ALTER TABLE `sprint`
   ADD PRIMARY KEY (`id_sprint`),
@@ -185,7 +186,7 @@ ALTER TABLE `sprint`
   ADD KEY `fk_id_projecte_sprint` (`id_projecte`);
 
 --
--- Indices de la tabla `usuarios`
+-- Index de la taula `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`),
@@ -194,60 +195,60 @@ ALTER TABLE `usuarios`
   ADD KEY `fk_usuarios` (`grupo`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT per les taules bolcades
 --
 
 --
--- AUTO_INCREMENT de la tabla `especificaciones`
+-- AUTO_INCREMENT per la taula `especificaciones`
 --
 ALTER TABLE `especificaciones`
   MODIFY `id_especificacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
--- AUTO_INCREMENT de la tabla `grupos`
+-- AUTO_INCREMENT per la taula `grupos`
 --
 ALTER TABLE `grupos`
   MODIFY `id_grupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT de la tabla `projectes`
+-- AUTO_INCREMENT per la taula `projectes`
 --
 ALTER TABLE `projectes`
-  MODIFY `id_projecte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_projecte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT de la tabla `sprint`
+-- AUTO_INCREMENT per la taula `sprint`
 --
 ALTER TABLE `sprint`
-  MODIFY `id_sprint` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_sprint` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
--- AUTO_INCREMENT de la tabla `usuarios`
+-- AUTO_INCREMENT per la taula `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
--- Restricciones para tablas volcadas
+-- Restriccions per taules bolcades
 --
 
 --
--- Filtros para la tabla `especificaciones`
+-- Restriccions per la taula `especificaciones`
 --
 ALTER TABLE `especificaciones`
   ADD CONSTRAINT `fk_id_usuario_esp` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`),
   ADD CONSTRAINT `fk_idprojectes` FOREIGN KEY (`id_projecte`) REFERENCES `projectes` (`id_projecte`);
 
 --
--- Filtros para la tabla `projectes`
+-- Restriccions per la taula `projectes`
 --
 ALTER TABLE `projectes`
   ADD CONSTRAINT `fk_projectes` FOREIGN KEY (`id_grupo`) REFERENCES `grupos` (`id_grupo`);
 
 --
--- Filtros para la tabla `sprint`
+-- Restriccions per la taula `sprint`
 --
 ALTER TABLE `sprint`
   ADD CONSTRAINT `fk_id_esp_sprint` FOREIGN KEY (`id_especificacion`) REFERENCES `especificaciones` (`id_especificacion`),
   ADD CONSTRAINT `fk_id_projecte_sprint` FOREIGN KEY (`id_projecte`) REFERENCES `especificaciones` (`id_projecte`);
 
 --
--- Filtros para la tabla `usuarios`
+-- Restriccions per la taula `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD CONSTRAINT `fk_usuarios` FOREIGN KEY (`grupo`) REFERENCES `grupos` (`id_grupo`);

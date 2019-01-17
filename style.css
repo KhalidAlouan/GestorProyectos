@@ -312,3 +312,21 @@ nav{
 
 	
 }
+
+.abajo{
+	height: 25px;
+	width: 25px;
+	display: inline-block;
+}
+
+.arriba{
+	height: 25px;
+	width: 25px;
+	display: inline-block;
+}
+
+.borrar{
+	height: 25px;
+	width: 25px;
+	display: inline-block;
+}

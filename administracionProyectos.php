@@ -204,7 +204,7 @@
 			$idBotonEliminar = 1;
 			foreach ($nombreSprint as $value) {
 				
-				echo"<div id='$idBoton' class='accordion' onclick='modificarSprint()'>";
+				echo"<div id='$idBoton' class='accordion' onclick='modificarSprint(this)'>";
 				echo"<p id='$value[0]' class='class0'>$value[0]</p>";
 				echo"<img src='assets/candado-cerrado.png' class='candadoCerrado' onclick='modificarSprint(this)' onmouseover='hoverCandadoAbierto(this,id)'  onmouseout='candadoCerradoFunc(this)'>"; 
 
@@ -238,22 +238,23 @@
 						echo "<br>";
 						echo"NOMBRE SPRINT: $nombresp";
 						echo "<br>";
-						echo "HORAS_ESPRINT:<input value=' $idessp'></input>";
+						echo "HORAS_ESPRINT:<input disabled value='$idessp'></input>";
 						echo "<br>";
 						echo "ID PROJECTE: $idprsp";
 						echo "<br>";
-						echo "FECHA INICIO:<input value=' $fechainiciosp'></input>";
+						echo "FECHA INICIO:<input disabled value='$fechainiciosp'></input>";
 						echo "<br>";
-						echo "FECHA FINAL:<input value=' $fechafinalsp'></input>";
+						echo "FECHA FINAL:<input disabled value='$fechafinalsp'></input>";
 						echo "<br>";
-						//echo "<script type='text/javascript'>modificarSprint() </script>";
 				  	echo"</div>";
 				echo"</div>";
-			if ($FechaActual2 < $fechainiciosp) {
-				echo "<button type='submit' name='eliminar' id=$idBoton onclick='eliminarSprint($idBoton,$idBotonEliminar)' class='botonEliminarSprint'> Eliminar </button>";
+			if ($consultaRolResultado == "SM"){
+				if ($FechaActual2 < $fechainiciosp) {
+				echo "<button type='submit' name='eliminar' id=$idBoton onclick=eliminarSprintBBDD($idsp) class='botonliminarSprint'> Eliminar </button>";
 
-			} elseif ($FechaActual2 >= $fechainiciosp) {
-				echo "<button id=$idBoton disabled class='botonEliminarSprint'> Eliminar </button>";
+				} elseif ($FechaActual2 >= $fechainiciosp) {
+					echo "<button id=$idBoton disabled class='botonliminarSprint'> Eliminar </button>";
+				}
 			}
 
 			$idBoton++;
@@ -263,7 +264,10 @@
 		echo "<br>";
 		echo "<br>";
 		echo "<br>";
-		echo"<button id='CrearSprint' onclick='formularioSprint()'>Crear Nou Sprint</button>";
+		
+		if ($consultaRolResultado == "SM") {
+			echo"<button id='CrearSprint' onclick='formularioSprint()'>Crear Nou Sprint</button>";
+		}
 		echo "<div id='sprintFormulario'></di>";
 
 
