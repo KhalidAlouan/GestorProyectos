@@ -26,6 +26,7 @@ body {
 	width:100%;
 	position: relative;
 	height:100px;
+
 }
 
 #footer {
@@ -47,6 +48,7 @@ body {
 	width: 50%;
 	height: 50%;
 	margin: auto;
+	background-color: white;
 }
 
 
@@ -183,6 +185,8 @@ nav{
   	height: 40%;
   	left: 15%;
   	background-color: white;
+  	overflow: auto
+
 }
 
 .SprintNombres{

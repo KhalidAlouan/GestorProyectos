@@ -406,6 +406,9 @@ function anadirEspecifiacion() {
 	var p = document.createElement("p");
 
 	p.innerText=nuevaESP;
+	p.appendChild(FlechaArriba());
+	p.appendChild(FlechaAbajo());
+	p.appendChild(borrarEspec());
 
 	var center = document.getElementById("center");
 

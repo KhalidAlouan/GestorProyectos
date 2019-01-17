@@ -360,9 +360,7 @@
 	
 	echo "</div>";
 	
-	echo "<div id='footer'>";
-		
-	echo "</div>";
+
 
 
 	?>
