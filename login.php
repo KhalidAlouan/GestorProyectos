@@ -41,7 +41,7 @@
 		                        </div>
 		                        <div class="card-action right-align">
 		                            <input type="submit" class="btn teal waves-effect waves-light" value="Login">
-		                            <a href="formularioCorreo.php" class="btn teal waves-effect waves-light">Restablecer Contraseña <a/>
+		                            <a href="ComprobarCorreo.php" class="btn teal waves-effect waves-light">Restablecer Contraseña <a/>
 		                        </div>
 		                      </form>
 		                    </div>
