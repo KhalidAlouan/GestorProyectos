@@ -10,8 +10,8 @@ Retrospectiva:
 	
 
 Opiniones participantes:
-	Jose:
+	Jose:No he sabido sacar adelante casi ninguna especificación. Me cuesta horrores imaginar el funcionamiento de una especificación en mi cabeza, como para escribirla a código. Las especificaciones sobre trabajar con los sprints y candados debería estar expuesto más claramente
 	
-	Miguel: Hemos perdido mucho tiempo intentando arreglar fallos que nos surgian a la hora de hacer especificaciones, falta de trabajo por parte de algun integrante del grupo. 
+	Miguel: Hemos perdido mucho tiempo intentando arreglar fallos que nos surgían a la hora de hacer especificaciones, falta de trabajo por parte de algún integrante del grupo. 
 
 	Marc: Creo que hemos fallado a la hora de asignar horas a las especificaciones, también me he dado cuenta de que para algunas especificaciones no las hemos podido hacer porque no conociamos AJAX.
