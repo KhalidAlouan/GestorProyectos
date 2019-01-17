@@ -338,6 +338,7 @@ function divEspecificacionesPB(array_especificaciones) {
 		p.setAttribute("draggable","true");
 		p.setAttribute("class","dragable");
 		p.setAttribute("id",idP);
+		if (true) {}
 		p.setAttribute("ondragstart","start(event)");
 		p.setAttribute("ondragend","end(event)");
 		p.appendChild(FlechaArriba());
@@ -411,7 +412,6 @@ function anadirEspecifiacion() {
 	var primerHijo = divPB.firstElementChild;
 
 	divPB.insertBefore(p,primerHijo);
-	divPB.insertAfter(p,primerHijo);
 }
 
 function eliminarSprint(idBoton,idBotonEliminar) {
@@ -450,6 +450,7 @@ function end(e) {
 
 function enter(e) {
     e.target.style.border = '3px dotted #555'; 
+    
 }
 
 function leave(e) {
@@ -699,30 +700,32 @@ function modificarSprint(candado){
 function moverElementoAbajo(element){
 	//Recuperamos el padre del elemento
 	var elementoPosterior = element.parentNode.nextSibling.nextSibling;
-	//Clonamos el elemento
-	var elementoClonado = element.parentNode.cloneNode(true);
-	//Accedemos al elemento <ul> 
-	var elementoRaiz = element.parentNode.parentNode;
+	if (elementoPosterior.className == "dragable" ) {
+		//Clonamos el elemento
+		var elementoClonado = element.parentNode.cloneNode(true);
+		//Accedemos al elemento <ul> 
+		var elementoRaiz = element.parentNode.parentNode;
 
-	var elementoPadre = element.parentNode;
-	
-	elementoPadre.parentNode.removeChild(elementoPadre);	
-	elementoRaiz.insertBefore(elementoClonado, elementoPosterior);
-
-
+		var elementoPadre = element.parentNode;
+		
+		elementoPadre.parentNode.removeChild(elementoPadre);	
+		elementoRaiz.insertBefore(elementoClonado, elementoPosterior);
+		}
 }
 
 //Funcion que mueve el elemento una posicion hacia arriba
 function moverElementoArriba(element){
 	var elementoAnterior = element.parentNode.previousSibling;
+	if (elementoAnterior.className == "dragable") {
+		var elementoClonado = element.parentNode.cloneNode(true);
+		var elementoRaiz = element.parentNode.parentNode;
+		
+		var elementoPadre = element.parentNode;
+		elementoPadre.parentNode.removeChild(elementoPadre);
+		elementoRaiz.insertBefore(elementoClonado, elementoAnterior);
 
-	var elementoClonado = element.parentNode.cloneNode(true);
-	var elementoRaiz = element.parentNode.parentNode;
-
+	}
 	
-	var elementoPadre = element.parentNode;
-	elementoPadre.parentNode.removeChild(elementoPadre);
-	elementoRaiz.insertBefore(elementoClonado, elementoAnterior);
 
 }
 
