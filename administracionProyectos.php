@@ -10,6 +10,7 @@
 	<?php
 	session_start();
 
+
 	//Abro la conexion a la base de datos
 	$dbs= "mysql:host=localhost;dbname=GestorProjectes";
 	$dbh = new PDO( $dbs, "admin","admin");
@@ -24,6 +25,8 @@
 	foreach ($username as $value) {
 		$username = $value;
 	}
+
+
 	
 
 	echo "<div id='header'>";
@@ -46,6 +49,8 @@
 	foreach ($consultaRolResultado as $value) {
 		$consultaRolResultado = $value;
 	}
+
+
 
 	//Obtengo la url actual de la web para despues obtener el id
 	$host= $_SERVER["HTTP_HOST"];
@@ -242,19 +247,24 @@
 						
 				  	echo"</p>";
 				echo"</div>";
-			if ($FechaActual2 < $fechainiciosp) {
+			if ($consultaRolResultado == "SM"){
+				if ($FechaActual2 < $fechainiciosp) {
 				echo "<button type='submit' name='eliminar' id=$idBoton onclick=eliminarSprintBBDD($idsp) class='botonliminarSprint'> Eliminar </button>";
 
-			} elseif ($FechaActual2 >= $fechainiciosp) {
-				echo "<button id=$idBoton disabled class='botonliminarSprint'> Eliminar </button>";
+				} elseif ($FechaActual2 >= $fechainiciosp) {
+					echo "<button id=$idBoton disabled class='botonliminarSprint'> Eliminar </button>";
+				}
 			}
+			
 
 			$idBoton++;
 			$idBotonEliminar++;
 		}
 		echo "<br>";
 		echo "<br>";
-		echo"<button id='CrearSprint' onclick='formularioSprint()'>Crear Nou Sprint</button>";
+		if ($consultaRolResultado == "SM") {
+			echo"<button id='CrearSprint' onclick='formularioSprint()'>Crear Nou Sprint</button>";
+		}
 		echo "<div id='sprintFormulario'></di>";
 
 
