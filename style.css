@@ -1,9 +1,10 @@
 body {
-	background-image: url(wallpaper.jpg);
+	background-image: url(assets/wallpaper.png);
   	background-repeat: no-repeat;
   	background-position: center center;
   	background-attachment: fixed;
   	background-size: 100%;
+  	font-family: Arial;
 }
 
 #header {
@@ -13,7 +14,9 @@ body {
 
 #cabezera {
 	border-radius: 10px;
-	background-color: #00008B;
+	background-color: white;
+
+
 }
 
 #center {
@@ -100,13 +103,13 @@ nav{
 #imagenlogat{
 	padding-top: 25px;
 	width: 5%;
-	height: 50%;
+	height: 70%;
 	
 }
 
 #imagenusuario{
 	width: 5%;
-	height: 50%;
+	height: 70%;
 	
 	
 }
@@ -123,6 +126,7 @@ nav{
   	height: 40%;
   	left: 15%;
   	background-color: white;
+  	border-radius: 10px;
 }
 
 #idpProjectes{
@@ -165,6 +169,7 @@ nav{
   	height: 40%;
   	left: 15%;
   	background-color: white;
+  	border-radius: 10px;
 }
 
 .titulos {
@@ -202,6 +207,7 @@ nav{
   	left: 15%;
   	overflow: auto;
   	background-color: white;
+  	border-radius: 10px;
 }
 
 

@@ -302,6 +302,7 @@ function inforGeneral(arrayJS) {
 function divEspecificacionesPB(array_especificaciones) {
 	var div = document.createElement("div");
 	div.setAttribute("class","divPB");
+	div.style.borderRadius = "15px";
 
 	var marcoInfoProyectos = document.getElementById("marcoInfoProyectos");
 	
