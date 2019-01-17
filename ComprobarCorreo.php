@@ -7,7 +7,7 @@
 <body>
 <?php 
 	echo "<div class='divCorreo'>";
-	echo "<form action='formcorreo.php' method='POST' >";
+	echo "<form action='restablecerpss.php' method='POST' >";
 	echo "<p>Introduce tu correo electronico: </p>";
 	echo "<input type='text' name='correoE'><br><br>";
 	echo "<input type='submit'value='Enviar' name='send'>";
