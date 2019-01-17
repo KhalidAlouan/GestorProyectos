@@ -340,6 +340,9 @@ function divEspecificacionesPB(array_especificaciones) {
 		p.setAttribute("id",idP);
 		p.setAttribute("ondragstart","start(event)");
 		p.setAttribute("ondragend","end(event)");
+		p.appendChild(FlechaArriba());
+		p.appendChild(FlechaAbajo());
+		p.appendChild(borrarEspec());
 		idP++;
 	}
 
@@ -408,6 +411,7 @@ function anadirEspecifiacion() {
 	var primerHijo = divPB.firstElementChild;
 
 	divPB.insertBefore(p,primerHijo);
+	divPB.insertAfter(p,primerHijo);
 }
 
 function eliminarSprint(idBoton,idBotonEliminar) {
@@ -720,4 +724,28 @@ function moverElementoArriba(element){
 	elementoPadre.parentNode.removeChild(elementoPadre);
 	elementoRaiz.insertBefore(elementoClonado, elementoAnterior);
 
+}
+
+function FlechaArriba(){
+	var flecha_arriba = document.createElement('img');
+	flecha_arriba.src="assets/arriba.jpg";
+	flecha_arriba.setAttribute('class', 'arriba');
+	flecha_arriba.setAttribute('onclick', 'moverElementoArriba(this)');
+	return flecha_arriba;
+}
+
+function FlechaAbajo(){
+	var flecha_abajo = document.createElement('img');
+	flecha_abajo.src="assets/abajo.jpg";
+	flecha_abajo.setAttribute('class', 'abajo');
+	flecha_abajo.setAttribute('onclick', 'moverElementoAbajo(this)');
+	return flecha_abajo;
+}
+
+function borrarEspec(){
+	var borrar = document.createElement('img');
+	borrar.src='assets/borrar.jpg';
+	borrar.setAttribute('class', 'borrar');
+	borrar.setAttribute('onclick', 'borrarElemento(this)');
+	return borrar;
 }

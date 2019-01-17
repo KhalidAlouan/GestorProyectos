@@ -243,7 +243,7 @@
 				  	echo"</p>";
 				echo"</div>";
 			if ($FechaActual2 < $fechainiciosp) {
-				echo "<button type='submit' name='eliminar' id=$idBoton onclick='eliminarSprint($idBoton,$idBotonEliminar)' class='botonliminarSprint'> Eliminar </button>";
+				echo "<button type='submit' name='eliminar' id=$idBoton onclick=eliminarSprintBBDD($idsp) class='botonliminarSprint'> Eliminar </button>";
 
 			} elseif ($FechaActual2 >= $fechainiciosp) {
 				echo "<button id=$idBoton disabled class='botonliminarSprint'> Eliminar </button>";
@@ -372,7 +372,6 @@
 		inforGeneral(arrayJS);
 		var array_especificaciones = <?php echo json_encode($array_especificaciones);?>;
 		divEspecificacionesPB(array_especificaciones);
-		//**Nuevo Sprint 3
 		var arrayIdSprint = <?php echo json_encode($array_IdSprint);?>;
 		
 	</script>

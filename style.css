@@ -183,6 +183,7 @@ nav{
   	height: 40%;
   	left: 15%;
   	background-color: white;
+  	overflow: auto
 }
 
 .SprintNombres{
@@ -265,15 +266,6 @@ nav{
   overflow: hidden;
 }
 
-.class0{
-	
-}
-
-
-.botonEliminarSprint {
-
-}
-
 .dragable {
 	cursor: move;
 }
@@ -307,4 +299,22 @@ nav{
 	height: 10%;
 
 	
+}
+
+.abajo{
+	height: 25px;
+	width: 25px;
+	display: inline-block;
+}
+
+.arriba{
+	height: 25px;
+	width: 25px;
+	display: inline-block;
+}
+
+.borrar{
+	height: 25px;
+	width: 25px;
+	display: inline-block;
 }
